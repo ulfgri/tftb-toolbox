@@ -9,7 +9,7 @@ Most of this software is in the public domain; some parts, e.g.
 the 'devec3' function for differential evolution minimization is
 distributed under the GNU Public License.
 
-New releases, additional documentation,and example scripts
+New releases, additional documentation, and example scripts
 can be downloaded from: 
 https://sites.google.com/site/ulfgri/numerical/tftb
 
