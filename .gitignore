@@ -1,0 +1,10 @@
+# refractive index library
+nk
+
+# backup files
+*~
+
+# intermediate and mex files
+*.o
+*.mex
+

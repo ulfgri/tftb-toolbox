@@ -1,0 +1,604 @@
+##
+# /***********************************************************************
+# * Adaptive Simulated Annealing (ASA)
+# * Lester Ingber <ingber@ingber.com>
+# * Copyright (c) 1987-2014 Lester Ingber.  All Rights Reserved.
+# * ASA-LICENSE file has the license that must be included with ASA code.
+# ***********************************************************************/
+#
+## $Id: ASA-Makefile,v 30.10 2014/07/28 21:14:05 ingber Exp ingber $
+
+## ********************************************************************
+## First read ASA-README, then examine this ASA-Makefile and ASA-NOTES.
+## ********************************************************************
+
+MANIFEST = \
+	ASA-CHANGES \
+	ASA-LICENSE \
+	ASA-Makefile \
+	ASA-NOTES \
+	ASA-README.html \
+	ASA-README.ms \
+	ASA-README.pdf \
+	ASA-README.ps \
+	ASA-README+.txt \
+	ASA-README.txt \
+	asa_test_asa \
+	asa_test_usr \
+	asa_usr.c \
+	asa_usr.h \
+	asa_usr_cst.c \
+	asa.c \
+	asa.h \
+	asa_usr_asa.h \
+	asa_opt
+
+###
+###		USER OPTIONS
+### The policy is to try to have the asa module (not necessarily
+### the user module) compile without "errors" (not necessarily without
+### "warnings").  Some additional modifications may be needed on your
+### machine; e.g., you might have to comment out the `#include <stdlib.h>'
+### line in asa_usr_asa.h.  See the current ASA-NOTES file for any
+### updates on some standard implementations.
+
+###
+## Defaults for various options are given below.  These can be
+## overridden using DEFINE_OPTIONS.  If you include several options,
+## separate them by a white space or place them conveniently on several
+## lines; if the latter, be sure each line to be continued ends in a "\"
+## (backslash).
+
+DEFINE_OPTIONS = -DASA_TEST=TRUE # -DMY_TEMPLATE=TRUE
+
+## This will run the ASA problem.
+#DEFINE_OPTIONS = -DASA_TEST=TRUE
+##
+## This ASA_TEMPLATE will number the ASA_OUT file according to the
+## system pid.  See asa_usr.h or possible changes you may have to make in the
+## include file and the prototype for getpid(), as well as for the set of
+## DEFINE_OPTIONS this example turns on.  (You might also have to change
+## the int declaration of pid_int in asa_usr.c as well.)
+#DEFINE_OPTIONS = -DASA_TEMPLATE_ASA_OUT_PID=FALSE
+##
+## This ASA_TEMPLATE will run the ASA test problem multiple times, and
+## separate the runs into different files.  See asa_usr_asa.h for the set
+## of DEFINE_OPTIONS this example turns on.
+#DEFINE_OPTIONS = -DASA_TEMPLATE_MULTIPLE=FALSE
+##
+## This ASA_TEMPLATE illustrates the use of SELF_OPTIMIZE=TRUE.  See
+## asa_usr_asa.h for the set of DEFINE_OPTIONS this example turns on.
+#DEFINE_OPTIONS = -DASA_TEMPLATE_SELFOPT=FALSE
+##
+## This will run the ASA_SAMPLE problem.  See asa_usr_asa.h for the set of
+## DEFINE_OPTIONS this example turns on.
+#DEFINE_OPTIONS = -DASA_TEMPLATE_SAMPLE=FALSE
+##
+## This will run the ASA_QUEUE problem.  See asa_usr_asa.h for the set of
+## DEFINE_OPTIONS this example turns on.
+#DEFINE_OPTIONS = -DASA_TEMPLATE_QUEUE=FALSE
+##
+##This will run the ASA_PARALLEL code.  See asa_usr_asa.h for the set of
+## DEFINE_OPTIONS this example turns on.
+#DEFINE_OPTIONS = -DASA_TEMPLATE_PARALLEL=FALSE
+##
+## These will run the ASA_SAVE problem.  See asa_usr_asa.h for the set of
+## DEFINE_OPTIONS this example turns on.
+#DEFINE_OPTIONS = -DASA_TEMPLATE_SAVE=FALSE
+##
+
+###
+###		Pre-Compile Options
+###
+## You can elect to read in the Program Options from asa_opt by
+## setting OPTIONS_FILE=TRUE.  OPTIONS_FILE=TRUE can be set here or
+## in asa_usr_asa.h.
+#-DOPTIONS_FILE=TRUE
+
+## If OPTIONS_FILE is set to TRUE, then also setting OPTIONS_FILE_DATA
+## to TRUE will read in most initialization data from asa_opt.
+#-DOPTIONS_FILE_DATA=TRUE
+
+## You can elect to read in the Program Options from asa_opt by setting
+## RECUR_OPTIONS_FILE=TRUE.  RECUR_OPTIONS_FILE=TRUE can be set here or in
+## asa_usr_asa.h.
+#-DRECUR_OPTIONS_FILE=FALSE
+
+## If RECUR_OPTIONS_FILE is set to TRUE, then also setting
+## RECUR_OPTIONS_FILE_DATA to TRUE will read in most initialization data
+## from asa_opt.
+#-DRECUR_OPTIONS_FILE_DATA=FALSE
+
+## If COST_FILE is set to TRUE, then your own file for the cost
+## function can be read into asa_usr.c.
+#-DCOST_FILE=TRUE
+
+## Setting ASA_LIB=TRUE will facilitate your running asa() as a library
+## call from another program, calling asa_main() in asa_usr.c.  In the
+## templates, provided, all initializations and cost function definitions
+## are set up in asa_usr.c.
+#-DASA_LIB=FALSE
+
+## If ASA_TEMPLATE_LIB=TRUE, then asa_main() returns information to an
+## example main() in asa_usr.c.  This illustrates how you provide the
+## appropriate memory in your main().
+#-DASA_TEMPLATE_LIB=FALSE
+
+## If you do _not_ have an ANSI compiler set this to FALSE.
+## If you use HAVE_ANSI=FALSE, change CC and CDEBUGFLAGS below.
+#-DHAVE_ANSI=TRUE
+
+## Most newer operating systems do not like any other I/O prototyping
+## other than those in their own include files.  Other machines, like a
+## Dec\-3100 under Ultrix complain that the ANSI I/O prototypes were
+## inconsistent.  A Sun under 4.1.x gcc gave warnings if no I/O prototypes
+## were present.  The defaults in asa_usr_asa.h use newer system prototypes.
+## IO_PROTOTYPES=TRUE will uncomment out declarations for such items as
+## fprintf, fflush, fclose, exit, and fscanf.
+#-DIO_PROTOTYPES=FALSE
+
+## Some systems do not have the time include files used here; others
+## have different scales for time.  Setting TIME_CALC=TRUE will permit
+## use of the time routines.
+#-DTIME_CALC=FALSE
+ 
+## Some systems, e.g., hpux, use other Unix-standard macros to access
+## time.  Setting TIME_STD=TRUE when using TIME_CALC=TRUE will use these
+## time routines instead.
+#-DTIME_STD=FALSE
+
+## Some smaller systems choke on `long int' and this option can be
+## set to INT_LONG=FALSE to turn off warnings and possibly some errors.
+#-DINT_LONG=TRUE
+
+## Some machine may not permit the dimension of calloc be anything
+## but int; in this case define INT_ALLOC=TRUE.  The default of FALSE
+## is to set the dimension to that of LONG_INT, determined by INT_LONG.
+#-DINT_ALLOC=FALSE
+
+## You can define SMALL_FLOAT to better correlate to your own machine's
+## maximum precision here if you know it.
+#-DSMALL_FLOAT=1.0E-18
+
+## You can define your own machine's minimum positive doubles here
+## if you know it.
+
+#-DMIN_DOUBLE=SMALL_FLOAT
+
+## You can define your own machine's maximum doubles here if you
+## know it.
+#-DMAX_DOUBLE=1.0/SMALL_FLOAT
+
+## You can define your own machine's maximum precision here if you
+## know it.
+#-DEPS_DOUBLE=SMALL_FLOAT
+
+## When CHECK_EXPONENT is TRUE, EXPONENT_CHECK(x) in asa() checks that
+## an exponent x is within a valid range and, if not, adjusts its
+## magnitude to fit in the range.
+#-DCHECK_EXPONENT=FALSE
+
+## When parameter temperatures are less than SMALL_FLOAT, do not exit,
+## and set them to SMALL_FLOAT.
+#-DNO_PARAM_TEMP_TEST=FALSE
+
+## When the cost temperature is less than SMALL_FLOAT, do not exit,
+## and set it to SMALL_FLOAT.
+#-DNO_COST_TEMP_TEST=FALSE
+
+## You can try to use asa to self-optimize its own Program Options
+## be setting SELF_OPTIMIZE=TRUE.  This can be very CPU-expensive as
+## well as being dependent on your definition of recur_cost_function.
+#-DSELF_OPTIMIZE=FALSE
+
+## To use the ASA test problem, set ASA_TEST to TRUE.
+#-DASA_TEST=FALSE
+
+## To use the enhanced ASA test problem, set ASA_TEST_POINT to TRUE.
+#-DASA_TEST_POINT=FALSE
+
+## To  permit IMMEDIATE_EXIT before calculating the next generated state,
+## by deleting the file asa_exit_anytime, set ASA_EXIT_ANYTIME to TRUE.
+#-DASA_EXIT_ANYTIME=FALSE
+
+## Setting USER_INITIAL_COST_TEMP to TRUE permits you to specify the
+## initial cost temperature.  This can be useful in problems where you
+## want to start the search at a specific scale.
+#-DUSER_INITIAL_COST_TEMP=FALSE
+
+## Different rates of parameter annealing can be set with
+## RATIO_TEMPERATURE_SCALES set to TRUE.
+#-DRATIO_TEMPERATURE_SCALES=FALSE
+
+## Setting USER_INITIAL_PARAMETERS_TEMPS to TRUE permits you to specify
+## the initial parameter temperatures.  This can be useful in constrained
+## problems, where greater efficiency can be achieved in focussing the
+## search than might be permitted just by setting upper and lower bounds.
+#-DUSER_INITIAL_PARAMETERS_TEMPS=FALSE
+
+## Different increments, used during reannealing to set each
+## parameter's numerical derivatives, can be set with DELTA_PARAMETERS set
+## to TRUE.
+#-DDELTA_PARAMETERS=FALSE
+
+## QUENCH_PARAMETERS permits you to alter the basic algorithm to
+## perform selective "quenching," i.e., faster temperature cooling than
+## permitted by the ASA algorithm.  This can be very useful, e.g., to
+## quench the system down to some region of interest, and then to perform
+## proper annealing for the rest of the run.
+#-DQUENCH_PARAMETERS=FALSE
+
+## If QUENCH_COST is set to TRUE, the scale of the power of the
+## temperature schedule used for the acceptance function can be altered in
+## a similar fashion to that described above when QUENCH_PARAMETERS is set
+## to TRUE.
+#-DQUENCH_COST=FALSE
+
+## When QUENCH_PARAMETERS is TRUE, if QUENCH_PARAMETERS_SCALE is TRUE,
+## then the temperature scales and the temperature indexes are affected by
+## User_Quench_Param_Scale[].  When QUENCH_PARAMETERS is TRUE, if
+## QUENCH_PARAMETERS_SCALE is FALSE, only the temperature indexes are
+## affected by User_Quench_Param_Scale[].
+#-DQUENCH_PARAMETERS_SCALE=TRUE
+
+## When QUENCH_COST is TRUE, if QUENCH_COST_SCALE is TRUE, then the
+## temperature scale and the temperature index are affected by
+## User_Quench_Cost_Scale[0].  When QUENCH_COST is TRUE, if
+## QUENCH_COST_SCALE is FALSE, only the temperature index is affected by
+## User_Quench_Cost_Scale[0].
+#-DQUENCH_COST_SCALE=TRUE
+
+## To use testing templates in the asa_usr.c and asa.c files, associated
+## with several OPTIONS, set ASA_TEMPLATE to TRUE.
+#-DASA_TEMPLATE=FALSE
+
+## It can be useful to return additional information to the user
+## module from the asa module.  When OPTIONAL_DATA_DBL is set to TRUE, an
+## additional pointer, *Asa_Data_Dbl,  is available in DEFINES *OPTIONS to
+## gather such data.
+#-DOPTIONAL_DATA_DBL=FALSE
+
+## It can be useful to return additional integer information to the
+## user module from the asa module.  When OPTIONAL_DATA_INT is set to
+## TRUE, an additional pointer, *Asa_Data_Int,  is available in DEFINES
+## *OPTIONS to gather such data.
+#-DOPTIONAL_DATA_INT=FALSE
+
+## It can be useful to return/pass additional array information to the
+## user module from/through the asa module.  When OPTIONAL_DATA_PTR is set
+## to TRUE, an additional pointer, *Asa_Data_Ptr, of type
+## OPTIONAL_PTR_TYPE is available in DEFINES *OPTIONS to gather such data.
+#-DOPTIONAL_DATA_PTR=FALSE
+
+## The function used for the cost_function temperature  schedule is of
+## the form test_temperature in asa.c.  You can define your own function
+## of test_temperature adaptively in asa_usr.c in user_cost_schedule() (and
+## in recur_user_cost_schedule() if SELF_OPTIMIZE is TRUE) by setting
+## USER_COST_SCHEDULE to TRUE.
+#-DUSER_COST_SCHEDULE=FALSE
+
+## The standard Boltzmann probability distribution is used for the
+## acceptance test.  You can adaptively change this using Asymp_Exp_Param
+## by setting USER_ACCEPT_ASYMP_EXP to TRUE.
+#-DUSER_ACCEPT_ASYMP_EXP=FALSE
+
+## The standard Boltzmann probability distribution is used for the
+## acceptance test.  You can change this by setting USER_ACCEPT_THRESHOLD
+## to TRUE.
+#-DUSER_ACCEPT_THRESHOLD=FALSE
+
+## The standard Boltzmann probability distribution is used for the
+## acceptance test.  You can adaptively change this with your own function
+## in asa_usr.c in user_acceptance_test() (and in
+## recur_user_acceptance_test() if SELF_OPTIMIZE is TRUE) by setting
+## USER_ACCEPTANCE_TEST to TRUE.
+#-DUSER_ACCEPTANCE_TEST=FALSE
+
+## The ASA generating probability distribution us used to generate new
+## states.  You can adaptively change this with your own function in
+## asa_usr.c in user_generating_distrib() (and in
+## recur_user_generating_distrib() if SELF_OPTIMIZE is TRUE) by setting
+## USER_GENERATING_FUNCTION to TRUE.
+#-DUSER_GENERATING_FUNCTION=FALSE
+
+## If you wish to adaptively control the algorithm controlling
+## reannealing of the cost function, this can be done in asa_usr.c in
+## user_reanneal_cost() (and in recur_user_reanneal_cost() if
+## SELF_OPTIMIZE is TRUE) by setting USER_REANNEAL_COST to TRUE.
+#-DUSER_REANNEAL_COST=FALSE
+
+## The macro used for reannealing parameter temperatures
+## #define FUNCTION_REANNEAL_PARAMS(temperature, tangent, max_tangent) \
+##  (temperature * (max_tangent / tangent))
+## is defined in asa.h.  If you wish to adaptively control this function
+## it can be defined in asa_usr.c in user_reanneal_params() (and in
+## recur_user_reanneal_params() if SELF_OPTIMIZE is TRUE) by setting
+## USER_REANNEAL_PARAMETERS to TRUE.
+#-DUSER_REANNEAL_PARAMETERS=FALSE
+
+## MAXIMUM_REANNEAL_INDEX is the maximum index (number of steps) at
+## which the initial temperature and the index of the temperature are
+## rescaled to avoid losing machine precision.
+#-DMAXIMUM_REANNEAL_INDEX=50000
+
+## REANNEAL_SCALE is the reannealing scale used when
+## MAXIMUM_REANNEAL_INDEX is exceeded.
+#-DREANNEAL_SCALE=10
+
+## When ASA_SAMPLE is set to TRUE, data is collected by asa to
+## importance-sample the users' variable space.
+#-DASA_SAMPLE=FALSE
+
+## When ADAPTIVE_OPTIONS is set to TRUE, it is possible to change relevant
+## OPTIONS in the USER_DEFINES struct in asa_usr_asa.h during run time,
+## by including an asa_adaptive_options file.
+#-DADAPTIVE_OPTIONS=FALSE
+
+## When ASA_QUEUE is set to TRUE, a FIFO queue saves generated states,
+## to avoid extra cost function calculations.
+#-DASA_QUEUE=FALSE
+
+## When ASA_RESOLUTION is set to TRUE, Coarse_Resolution[] defines the
+## resolution of parameters in the fit.
+#-DASA_RESOLUTION=FALSE
+
+## When ASA_FUZZY is set to TRUE, several subroutines become available to
+## perform an adaptive tuning of selected ASA OPTIONS.
+#-DASA_FUZZY=FALSE
+
+## When FITLOC is set to TRUE, three subroutines become available to
+## shunt asa() over to a local simplex optimization.
+#-DFITLOC=FALSE
+
+## If FITLOC is set to TRUE and FITLOC_ROUND is TRUE, then each time
+## parameters are passed to or between the local routines, they are first
+## processed by rounding integers or respecting rounding according to
+## ASA_RESOLUTION constraints.
+#-DFITLOC_ROUND=TRUE
+
+## When FITLOC is set to TRUE and FITLOC_PRINT is TRUE, the local
+## fitting routines print out from the user module.
+#-DFITLOC_PRINT=TRUE
+
+## When MULTI_MIN is set to TRUE, the lowest Multi_Number values of the
+## cost function and their parameters are saved.
+#-DMULTI_MIN=FALSE
+
+## When ASA_PARALLEL is set to TRUE, ASA is run in parallel-processor
+## mode.
+#-DASA_PARALLEL=FALSE
+
+## When FDLIBM_POW is set to TRUE, a user-defined function s_pow() is
+## used instead of pow().  This may be desirable on some machines when a
+## speed-up can be realized.
+#-DFDLIBM_POW=FALSE
+
+## When FDLIBM_LOG is set to TRUE, a user-defined function s_log() is
+## used instead of log().  This may be desirable on some machines when a
+## speed-up can be realized.
+#-DFDLIBM_LOG=FALSE
+
+## When FDLIBM_EXP is set to TRUE, a user-defined function s_exp() is
+## used instead of exp().  This may be desirable on some machines when a
+## speed-up can be realized.
+#-DFDLIBM_EXP=FALSE
+
+###
+###		Printing Options
+###
+## Setting ASA_PRINT to FALSE will suppress all printing within asa.
+#-DASA_PRINT=TRUE
+
+## The name of the output file containing all printing from asa If you
+## wish to attach a process number use ASA_OUT=\"asa_out_$$$$\" If
+## ASA_OUT=\"STDOUT\" then ASA will print to stdout.
+#-DASA_OUT=\"asa_out\"
+
+## The name of the output file containing all printing from asa_usr.c If you
+## wish to attach a process number use USER_OUT=\"asa_usr_out_$$$$\" If
+## USER_OUT=\"STDOUT\" then asa_usr.c will print to stdout.
+#-DUSER_OUT=\"asa_usr_out\"
+
+## Some compilers on some systems under some levels of optimization will not
+## compile if stdout is present in the code.  All instances of stdout and
+## printf in the user and the asa modules can be commented out by setting
+## INCL_STDOUT to FALSE.  Note that this also will suppress some output
+## from such OPTIONS as ASA_PIPE, TIME_CALC, etc.
+#-DINCL_STDOUT=TRUE
+
+## If your wish to have the printing from asa be sent to a file
+## determined dynamically from the user module, set USER_ASA_OUT to
+## TRUE, and define the Program Option *Asa_Out_File in the user module.
+## (This overrides any ASA_OUT settings.)  In asa_usr.c, if
+## USER_OPTIONS->Asa_Out_File = "STDOUT";, then ASA will print to stdout.
+#-DUSER_ASA_OUT=FALSE
+
+## If your wish to have the printing from asa_usr be sent to a file
+## determined dynamically from the user module, set USER_ASA_USR_OUT to
+## TRUE, and define the Program Option *Asa_Usr_Out_File in the user module.
+## (This overrides any USER_OUT settings.)
+#-DUSER_ASA_USR_OUT=FALSE
+
+## Setting ASA_PRINT_INTERMED to FALSE will suppress intermediate
+## printing within asa.
+#-DASA_PRINT_INTERMED=TRUE
+
+## Setting ASA_PRINT_MORE to TRUE will print out more intermediate
+## information, e.g., new parameters whenever a new minimum is reported.
+#-DASA_PRINT_MORE=FALSE
+
+## The field width and precision for doubles is specified as
+## G_FIELD.G_PRECISION.
+#-DG_FIELD=12
+#-DG_PRECISION=7
+
+## When ASA_SAVE is set to TRUE, asa saves enough information after
+## each newly best accepted state to restart from that point.
+#-DASA_SAVE=FALSE
+
+## If ASA_SAVE is set to TRUE, when ASA_SAVE_BACKUP is set to TRUE,
+## asa saves enough information after each newly best accepted state to
+## restart from any previous best accepted state when that
+## asa_save.{best_state} is copied to asa_save.
+#-DASA_SAVE_BACKUP=FALSE
+
+## If ASA_SAVE_OPT is set to TRUE, when asa is restarted, if the file
+## asa_opt_save is present in the same directory as asa_opt, then new values
+## of ASA parameters and OPTIONS are read in after initializing to the
+## point of the last writing of asa_save, without requiring recompilation.
+#-DASA_SAVE_OPT=FALSE
+
+## When ASA_PIPE is set to TRUE asa prints to STDOUT lines of
+## data that can be used to update databases or charts.
+#-DASA_PIPE=FALSE
+
+## When ASA_PIPE_FILE is set to TRUE asa prints to asa_pipe lines of
+## data that can be used to examine run data.
+#DASA_PIPE_FILE=FALSE
+
+## When SYSTEM_CALL is set to FALSE, asa avoids popen calls, e.g.,
+## as in asa.c when ASA_SAVE is set to TRUE, to copy asa_save to
+## asa_save.old.  This is useful on machines that do not permit these
+## commands.
+#-DSYSTEM_CALL=TRUE
+
+###
+###		Compiler Choices
+###
+## If HAVE_ANSI=TRUE use this block; otherwise, use the K&R block below.
+## The gnu C compiler is the default.
+## The use of -ffloat-store with gcc/g++ is to maintain the same level of
+## precision across levels of compiler optimization on different platforms.
+#CC = g++
+CC = gcc
+CDEBUGFLAGS = -g -Wall -ffloat-store # -Wno-unused-but-set-variable # MY_TEMPLATE_flags
+##
+## If you use your system's ANSI compiler, e.g., named cc, use this block.
+## Sun's ANSI compiler is named acc, so use CC = acc for this one.
+
+#CC = acc
+#CDEBUGFLAGS = -O
+
+## If HAVE_ANSI=FALSE use this K&R block, or the next block with gcc
+#CC = cc
+#CDEBUGFLAGS = -O
+#
+#CC = gcc
+#CDEBUGFLAGS = -traditional -g -O -Wall -ffloat-store
+
+## If you wish to include some profile statistics
+#CC = gcc -pg
+#CDEBUGFLAGS = -g -Wall -ffloat-store
+
+## If using gcc with ASA_PARALLEL and _OPENMP using gcc
+#CC = gcc -fopenmp
+#CDEBUGFLAGS = -g -Wall -ffloat-store # MY_TEMPLATE_flags
+
+CFLAGS = $(CDEBUGFLAGS) $(DEFINE_OPTIONS)
+## Under Cygwin, using ASA_LIB set TRUE and INCL_STDOUT set FALSE,
+## use the following to produce a DLL with asa_dll: below
+## CC = /bin/i686-pc-mingw32-gcc.exe
+
+LDFLAGS =
+
+all:
+	make compile
+	make run
+#	make profile
+
+###
+###		Document Formatting
+###
+doc:
+## Use groff if you have it; add pep or colcrt to delete extra
+## formatting.  Under groff, using `more' or `less' presents an enhanced
+## text.  The following is used on Cygwin.
+## Otherwise, standard UNIX macros are fine.
+## The next 2 lines use standard UNIX utilities
+#	refer -e -P -n ASA-README.ms | tbl | nroff -ms > ASA-README+.txt
+#	refer -e -P -n ASA-README.ms | tbl | nroff -ms | pep > ASA-README.txt
+##
+## Similarly, you may format your own PostScript ASA-README.ps.
+##
+	groff -wall -R -t -Tascii -ms ASA-README.ms > ASA-README+.txt
+	cat ASA-README+.txt | sed -e "s/\[1m//g" | sed -e "s/\[0m//g" | sed -e "s/\[4m//g" | sed -e "s/\[24m//g" | sed -e "s/\[22m//g" > ASA-README.txt
+	groff -wall -R -t -e -ms ASA-README.ms > tp.ASA-README.ps
+	psselect -p1,58-,2-56 tp.ASA-README.ps > ASA-README.ps
+	rm tp.ASA-README.ps
+	ps2pdf ASA-README.ps
+	HTML/xread_html
+	chmod 644 ASA-README*
+
+###
+###		Other Standard Arguments to Make
+###
+# MY_TEMPLATE_macros
+#
+## If COST_FILE is set to FALSE, asa_usr_cst.c may be deleted.  If the
+## name asa_usr_cst.c is changed, then this might be changed here as well.
+USEROBJS = asa_usr.o asa_usr_cst.o # the name of the calling object files
+ASAOBJS = asa.o # the ASA optimization object file
+ASA_USER_INCL = asa.h asa_usr.h
+# MY_TEMPLATE_OBJS =
+# MY_TEMPLATE_incl =
+# Use this 2-line compile instead of the next one if using MY_TEMPLATE_OBJS
+#compile: $(USEROBJS) $(ASAOBJS) $(MY_TEMPLATE_OBJS)
+#	@$(CC) $(LDFLAGS) -o asa_run $(USEROBJS) $(ASAOBJS) $(MY_TEMPLATE_OBJS) -lm
+compile: $(USEROBJS) $(ASAOBJS)
+	@$(CC) $(LDFLAGS) -o asa_run $(USEROBJS) $(ASAOBJS) -lm
+
+$(USEROBJS): asa_usr.h # MY_TEMPLATE_user_incl
+$(ASAOBJS): asa.h
+$(ASA_USER_INCL): asa_usr_asa.h
+# MY_TEMPLATE_depends
+
+profile:
+	gprof -z asa_run > asa_profile
+
+## CC and CFLAGS are passed into main, to be recorded in asa_usr_out.
+## If "." is not in the path, use "./asa_run" instead of "asa_run" .
+## Use a low value of nice for runs that are time- and CPU-intensive.
+run:
+	asa_run $(CC) $(CFLAGS) # MY_TEMPLATE_run
+#	./asa_run $(CC) $(CFLAGS) # MY_TEMPLATE_run
+#	nice -19 asa_run $(CC) $(CFLAGS)
+#	profile
+
+clean:
+	rm -f *\.o asa_run* asadll* # MY_TEMPLATE_clean core gmon.out
+
+realclean:
+	rm -f *\.o asa_run* asa_usr_out* asa_out* core asa_save* asa_rcur asa_sfop \
+	asa_exit_anytime asa_[A-D]_[a-d] asa_pipe asadll* # MY_TEMPLATE_realclean gmon.out
+
+docclean:
+	rm -f ASA-README.txt ASA-README.ps ASA-README.pdf
+
+tgz:
+	mkdir ASA ; cp $(MANIFEST) ASA ; tar cBf - ASA | gzip --best > ASA.tar.gz ; rm -rf ASA
+
+## Prepare DOS-zip using UNIX-zip
+zip:
+	mkdir ASA ; cp $(MANIFEST) ASA ; u2d ASA/*[^f] ; zip -rq9 ASA ASA ; rm -rf ASA
+
+# under Cygwin change CC to
+## CC = /bin/i686-pc-mingw32-gcc.exe
+dllmodule = asadll
+obj_libs = $(MY_TEMPLATE_OBJS) $(USEROBJS) $(ASAOBJS)
+dependency_libs =  # -lm is a dummy /usr/lib/mingw/libm.a with Cygwin
+#dependency_libs = -lm
+# compiling without main(), using ASA_LIB, gives warning to be ignored.
+asadll:
+	make -i compile
+	$(CC) $(CFLAGS) -shared -o ${dllmodule}.dll \
+	-Wl,--out-implib=${dllmodule}.lib \
+	-Wl,--compat-implib \
+	-Wl,--add-stdcall-alias \
+	-Wl,--enable-stdcall-fixup \
+	-Wl,--enable-auto-import \
+	-Wl,--enable-auto-image-base \
+	-Wl,--whole-archive ${obj_libs} \
+	-Wl,--export-all \
+	-Wl,--output-def=${dllmodule}.def \
+	-Wl,--no-whole-archive ${dependency_libs}
+

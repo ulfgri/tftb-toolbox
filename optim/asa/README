@@ -1,0 +1,98 @@
+/***********************************************************************
+* ASAMIN --- MATLAB Gateway to Lester Ingber's Adaptive Simulated
+* Annealing (ASA) Software
+* 
+* Copyright (c) 1999-2008  Shinichi Sakata.  All Rights Reserved.
+***********************************************************************/
+/* $Id: README,v 1.39 2011/02/18 16:49:47 ssakata Exp $ */
+
+asamin.c provides a MATLAB mex file that serves as gateway to Adaptive
+Simulated Annealing (ASA) by Lester Ingber. The copyright of the
+computer codes in this package belong to me, Shinichi Sakata. I assume
+no responsibility for any damages or loss caused by the codes.
+
+-------------
+ Limitations
+-------------
+
+The current version of ASAMIN is written for MATLAB 7.9.0 (R2009b). It
+probably works with some earlier and newer versions of MATLAB.
+
+ASAMIN is written in ANSI C. I do not think that the code much depends
+on my particular environment. The gcc compiler version 4.4.5, which is
+called by mex, compiles it on my Intel Core i5 box running Debian
+Linux 6.0.0 ("squeeze"). Some people have also reported that ASAMIN
+can be compiled and used with other versions of MATLAB on other
+platforms. But I would like to stress that I myself only tested ASAMIN
+in the particular environment described above.
+
+The current version of ASAMIN has been tested with ASA v. 28.1. It may
+not work with older / future versions of ASA. ASA offers an array of
+compilation-time options. ASAMIN only covers a particular setup found
+in Makefile. If you need other setups, you may need to modify ASAMIN.
+
+--------------------------------
+ Installation on UNIX platforms
+--------------------------------
+
+1. Obtain an archive of ASA from http://www.ingber.com and put the
+   files in the archive in a work directory.
+
+2. Copy or link asa.c, asa.h, and asa_usr_asa.h to the directory of
+   ASAMIN.
+
+3. Edit Makefile to reflect your C compiler. (You may also need to
+   configure your mex options. See your MATLAB manual.)
+
+4. Move to the directory of ASAMIN, if you haven't. Make ASAMIN by
+   typing make.
+
+5. Starting MATLAB in the same directory, run asatest, which yields
+   asatest1.log and asatest2.log. Verify that the results in these log
+   files are the same as that in asa_test_asa in the ASA package.
+
+6. Move the mex file of ASAMIN (e.g., asamin.mexglx) and asamin.m to a
+   directory in the search list of MATLAB. (Read the output of 'help
+   path' and 'help addpath' in MATLAB, if you don't know what the
+   search list is.)
+
+-----------------------------------
+ Installation on Windows Platforms
+-----------------------------------
+
+The information in this section, which came from some users of ASAMIN,
+is likely to be outdated. Your feedback would be welcomed.
+
+1. Obtain an archive of ASA from http://www.ingber.com and put the
+   files in the archive in a work directory.
+
+2. Copy asa.c, asa.h, and asa_usr_asa.h to the directory of ASAMIN.
+
+3. Move to the directory of ASAMIN, if you haven't. Type in
+
+     mex asamin.c asa.c -DUSER_ACCEPTANCE_TEST#TRUE -DUSER_ASA_OUT#TRUE
+
+   If your compiler complains that DBL_MIN is undefined, try 
+   adding a switch "-DDBL_MIN#2.2250738585072014e-308".
+
+4. Starting MATLAB in the same directory, run asatest, which yields
+   asatest1.log and asatest2.log. Verify that the results in these log
+   files are the same as that in asa_test_asa in the ASA package.
+
+5. Move the mex file of ASAMIN and asamin.m to a
+   directory in the search list of MATLAB. (Read the output of 'help
+   path' and 'help addpath' in MATLAB, if you don't know what the
+   search list is.)
+
+-------
+ Usage
+-------
+
+The file asamin.m describes the basic usage. A simple example is found
+asatest.m. See test_cost_func1.m and test_cost_func2.m to learn how to
+write the objective function.
+
+Asamin has quite a few run-time options, reflecting those provided by
+ASA. What these options do are found in ASA-README included in the ASA
+package.
+

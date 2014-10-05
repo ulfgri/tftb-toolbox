@@ -1,0 +1,83 @@
+#if FALSE /* ASA_SAVE */
+Limit_Acceptances[10000][ASA_TEST:1000]			1000
+Limit_Generated[99999]					99999
+Limit_Invalid_Generated_States[1000]			1000
+Accepted_To_Generated_Ratio[1.0E-6][ASA_TEST:1.0E-4]	1.0E-4
+
+Cost_Precision[1.0E-18]					1.0E-18
+Maximum_Cost_Repeat[5]					5
+Number_Cost_Samples[5]					5
+Temperature_Ratio_Scale[1.0E-5]				1.0E-5
+Cost_Parameter_Scale_Ratio[1.0]				1.0
+Temperature_Anneal_Scale[100.0]				100.0
+
+Include_Integer_Parameters[FALSE=0]			0
+User_Initial_Parameters[FALSE=0]			0
+Sequential_Parameters[-1]				-1
+Initial_Parameter_Temperature[1.0]			1.0
+
+Acceptance_Frequency_Modulus[100]			100
+Generated_Frequency_Modulus[10000]			10000
+Reanneal_Cost[1]					1
+Reanneal_Parameters[TRUE=1]				1
+
+Delta_X[0.001]						0.001
+User_Tangents[FALSE=0]					0
+Curvature_0[FALSE=0]					0
+
+___Define_below_if_OPTIONS_FILE_DATA=TRUE
+
+number_parameters=*parameter_dimension			4
+
+Param#:Minimum:Maximum:InitialValue:Integer[1or2]orReal[-1or-2]
+0	-10000	10000	999.0			-1
+1	-10000	10000	-1007.0			-1
+2	-10000	10000	1001.0			-1
+3	-10000	10000	-903.0			-1
+
+___Define_below_if_QUENCH_COST_and_OPTIONS_FILE_DATA=TRUE
+
+User_Quench_Cost_Scale[0]=1.0				1.0
+
+___Define_below_if_QUENCH_PARAMETERS_and_QUENCH_COST_and_OPTIONS_FILE_DATA=TRUE
+
+Param#:User_Quench_Param_Scale[.]=1.0
+0	1.0
+1	1.0
+2	1.0
+3	1.0
+
+NOTE:  Keep all comment lines above, with no extra in-line "white" spaces.
+
+The OPTIONS_FILE_DATA lines used by ASA_TEST are saved for reference:
+
+number_parameters=*parameter_dimension			4
+
+Param#:Minimum:Maximum:InitialValue:Integer[1or2]orReal[-1or-2]
+0	-10000	10000	999.0			-1
+1	-10000	10000	-1007.0			-1
+2	-10000	10000	1001.0			-1
+3	-10000	10000	-903.0			-1
+
+/***********************************************************************
+* Adaptive Simulated Annealing (ASA)
+* Lester Ingber <ingber@ingber.com>
+* Copyright (c) 1987-2014 Lester Ingber.  All Rights Reserved.
+* ASA-LICENSE file has the license that must be included with ASA code.
+***********************************************************************/
+
+When using this file with ASA_SAVE=TRUE, C code can be added after
+the last #endif statement after the  line below, to be recompiled
+into the code after the asa_save file is read in.  Be sure to force a
+recompile of asa.o and asa_run before restarting runs.  Also be sure you
+write the names of these variables as they are used in the asa.c file,
+which can differ from their counterparts in asa_usr.c file.  For example,
+you might add:
+
+parameter_maximum[2] = 500;
+OPTIONS->Limit_Generated = 700;
+OPTIONS->User_Quench_Param_Scale[3] = 0.8; /* assumes QUENCH_PARAMETERS=TRUE */
+
+$Id: asa_opt,v 30.10 2014/07/28 21:14:12 ingber Exp ingber $
+#endif /* ASA_SAVE */
+

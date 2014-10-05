@@ -1,0 +1,393 @@
+2014-October-5, Ulf Griesmann
+- version 62
+- swapped last two arguments in 'tf_write.m', because
+  the function is mostly used with the 'matlab' default
+  option.
+- renamed tf_optimize* functions to indicate the optimization
+  algorithm in the function name. Unconstrained optimization is
+  now the default in 'tf_optimize_lm.m' (Levenberg-Marquardt).
+- new 'tf_optimize2.m' based on adaptive simulated annealing.
+- better axis labeling in 'tf_plotnk.m'
+- much improved 'tf_write.m'; now can write a nice HTML table
+  that can be used by fabricators.
+- better uncertainty handling in 'tf_stoney.m'. Not all 
+  uncertainties need to be supplied.
+
+2014-January-27, Ulf Griesmann
+- version 60b
+- correct error (missing ,) in 'tf_swingcurve.m'.
+- constrain parameters to values >= 0 in 'tf_optimize3.m'.
+- improvements to 'tf_plotN.m'.
+
+2014-January-26, Ulf Griesmann
+- version 60
+- simplify 'tf_rootdir.m'. Now uses 'which', which is much faster.
+- fixed a serious bug in 'tf_searchnk.m'.
+- index data collection 'nist' is renamed to 'litho'.
+- 'tf_swingcurve.m' and 'tf_rayfan.m' now accept vectors
+  with wavelengths.
+- 'tf_plotN.m' indicates layer boundaries.
+
+2014-January-23, Ulf Griesmann
+- version 59
+- corrected the initialization of bounds in 'tf_optimize.m'.
+
+2014-Januray-22, Ulf Griesmann
+- version 58
+- corrected an error in 'tf_rayfan_sub.m'.
+
+2014-January-21, Ulf Griesmann
+- version 57
+- tolerance argument for 'tf_optimze.m'
+- add a grid option to 'tf_plot.m'
+- new function 'tf_plotGD.m' for plotting
+  of group delay and group delay dispersion.
+- new function 'tf_int_sub.m' calculates reflectance
+  and transmittance for a substrate that has multilayers
+  on front- and back-surfaces.
+- new functions 'tf_spectrum_sub.m' and 'tf_rayfan_sub.m'
+  calculate reflectance and transmittance spectra (and ray
+  fans) with the inclusion of (incoherent) substrate effects. 
+
+2014-January-20, Ulf Griesmann
+- version 56
+- calculation of GD and GDD is now correct.
+
+2014-January-19, Ulf Griesmann
+- version 55
+- labels for the y-axes in 'tf_plot.m' can now
+  be changed, which makes the plotting function
+  more general.
+- fixed title of admittance diagrams. Units are um, not nm.
+- new functions 'tf_efield.m' and 'tf_plotE.m' to calculate
+  and plot the electric field strength through a thin film
+  stack.
+
+2014-January-15, Ulf Griesmann
+- version 54
+- 'tf_write.m' now can write out a thin film stack in form
+  of a callable MATLAB/Octave function which returns the
+  thin film stack structure array. 
+
+2014-January-15, Ulf Griesmann
+- version 53
+- tweaked parameters of 'tf_optimize3.m'.
+- vectorized another loop in 'devec3.m'.
+- add new Octave error code for sqp.m to 'tf_optimize.m'.
+
+2014-January-12, Ulf Griesmann
+- version 52
+- new function 'tf_optimize3.m' which implements a global
+  differential evolution algorithm for minimizing a 
+  cost/merit function.
+
+2014-January-6, Ulf Griesmann
+- version 51
+- fixed a bug in 'private/lm_opts_check.m'
+- fixed a couple bugs in 'tf_needle.m', and new option
+  nic.swid to set the needle width in the output film stack.
+- several fixes in 'tf_plot.m' to correct bugs related
+  to plotting of multiple datasets.
+- slightly enhance 'tf_layer.m'; default thickness is 0, which 
+  is useful for defining entrance and exit media.
+
+2014-January-3, Ulf Griesmann
+- version 49,50
+- more plotting fixes and improvements. RAD and Y
+  diagrams are finally plotted with square aspect
+  ratio. Circle diagrams are now actual circles.
+- fixed a bug with legends in 'tf_plot.m'
+- fixed a recently introduced bad bug in 'tf_plotnk.m'
+
+2014-January-2, Ulf Griesmann
+- version 48
+- further improvements to plotting functions, make plots
+  look identical in Ocatave and MATLAB.
+- correctly print '_' in plot legends.
+
+2014-January-1, Ulf Griesmann
+- version 47
+- improved all plotting functions and corrected several
+  errors in the error message texts. 
+
+2013-December-30, Ulf Griesmann
+- version 46
+- 'tf_stack.m' also prints the total thickness
+  of the thin film stack.
+- improved description of 'tf_plotrad.m'.
+- improved function 'tf_plot.m'. Now can plot more
+  than one dataset in one plot for easier comparison.
+
+2013-December-26, Ulf Griesmann
+- version 45
+- replaced 'tf_plotphase.m' with 'tf_phase.m', which 
+  calculates the phase as function of the wavelength.
+- new function 'tf_gd.m' for computing group delay (GD) 
+  and group delay dispersion (GDD).
+- new function 'tf_layer.m' makes it easier to set up 
+  film stacks and to define lambda/2, lambda/4, etc. layers.
+
+2013-December-23, Ulf Griesmann
+- version 44
+- fixed a bad bug in 'private/getnames.m' which
+  could result in allocating far too much memory
+  for even modest size film stacks.
+
+2013-December-22, Ulf Griesmann
+- version 43
+- fixed spelling of message in 'tf_optimize.m'
+- make unconstrained optimization an option in 'tf_optimize2.m'
+- new function 'tf_prune.m' which removes layers with thickness
+  outside a specified range.
+- in 'tf_plotrad.m' changed the order of arguments 'radtype' and
+  'nila'.
+- new function 'tf_plotphase.m', which complements the amplitude plot
+  by showing only the phase of the electric field through the stack.
+
+2013-December-16, Ulf Griesmann
+- version 42
+- fix help text of 'tf_optimize.m'
+- in 'tf_int.m' bracket the computation of t*conj(t)
+  to avoid a small imaginary part due to roundoff errors in MATLAB. 
+- changed matrix XYZ --> RGB in 'tf_color.m'.
+- corrected the calculation of the CIE tristimulus values;
+  they are now correctly normalized. The sRGB color
+  space is used.
+
+2013-December-11, Ulf Griesmann
+- version 41
+- 'tf_needle.m' implements the needle method for thin
+  film stack synthesis.
+  
+2013-December-10, Ulf Griesmann
+- version 40
+- 'tf_optimize.m' can optimize for objectives (merit function
+  target values other than 0. This enables the calculation 
+  e.g. of beam splitters. 
+- additional optimization function 'tf_lmoptimize2.m', which is based
+  on constrained Levenberg-Marquardt optimization; easier to use for
+  some applications, and it is good to have more than one nonlinear
+  optimization algorithm. The new function also enables the use of 
+  function objectives, which, e.g., would be needed for the design
+  of dichroic mirrors.
+- renamed functions tf_BC.m --> tf_bc.m and tf_BCinc.m --> tf_bcinc.m
+  for reasons of style.
+- cleaned up 'tf_color.m' a bit.
+- fixed a bug in 'tf_maxgarn.m'. Now it beautifully reproduces the 
+  color of ruby glass.
+- 'tf_stack.m' now prints the optical thickness in units of the
+  wavelength.
+- function 'tf_write.m' now writes the data of a thin film material
+  stack to a file either as a table or as Octave/MATLAB code.
+
+2013-December-6, Ulf Griesmann
+- version 39
+- fixed bug in 'tf_stack.m', now prints correct sign of k.
+- improvements to 'n_sellmeier.m'.
+- changed 'tolower' --> 'lower' because the former only 
+  exists in Octave.
+- made 'tf_searchnk.m' simpler and better.
+
+2013-December-1, Ulf Griesmann
+- version 38
+- better error messages when index files cannot be found/opened.
+- new function 'tf_maxgarn.m' calculates the effective refractive
+  index of an isotropic Maxwell Garnet model.
+- 'tf_searchnk.m' can search multiple collections with a single 
+  invocation.
+- new 'tf_fitn.m' function to fit Cauchy and Sellmeier models
+  to experimental refractive index data. Requires the LEVMAR
+  library for Levenberg-Marquardt least-squares minimization.
+- needle method is still work in progress ...
+
+2013-November-16, Ulf Griesmann
+- version 37
+- fixed small bug in description of 'tf_plotrad.m'
+- new function 'tf_plotY.m' for plotting of admittance
+  diagrams.
+- new functions 'tf_admit.m' and 'tf_admitinc.m' for 
+  calculating admittances.
+- moved 'make_arc.m' function into private directory.
+- new function 'tf_stoney.m' for calculating film stresses,
+  and their uncertainty, with Stoney's formula.
+- plot admittance diagrams and circle diagrams with grid.
+
+2013-November-14, Ulf Griesmann
+- version 36
+- 'tf_searchnk.m' no longer aborts when a wavelength is outside
+  the wavelength range of a data file.
+- rewrite 'nkb_file_exists.m' to not use 'dir' because that turned
+  out to be incredibly slow on Octave.
+- clean up 'tf_stack.m'.
+- fixed generic merit functions 'tf_rmin.m' and 'tf_tmin.m'. Now they 
+  work for more than one wavelength. 
+
+2013-November-11, Ulf Griesmann
+- version 35
+- convert refractive index files to binary files upon first reading
+  to speed up subsequent file accesses. Binary files have the file
+  extension .nkb
+- new function 'tf_searchnk.m' that searches the refractive index
+  database for materials with a specified refractive index or
+  absorption coefficient.
+- correct bug in range checking in 'tf_nk.m'.
+- new function 'tf_insert.m' for inserting new material layers in
+  a thin film stack.
+- 'tf_stack.m' also prints out the layer materials and the stack
+  can be evaluated at more than one wavelength
+
+2013-November-08, Ulf Griesmann
+- version 34
+- fixed bugs in general purpose merit functions 'tf_rmin.m' 
+  and'tf_tmin.m'. Averaging over angles had been done wrong.
+- 'tf_optimize.m' now works on MATLAB but requires 'fmincon' 
+  from the Optimization Toolbox.
+- fixed bugs in 'tf_plotnk.m'; plots with more than 2 refractive 
+  index spectra now work correctly.
+- enable plotting of refractive index spectra that are defined
+  through functions with 'tf_plotnk.m'.
+
+2013-November-07, Ulf Griesmann
+- version 32, 33
+- use constrained optimization in 'tf_optimize.m' to ensure
+  that thicknesses remain positive.
+
+2013-November-03, Ulf Griesmann
+- version 31
+- function 'tf_plotnk.m' can now plot several refractive
+  index files together in one plot for comparison.
+- function 'tf_readnk.m' returns the name of the index file
+  and the name of the collection in ri.name
+
+2013-October-22, Ulf Griesmann
+- version 30
+- arg(Z) --> atan2(imag(Z),real(Z)) because MATLAB doesn't have arg.
+- tf_plotrad.m : bugfix - tf_amplinc.m has only 4 arguments.
+- tf_color.m : bugfix - lnm must be defined outside if block.
+- blue_mirror.m example : fixed - MATLAB imwrite can't write .eps files.
+
+2013-October-17, Ulf Griesmann
+- version 29
+- changed argument order in 'tf_optimize.m' to make it 
+  consistent with other functions.
+- general overhaul of 'tf_optimize.m'
+
+2013-October-15, Ulf Griesmann
+- version 28
+- Better handling of data from the palik collection.
+  Still a mess; unclear how to handle missing data, which
+  cause problems with interpolation.
+- finally fixed 'tf_color.m' - I hope ...
+- new function 'tf_plotrgb.m' that plots arrays
+  of color swatches with titles.
+
+2013-October-14, Ulf Griesmann
+- version 27
+- improved 'tf_plotnk.m': uses log x-axis when range is large,
+  plot title can be added.
+- fixed another bug in 'tf_color.m'.
+
+2013-October-12, Ulf Griesmann
+- version 26b
+- add more CIE illuminants (A, F1-F4, D50, D65, ID50, ID65);
+  should be more than enough. Especially F4 is useful for the 
+  fluorescent lighting in typical laboratories.
+- read the CIE standard observer functions from files
+- different CIE illuminants in 'tf_color.m'.
+- move all Octave/MATLAB files out of the nk directory.
+- much simplified 'tf_readnk.m'
+- several fixes to help texts.
+
+2013-October-11, Ulf Griesmann
+- version 25
+- changed 'tf_optimize.m' such that user defined merit functions 
+  can be used in addition to the built-in merit functions. 
+
+2013-October-11, Ulf Griesmann
+- version 24
+- new function 'tf_version.m' that displays the toolbox version.
+- revert to previous way of calculating ellipsometric angles Psi
+  and Delta, which seems to be correct.
+- fixed bug in help text of 'tf_plotN.m'.  
+
+2013-October-10, Ulf Griesmann
+- version 23
+- new function 'tf_plotrad.m' which plots reflection amplitude 
+  and transmission amplitude diagrams (aka. circle diagrams). 
+
+2013-October-09, Ulf Griesmann
+- version 22
+- use atan2 in 'tf_psi.m' for the calculation of Psi.
+- renamed 'tf_index.m' --> 'tf_plotN.m'.
+
+2013-October-09, Ulf Griesmann
+- version 21
+- Use the same formulae as OpenFilters. [See S. Larouche and
+  L. Martinu, "OpenFilters: open-source software for the design,
+  optimization, and synthesis of optical filters", Appl. Opt. 47,
+  C219-C230 (2008)]. They are more in line with conventions used in
+  the thin film optics community. This also implies a change in
+  the definition of the complex refractive index: N = n - i*k  
+- new function 'tf_charmat.m' that calculates the characteristic
+  matrix for each layer and returns the stack of matrices.
+- change internal calculations to the 
+- calculate Psi, Delta according to S. Larouche and L. Martinu, 
+  Appl. Opt. 47, C219-C230 (2008).
+- No default unwrapping in tf_ellip.m 
+
+2013-October-07, Ulf Griesmann
+- version 20
+- added function 'tf_index.m' which plots the refractive
+  index profile of a thin film stack.
+- fixed help texts of several functions.
+
+2013-October-07, Ulf Griesmann
+- version 19
+- make color swatches a bit smaller
+- tf_plot makes a new plot window by default.
+- fixed bug in tf_optimize: did not correctly return
+  the optimized film stack.
+- more flexible file name specification in 'tf_color.m' that permits
+  writing of color swatches in different formats.
+
+2013-October-07, Ulf Griesmann
+- version 18
+- bug fix in XYZ --> RGB transformation of tf_color.m. Now uses the
+  CIE D65 illuminant. Colors are same as in FreeSnell now
+
+2013-October-06, Ulf Griesmann
+- version 17
+- added function 'tf_color' which calculates of color swatches
+  for reflection and transmission.
+
+2013-October-05, Ulf Griesmann
+- version 16
+- added functions 'tf_ellip.m' and 'tf_psi.m' for calculation
+  of ellipsometric Psi & Delta.
+
+2013-October-04, Ulf Griesmann
+- version 15
+- move refractive index collections into a separate archive
+- add index data from Edward Palik's "Handbook of Optical Constants I
+& II"
+
+2013-October-04, Ulf Griesmann
+- version 14
+- made tf_ampl.m simpler and faster; no extra loop to calculate M.
+- mex function tf_ampl.mex to speed up inner loops of calculations
+  (not ready, also not much faster. hm ...).
+- added data for AZ MiR-701 and Dow Ultra-i123 i-line photoresists.
+- function 'tf_optmize.m' to optimize film thicknesses.
+- Contents.m file added (real documentation still missing).
+
+2013-March-03, Ulf Griesmann
+- version 12
+- fixed the last bug in 'tf_ampl.m'. Now I can
+  replicate the FreeSnell examples.
+
+2013-February-24, Ulf Griesmann
+- version 7
+- seems to work now.
+
+2013-February-21, Ulf Griesmann
+- basic functionality for film analysis is implemented.

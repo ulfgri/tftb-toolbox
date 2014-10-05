@@ -1,0 +1,11 @@
+Illuminant      Description                   CCT
+----------      -----------                   ---
+ A              Incandescent lamp             2856 K
+ D50            Daylight when sun is low      5003 K
+ ID50           Indoor daylight
+ D65            Daylight at noon              6504 K
+ ID65           Indoor daylight at noon
+ F1             Daylight fluorescent lamp     6430 K
+ F2             Cool white fluorescent lamp   4230 K
+ F3             White fluorescent lamp        3450 K
+ F4             Warm fluorescent lamp         2940 K

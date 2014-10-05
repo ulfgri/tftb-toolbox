@@ -1,0 +1,63 @@
+
+- check derivatives in group delay functions
+
+- add simulted annealing algorithm (samin on Octave)
+  should be 'tf_optimize2.m' and Levenberg-Marquardt is
+  demoted to 'tf_optimize4.m'.
+  
+- add inequality constraints to 'tf_optimize.m'
+
+- clean up index data base (Palik in particular ...)
+
+- 'tf_tolerance' function for calculating how a merit function depends
+  on layer thickness tolerances. (Monte Carlo ?)
+
+
+----------
+
+- fix problems with LEVMAR optimization (poor convergence).
+  Can't be fixed - emphasize other algorithms
+- function 'tf_report.m' which summarizes coating properties in a report
+  sheet as input for fabrication. (Better 'tf_write.m' will do for now) 
+- make 'tf_swingcurve.m' and 'tf_rayfan.m' accept a vector of
+  wavelengths and return a matrix. (DONE)
+- incoherent layers (DONE with the functions that include substrate effects,
+  which is not the most general form, but will be sufficient for most
+  practical purposes.) 
+- 'tf_efield' function to calculate/plot electrical field through
+  coating and 'tf_plotE' for plotting it. (DONE)
+- 'tf_optseek' function for exploring a parameter space. (DONE with
+tf_optimize3.m, which uses differential evolution to search for a
+merit function optimum - much better than brute-force searching).
+- enable plotting of multiple datasets in the same plot with tf_plot.m (DONE) 
+- calculate GD and GDD (DONE)
+- calculate phase (DONE)
+- 'tf_prune' function for removing very thin layers. (DONE)
+- basic design functionality: needle method. (DONE)
+- many optimization problems are better solved using the Levenberg-Marquardt
+  algorithm. Have a 2nd optimization function 'tf_lmoptimize.m' for LM
+  optimization. (DONE)
+- 'tf_fitn.m' function to fit Sellmeir or Cauchy formulae to experimental 
+  refractive index data. (DONE)
+- admittance diagrams (DONE)
+- function to insert a layer somewhere in a stack (tf_insert.m). 
+  Can also be used to manually add needles. (DONE)
+- refractive index lookup ('tf_searchnk.m'): look for materials with a 
+  desired index at a specified wavelength. 
+  (Probably requires binary index files for fast reading) (ALL DONE)
+- use analytic Jacobians for the standard merit functions tf_rmin.m
+  and tf_tmin.m (DELAY - TOO INFLEXIBLE)
+- use 'levmar' for optimization in 'tf_optimize.m', because
+  'fminunc' is not compatible between Octave and MATLAB.
+   (stay with fmincon on MATLAB and sqp on Octave for now.)
+- tf_optimize.m should accept a range of ANGLES if optimization
+  for a range of angles is needed (DONE)
+- bug: running tf_color twice --> crash (FIXED)
+- DOCUMENTATION (made a start)
+- more generic least squares optimization with user supplied merit
+  function (DONE)
+- reflectance amplitude diagrams (circle diagams) (DONE)
+- tf_color function to calculate color swatches (DONE)
+- tf_ellip to calculate ellipsometric Psi and Delta (DONE)
+- layer thickness optimization function (DONE)
+- add PMMA index (DONE)

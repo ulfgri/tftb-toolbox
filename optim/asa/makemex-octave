@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# shell script to make the .mex file for asamin 
+# for Octave on Linux/Unix
+
+export CFLAGS='-O3 -march=native -fomit-frame-pointer'
+#export CFLAGS='-g -Wall'
+
+mkoctfile --mex -s -DUSER_ACCEPTANCE_TEST=TRUE -DUSER_ASA_OUT=TRUE asamin.c asa.c
+rm *.o
