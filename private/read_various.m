@@ -1,11 +1,11 @@
 function [nk, lambda] = read_various(name);
 %function [nk, lambda] = read_various(name);
 % 
-% read_nist :  read refractive index data from the 'various' collection.
-%              The files all have the same format: the 1st column
-%              is the wavelength in micrometer, the 2nd column is 
-%              the index, and the third column the imaginary part
-%              of the refractive index.
+% read_various :  read refractive index data from the 'various' collection.
+%                 The files all have the same format: the 1st column
+%                 is the wavelength in micrometer, the 2nd column is 
+%                 the index, and the third column the imaginary part
+%                 of the refractive index.
 
 % read binary index file if present
 bname = [name, 'b'];
