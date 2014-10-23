@@ -14,14 +14,15 @@ function tf_plot(X, R, T, A, opts, xrange, blin, bnew)
 %           array of vectors. Assumes absorbance by default.
 % opts :    (Optional) A structure with text strings that annotate
 %           the plot and other options.
-%                opts.xlabel :  string with label for the x axis
-%                opts.rlabel :  string with label for the R axis
-%                opts.tlabel :  string with label for the T axis
-%                opts.alabel :  string with label for the A axis
-%                opts.legend :  string or cell array of strings
-%                               with legends for each data set.
-%                opts.title  :  string with a title for the plot
-%                opts.grid   :  if ==1, plot a grid
+%                opts.xlabel :   string with label for the x axis
+%                opts.rlabel :   string with label for the R axis
+%                opts.tlabel :   string with label for the T axis
+%                opts.alabel :   string with label for the A axis
+%                opts.legend :   string or cell array of strings
+%                                with legends for each data set.
+%                opts.location : legend location, 'northeast' or 'southeast'
+%                opts.title  :   string with a title for the plot
+%                opts.grid   :   if ==1, plot a grid
 % xrange :  (Optional) a 1x2 vector with lower and upper bound of the
 %           independent variable to be plotted
 % blin :    (Optional) scalar, if ~= 0, plots have a linear
@@ -191,21 +192,24 @@ end
 
 % legends
 if isfield(opts,'legend')
+   if ~isfield(opts,'location')
+       opts.location = 'northeast';
+   end
    curp = 1;
    subplot(1,nump,curp);
    L = legend(opts.legend);
-   set(L, 'Fontsize',lfsize);
+   set(L, 'Fontsize',lfsize, 'Location',opts.location);
    if ~isempty(T)
       curp = curp + 1;
       subplot(1,nump,curp);
       L = legend(opts.legend);
-      set(L, 'Fontsize',lfsize);
+      set(L, 'Fontsize',lfsize, 'Location',opts.location);
    end
    if ~isempty(A)
       curp = curp + 1;
       subplot(1,nump,curp);
       L = legend(opts.legend);
-      set(L, 'Fontsize',lfsize);
+      set(L, 'Fontsize',lfsize, 'Location',opts.location);
    end
 end
 
