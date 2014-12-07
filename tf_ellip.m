@@ -18,44 +18,44 @@ function [Psi, Delta] = tf_ellip(stack, lambda, theta, bunwrap)
 %           unwrapped. Default is 0 (no unwrapping). 
 %
 % Output:
-% Psi :    Psi(lambda) in DEGREES
-% Delta :  Delta(lambda) in DEGREES
+% Psi :    column vector Psi(lambda) in DEGREES
+% Delta :  column vector Delta(lambda) in DEGREES
 %
 
 % Initial version, Ulf Griesmann, October 2013
 
-% check input
-if nargin < 4, bunwrap = []; end
-if nargin < 3
-   error('tf_ellip :  three input arguments required.');
+    % check input
+    if nargin < 4, bunwrap = []; end
+    if nargin < 3
+        error('tf_ellip :  three input arguments required.');
+    end
+    if isempty(bunwrap), bunwrap = 0; end;
+    if iscolumn(lambda), lambda = lambda'; end
+    
+    % pre-allocate arrays
+    Psi   = zeros(size(lambda));
+    Delta = zeros(size(lambda));
+
+    % compute all thicknesses in units of lambda
+    d = zeros(length(stack), length(lambda));
+    for l = 1:length(lambda)  
+        d(2:length(stack)-1, l) = [stack(2:length(stack)-1).d] / lambda(l);
+    end
+
+    % compute all indices
+    nk = evalnk(stack, lambda); 
+
+    % calculate Psi, Delta for all lambda
+    for l = 1:length(lambda)
+        [Psi(l), Delta(l)] = tf_psi(d(:,l), nk(:,l), theta);
+    end
+
+    % unwrap, convert to degrees, and make column vector
+    if bunwrap
+        Psi   = unwrap(Psi);
+        Delta = unwrap(Delta);
+    end
+    Psi   = 180 * Psi' / pi;
+    Delta = 180 * Delta' / pi;
+
 end
-if isempty(bunwrap), bunwrap = 0; end;
-if iscolumn(lambda), lambda = lambda'; end
-
-% pre-allocate arrays
-Psi = zeros(size(lambda));
-Delta = zeros(size(lambda));
-
-% compute all thicknesses in units of lambda
-d = zeros(length(stack), length(lambda));
-for l = 1:length(lambda)  
-   d(2:length(stack)-1, l) = [stack(2:length(stack)-1).d] / lambda(l);
-end
-
-% compute all indices
-nk = evalnk(stack, lambda); 
-
-% calculate Psi, Delta for all lambda
-for l = 1:length(lambda)
-    [Psi(l), Delta(l)] = tf_psi(d(:,l), nk(:,l), theta);
-end
-
-% unwrap and convert to degrees
-if bunwrap
-   Psi   = unwrap(Psi);
-   Delta = unwrap(Delta);
-end
-Psi   = 180 * Psi / pi;
-Delta = 180 * Delta / pi;
-
-return

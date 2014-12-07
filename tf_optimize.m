@@ -103,70 +103,15 @@ end
 
 % display optimized parameters
 fprintf('\n');
-disp_info(info, iter);
+tf_disp_info(info, iter);
 fprintf('  Iterations : %d\n', iter);
 fprintf('  Merit function :  %g\n', merit);   
-disp_d(dopt, didx, S);
+tf_disp_d(dopt, didx, S);
 
 % return optimized film stack
 Sopt = S;
 for k = 1:length(didx)
    Sopt(didx(k)).d = dopt(k);
 end
-
-return
-
-
-% display optimization information
-function disp_info(info, iter)
-
-switch info
-
- case 0
-    fprintf('  Failure - maximum number of iterations exceeded.\n');
-    
- case 1
-    fprintf('  Success - algorithm terminated normally.\n');
-    
- case -1
-    fprintf('  Stopped by an output function or plot function.\n');
-    
- case -2
-    fprintf('  Failure - no feasible point was found.\n');
-      
- case 101
-    fprintf('  Success - algorithm terminated normally.\n');
-    
- case 102
-    fprintf('  Failure - BGFS update failed.\n');
- 
- case 103
-    fprintf('  Failure - maximum number of iterations reached.\n');
- 
- case 104
-    fprintf('  Warning - no convergence, step size is too small.\n');
- 
-end
-
-return
-
-
-% display optimized film thicknesses
-function disp_d(d, didx, S)
-
-fprintf('\n');
-fprintf('  layer #    thickness / um    material\n');
-fprintf('  -------    ----------------  --------\n');
-for k = 1:length(d)
-   if isa(S(didx(k)).n, 'function_handle')
-      mname = func2str(S(didx(k)).n);
-   elseif isstruct(S(didx(k)).n)
-      mname = S(didx(k)).n.name;
-   else
-      mname = 'undefined';
-   end
-   fprintf('  %-7d    %.4f            %s\n', didx(k), d(k), mname);
-end
-fprintf('\n');
 
 return

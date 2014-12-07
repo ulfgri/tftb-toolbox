@@ -1,3 +1,18 @@
+2014-December-07, Ulf Griesmann
+- change 'tf_plotpd' to plot in different modes 'std'
+  for plotting Psi, Delta, and 'mag' (magnitude) for
+  plotting tan(Psi) and cos(Delta). Also add a 'pol' (polar)
+  mode that plots Psi(Delta). Remove pointless 'xrange'
+  argument.
+- new function 'tf_ellip_match.m' to calculate or plot
+  the rms difference of ellipsometric tan(Psi) and measured
+  tan(Psi) = |rho| as a function of layer thickness
+- new function 'tf_ellip_fit.m' to calculate layer thicknesses
+  from ellipsometric data when the optical properties of the
+  layer materials are known.
+- new function 'tf_listnk.m' to list the materials in a 
+  refractive index data collection.
+
 2014-October-5, Ulf Griesmann
 - version 62
 - swapped last two arguments in 'tf_write.m', because

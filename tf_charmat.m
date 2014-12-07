@@ -23,42 +23,42 @@ function [M] = tf_charmat(d, nk, theta, pol);
 
 % Initial version, Ulf Griesmann, October 2013
 
-% check arguments
-if nargin ~= 4
-   error('tf_charmat :  must have 4 arguments.');
-end
-if length(d) ~= length(nk)
-   error('tf_charmat :  number of thicknesses ~= number of indices.');
-end
-if isrow(d), d = d'; end
-if isempty(theta), theta = 0; end
+    % check arguments
+    if nargin ~= 4
+       error('tf_charmat :  must have 4 arguments.');
+    end
+    if length(d) ~= length(nk)
+       error('tf_charmat :  number of thicknesses ~= number of indices.');
+    end
+    if isrow(d), d = d'; end
+    if isempty(theta), theta = 0; end
 
-% check if only one interface
-if length(d) == 2
-   M = eye(2);  % because delta = 0
-   return
+    % check if only one interface
+    if length(d) == 2
+       M = eye(2);  % because delta = 0
+       return
+    end
+
+    % pseudo-index eta and phase phi shift for each layer
+    alpha2 = (nk(1) * sin(pi*theta/180))^2;  % is constant
+    N = nk(2:end-1);                         % actual layers
+    eta0 = sqrt(N.^2 - alpha2);
+    if pol == 's'
+       eta = eta0;
+    elseif pol == 'p'
+       eta = N.^2 ./ eta0;
+    else
+       error('tf_charmat :  unknown polarization state.');
+    end
+    phi = 2*pi * d(2:end-1) .* eta0;
+
+    % stack of characteristic matrices for each layer
+    M = complex(zeros(2,2,length(phi)));
+    cosphi = cos(phi);
+    sinphi = sin(phi);
+    M(1,1,:) = cosphi;
+    M(2,2,:) = cosphi;
+    M(1,2,:) = i*sinphi./eta;
+    M(2,1,:) = i*sinphi.*eta;
+
 end
-
-% pseudo-index eta and phase phi shift for each layer
-alpha2 = (nk(1) * sin(pi*theta/180))^2;  % is constant
-N = nk(2:end-1);                         % actual layers
-eta0 = sqrt(N.^2 - alpha2);
-if pol == 's'
-   eta = eta0;
-elseif pol == 'p'
-   eta = N.^2 ./ eta0;
-else
-   error('tf_charmat :  unknown polarization state.');
-end
-phi = 2*pi * d(2:end-1) .* eta0;
-
-% stack of characteristic matrices for each layer
-M = complex(zeros(2,2,length(phi)));
-cosphi = cos(phi);
-sinphi = sin(phi);
-M(1,1,:) = cosphi;
-M(2,2,:) = cosphi;
-M(1,2,:) = i*sinphi./eta;
-M(2,1,:) = i*sinphi.*eta;
-
-return

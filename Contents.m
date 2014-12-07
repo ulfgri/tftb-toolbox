@@ -22,30 +22,31 @@
 %    tf_nk.m         - evaluate index spectrum at wavelength(s)
 %    tf_plotnk.m     - plot complex refractive index spectra
 %    tf_searchnk.m   - search materials with specific n, k
+%    tf_listnk.m     - list materials in an index data collection
 %    tf_maxgarn.m    - effective index of Maxwell Garnet model
 %    tf_fitn.m       - fit Cauchy and Sellmeier models to data
 %
 % Film stack design:
 % ------------------
-%    tf_layer.m      - add a layer structure to a film stack
-%    tf_repl.m       - design stack with layer repetitions
-%    tf_insert.m     - insert a new material in a film stack
-%    tf_prune.m      - remove layers with thickness outside range
-%    tf_optimize.m   - optimize layer thicknesses using SQP
-%    tf_optimize2.m  - optimize layer thicknesses with adaptive
-%                      simulated annealing (ASA)
-%    tf_optimize3.m  - layer thickness optimization using a 
-%                      differential evolution algorithm
-%    tf_optimize4.m  - least squares optimization of layer
-%                      thicknesses using a Levenberg-Marquardt
-%                      algorithm
-%    tf_needle.m     - synthesize new stack with needle method
+%    tf_layer.m       - add a layer structure to a film stack
+%    tf_repl.m        - design stack with layer repetitions
+%    tf_insert.m      - insert a new material in a film stack
+%    tf_prune.m       - remove layers with thickness outside range
+%    tf_optimize.m    - optimize layer thicknesses using SQP
+%    tf_optimize_se.m - optimize layer thicknesses with adaptive
+%                       simulated annealing (ASA)
+%    tf_optimize_de.m - layer thickness optimization using a 
+%                       differential evolution algorithm
+%    tf_optimize_lm.m - least squares optimization of layer
+%                       thicknesses using a Levenberg-Marquardt
+%                       algorithm
+%    tf_needle.m      - synthesize new stack with needle method
 %
 % Film stack analysis:
 % --------------------
 %    tf_stack.m      - display thin film stack data
 %    tf_plot.m       - plot T, R, A, and etc.
-%    tf_plotpd.m     - plot ellipsometric Psi and Delta
+%    tf_plotpd.m     - plot ellipsometric Psi,Delta, and rho
 %    tf_plotN.m      - plot refractive index profiles
 %    tf_plotrad.m    - plot reflectance amplitude diagrams
 %    tf_plotY.m      - plot admittance diagrams
@@ -79,14 +80,23 @@
 %    tf_swingcurve.m   - T and R as function of film thickness
 %    tf_rayfan.m       - T and R as function of angle of incidence
 %    tf_rayfan_sub.m   - T and R as function of AOI including substrate
-%    tf_psi.m          - Ellipsometric spectra Psi(lambda) & Delta(lambda)
 %    tf_color.m        - calculate reflected and transmitted color
 %                        of a thin film stack for CIE illuminants.
 %
+% Ellipsometry:
+% -------------
+%    tf_ellip.m      - Ellipsometric spectra Psi(lambda) & Delta(lambda)
+%    tf_psi.m        - calculate ellipsometric Psi and Delta
+%
 % Film stack inspection:
 % ----------------------
-%    tf_psi.m        - calculate ellipsometric Psi and Delta
-%    tf_stoney.m     - Stoney's formula for film stress measurements 
+%    tf_stoney.m     - Stoney's formula for film stress
+%                      measurements 
+%    tf_ellip_match  - Visually compare measured ellipsometry data
+%                      with with calculated data as function of 
+%                      layer thickness (rms of difference)
+%    tf_ellip_fit    - fit layer thicknesses to match ellipsometric
+%                      measurement data with Psi for known materials
 %
 % Miscellaneous:
 % --------------

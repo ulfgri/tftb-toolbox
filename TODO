@@ -1,4 +1,7 @@
 
+- analyze ellipsometric data by fitting of spectroscopic models
+  using B-Splines
+
 - check derivatives in group delay functions
 
 - add simulted annealing algorithm (samin on Octave)
@@ -15,6 +18,9 @@
 
 ----------
 
+- tf_listnk function to list materials in a collection (DONE)
+- update tf_plotpd to plot ellipsometric psi, delta in polar form
+  if so desired by the user: psi(delta) (DONE)
 - fix problems with LEVMAR optimization (poor convergence).
   Can't be fixed - emphasize other algorithms
 - function 'tf_report.m' which summarizes coating properties in a report
