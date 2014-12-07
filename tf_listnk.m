@@ -55,13 +55,14 @@ function tf_listnk(coll)
         
         nk_nam = [nk_nam, m_nam];
         
-        % restore current directory
-        cd(cdir);
-        
         % print out names in 4 columns
         fprintf('\n');
         fprintf('  %-25s  %-20s  %-20s  %-20s\n', nk_nam{:});
         fprintf('\n\n');
         fprintf('  %d materials\n\n', length(nk_nam));
     end
+
+    % restore current directory
+    cd(cdir);
+        
 end
