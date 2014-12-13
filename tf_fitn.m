@@ -1,5 +1,5 @@
-function [par, res] = tf_fitn(lambda, rin, type, par0, mit, opt)
-%function [par, res] = tf_fitn(lambda, rin, type, par0, mit, opt)
+function [par, res] = tf_fitn(lambda, rin, type, par0, mit)
+%function [par, res] = tf_fitn(lambda, rin, type, par0, mit)
 %
 % tf_fitn :  calculates the parameters of a Sellmeier or Cauchy 
 %            refractive index dispersion model for a given set of 
@@ -23,7 +23,6 @@ function [par, res] = tf_fitn(lambda, rin, type, par0, mit, opt)
 % par0 :     initial values of the parameters 
 %                  par0.A and par0.B
 % mit :      (Optional) maximum number of iterations. Default is 500.
-% opt :      (Optional) options vector for the 'levmar' function.
 %
 % Output:
 % par :      a structure with the parameters of the model: 
@@ -40,47 +39,80 @@ function [par, res] = tf_fitn(lambda, rin, type, par0, mit, opt)
 
 % Initial version, Ulf Griesmann, November 2013
 
-% check parameters
-if nargin < 6, opt = []; end
-if nargin < 5, mit = []; end
-if nargin < 4
-   error('tf_fitn :  missing parameter(s).');
-end
-if isempty(mit), mit = 500; end
-type = lower(type);
+   % check parameters
+   if nargin < 6, opt = []; end
+   if nargin < 5, mit = []; end
+   if nargin < 4
+      error('tf_fitn :  missing parameter(s).');
+   end
+   if isempty(mit), mit = 200; end
+   type = lower(type);
 
-% call lsq function
-if strcmp(type, 'sellmeier')
+   % call lsq function
+   if strcmp(type, 'sellmeier')
   
-   nt = length(par0.A);
-   p0(1:nt) = par0.A;
-   p0(nt+1:2*nt) = par0.B;
-   [ret, popt, info] = levmar(@lm_sellmeier, [], p0, rin, mit, opt, 'unc', lambda, nt);
-   par.A = popt(1:nt);
-   par.B = popt(nt+1:2*nt);
-   res = rin - n_sellmeier(lambda, par);
+      nt = length(par0.A);
+      p0(1:nt) = par0.A;
+      p0(nt+1:2*nt) = par0.B;
    
-elseif strcmp(type, 'cauchy')
+      if is_octave
+        
+         if exist('leasqr') ~= 2
+            error('tf_fitn: must install/load package ''optim''.');
+         end
+         [rout,popt,flag,iter] = leasqr(lambda,rin,p0,@lm_sellmeier_oct,1e-6,mit);
+         res = rin - rout;
+      
+      else
+
+         if exist('lsqcurvefit') ~= 2 % use optimization toolbox
+            error('tf_fitn: ''lsqcurvefit'' from MATLAB optimization toolbox required.');
+         end
+         [popt,~,res,flag,out] = lsqcurvefit(@lm_sellmeier_mat,p0,lambda,rin); 
+         iter = out.iterations;
+         
+      end
+
+      par.A = popt(1:nt);
+      par.B = popt(nt+1:2*nt);
+   
+   elseif strcmp(type, 'cauchy')
   
-   nt = length(par0.B);
-   p0 = par0.A;
-   p0(2:nt+1) = par0.B;
-   [ret, popt, info] = levmar(@lm_cauchy, [], p0, rin, mit, opt, 'unc', lambda);
-   par.A = popt(1);
-   par.B = popt(2:end);
-   res = rin - n_cauchy(lambda, par);
+      nt = length(par0.B);
+      p0 = par0.A;
+      p0(2:nt+1) = par0.B;
+
+      if is_octave
+      
+         if exist('leasqr') ~= 2
+           error('tf_fitn: must install/load package ''optim''.');
+         end
+         [rout,popt,flag,iter] = leasqr(lambda,rin,p0,@lm_cauchy_oct,1e-6,mit);
+         res = rin - rout;
+      
+      else
+
+         if exist('lsqcurvefit') ~= 2 % use optimization toolbox
+            error('tf_fitn: ''lsqcurvefit'' from MATLAB optimization toolbox required.');
+         end
+         [popt,~,res,flag,out] = lsqcurvefit(@lm_cauchy_mat, p0, lambda, rin); 
+         iter = out.iterations;
+
+      end
+
+      par.A = popt(1);
+      par.B = popt(2:end);
    
-else
-   error('tf_fitn :  unrecognized type argument.');
-end
+   else
+      error('tf_fitn: type argument must be ''sellmeier'' or ''cauchy''.');
+   end
 
-% return results
-if ret < 0
-   error('tf_fitn :  call to levmar returned an error.')
-elseif ret == mit
-   error('tf_fitn :  maximum number of iterations reached.');
-else
-   fprintf('\n   >>> fit successful after %d iterations.\n\n', ret); 
-end
+   % return results
+   if flag == 1
+      fprintf('\n   >>> Fit successful after %d iterations. RMS residuum = %f\n\n', ...
+              iter, sqrt(sum(res.^2)) ); 
+   else
+      fprintf('\n   >>> Failure after %d iterations.\n\n', iter); 
+   end
 
-return
+end

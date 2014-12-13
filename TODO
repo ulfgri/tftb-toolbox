@@ -1,6 +1,9 @@
 
+- use leasqr from optim in Octave and lsqnonlin from the optimization
+  toolbox instead of levmar - at least as an alternative
+  
 - analyze ellipsometric data by fitting of spectroscopic models
-  using B-Splines
+  using B-Splines and Legendre polynomials
 
 - check derivatives in group delay functions
 

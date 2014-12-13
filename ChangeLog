@@ -1,3 +1,8 @@
+- begin eliminating 'levmar' library because it is too
+  difficult to compile on all required platforms.
+- improved 'tf_fitn.m'; no longer uses 'levmar'. Much better 
+  convergence with Octave 'leasqr'.
+
 2014-December-07, Ulf Griesmann
 - change 'tf_plotpd' to plot in different modes 'std'
   for plotting Psi, Delta, and 'mag' (magnitude) for

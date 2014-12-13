@@ -1,7 +1,7 @@
 function [M] = tf_charmat(d, nk, theta, pol);
 %function [M] = tf_charmat(d, nk, theta, pol);
 %
-% tf_charmat : calculate the characteristic matrices of a 
+% tf_charmat : calculate the characteristic matrices for a 
 %              stack of thin films.
 %
 % Input:
