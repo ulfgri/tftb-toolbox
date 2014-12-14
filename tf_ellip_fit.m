@@ -42,7 +42,7 @@ function [Sopt] = tf_ellip_fit(S, theta, lambda, tanpsi, didx, itmax, tol)
     if isempty(itmax), itmax = 500; end
     if isempty(didx), didx = [2:length(S)-1]; end
 
-    % compute all refractive indices at wavelengths of interest
+    % refractive indices at wavelengths of interest
     nk = evalnk(S, lambda);
 
     % vector of film thicknesses
@@ -55,33 +55,42 @@ function [Sopt] = tf_ellip_fit(S, theta, lambda, tanpsi, didx, itmax, tol)
     ub = Inf(size(d0));   % no upper bound
 
     % find thicknesses
-    if is_octave()
-        [dopt, merit, info, iter] = ...
-            sqp(d0, @(x)tf_rho_chi2(x,d,nk,theta,lambda,tanpsi,didx), ...
-                [], [], lb, ub, itmax, tol);
+    if is_octave
+      
+        if exist('leasqr') ~= 2
+            error('tf_ellip_fit: must install/load package ''optim''.');
+        end
+        [rhout,dopt,flag,iter] = leasqr(lambda,tanpsi,d0, ...
+                                        @(L,X)tf_rho_oct(L,X,d,nk,theta,didx), ...
+                                        tol,itmax);
+        res = rhout - tanpsi;
+      
     else
-        opts = optimset('fmincon'); % requires the MATLAB Optimization Toolbox
+
+        if exist('lsqcurvefit') ~= 2 % use optimization toolbox
+            error('tf_ellip_fit: ''lsqcurvefit'' from MATLAB optimization toolbox required.');
+        end
         opts.MaxIter = itmax;
-        opts.Algorithm = 'sqp';
-        opts.Display = 'none';
         opts.TolX = tol;
-        [dopt, merit, info, output] = ...
-             fmincon(@(x)tf_rho_chi2(x,d,nk,theta,lambda,tanpsi,didx), d0, ...
-                     [], [], [], [], lb, ub, [], opts);
-        iter = output.iterations;
+        [dopt,~,res,flag,out] = lsqcurvefit(@(X,L)tf_rho_oct(X,L,d,nk,theta,didx), ...
+                                            d0,lambda,tanpsi,[],[],opts);
+        iter = out.iterations;
+        
     end
 
     % display optimized parameters
     fprintf('\n');
-    tf_disp_info(info, iter);
-    fprintf('  Iterations : %d\n', iter);
-    fprintf('  Merit function :  %g\n', merit);
+    if flag == 1, fprintf('>> Fit successful.\n'); end
+    if flag == 0, fprintf('>> Failed to find a solution.\n'); end
+    fprintf('   Iterations :   %d\n', iter);
+    fprintf('   RMS residuum : %g\n', sqrt(sum(res.^2)) );
     tf_disp_d(dopt, didx, S);
 
     % return optimized film stack
-    Sopt = S;
-    for k = 1:length(didx)
-        Sopt(didx(k)).d = dopt(k);
+    if nargout
+        Sopt = S;
+        for k = 1:length(didx)
+            Sopt(didx(k)).d = dopt(k);
+        end
     end
-
 end

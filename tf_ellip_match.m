@@ -39,23 +39,38 @@ function [R] = tf_ellip_match(S, theta, lambda, tanpsi, D, didx)
     if length(lambda) ~= length(tanpsi)
         error('tf_ellip_match: length of lambda and tanpsi must be identical.');
     end
+    if isrow(tanpsi), tanpsi = tanpsi'; end
     
     % some constants
     lwidth = 2;   % plot line width
     lfsize = 14;  % label/legend font size
 
+    % film thicknesses in units of lambda
+    d = zeros(length(S), length(lambda));
+    for l = 1:length(lambda)  
+        d(2:length(S)-1, l) = [S(2:length(S)-1).d] / lambda(l);
+    end
+
+    % refractive indices at wavelengths of interest
+    nk = evalnk(S, lambda); 
+
     % calculate R
     R = zeros(size(D));
     for k = 1:length(D)
       
-        S(didx).d = D(k);
-        psi = tf_ellip(S, lambda, theta, 1);
-        R(k) = sqrt(sum((tanpsi - tand(psi)).^2) / length(tanpsi));
+        d(didx,:) = D(k) ./ lambda;
+        
+        psi = zeros(length(lambda),1);
+        for l = 1:length(lambda)
+            psi(l) = tf_psi(d(:,l), nk(:,l), theta);
+        end
+        
+        R(k) = sqrt(sum((tanpsi - tan(psi)).^2) / length(tanpsi));
        
     end
     
     % plot if no output argument
-    if nargout < 1
+    if ~nargout
       
         plot(D, R, 'b', 'LineWidth',lwidth);
         grid on
