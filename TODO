@@ -1,4 +1,7 @@
 
+- extend the support for effective media models to better
+  describe material mixtures (tf_maxgarn --> tf_effmedia)
+
 - use leasqr from optim in Octave and lsqnonlin from the optimization
   toolbox instead of levmar - at least as an alternative
   

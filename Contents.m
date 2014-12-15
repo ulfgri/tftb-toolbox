@@ -5,12 +5,16 @@
 % ulf.griesmann@nist.gov, ulfgri@gmail.com
 %
 % Most functions of this software are in the public domain.
-% Functions depending on the LEVMAR optimization library
-% and the function 'devec3.m' for differential evolution
-% optimization are distributed under the  GNU Public License.
+% The function 'devec3.m' for differential evolution
+% optimization are distributed under the  GNU Public License,
+% the ASA library for adaptive simulated annealing is (c) Lester 
+% Ingber.
 %
-% New versions can be downloaded from:
+% Stable versions can be downloaded from:
 % https://sites.google.com/site/ulfgri/numerical/tftb
+%
+% Development versions are on:
+% https://github.com/ulfgri/tftb-toolbox
 %
 %
 % Functions
@@ -85,18 +89,24 @@
 %
 % Ellipsometry:
 % -------------
-%    tf_ellip.m      - Ellipsometric spectra Psi(lambda) & Delta(lambda)
 %    tf_psi.m        - calculate ellipsometric Psi and Delta
+%    tf_ellip.m      - Ellipsometric spectra Psi(lambda) &
+%                      Delta(lambda) for a thin film stack
+%    tf_ellip_match  - Visually compare measured ellipsometry data
+%                      with with calculated data as function of 
+%                      layer thickness (rms of difference) e.g. to
+%                      estimate a layer thickness.
+%    tf_ellip_fit    - fit layer thicknesses to match ellipsometric
+%                      measurement data with Psi for materials with
+%                      known optical constants.
+%    tf_ellip_model  - calculate models for optical constants
+%                      n(lambda), k(lambda) from spectroscopic
+%                      ellipsometry data.
 %
-% Film stack inspection:
+% Film properties:
 % ----------------------
 %    tf_stoney.m     - Stoney's formula for film stress
 %                      measurements 
-%    tf_ellip_match  - Visually compare measured ellipsometry data
-%                      with with calculated data as function of 
-%                      layer thickness (rms of difference)
-%    tf_ellip_fit    - fit layer thicknesses to match ellipsometric
-%                      measurement data with Psi for known materials
 %
 % Miscellaneous:
 % --------------

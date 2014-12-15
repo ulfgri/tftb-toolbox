@@ -19,7 +19,7 @@ function [Sopt] = tf_ellip_fit(S, theta, lambda, tanpsi, didx, itmax, tol)
 %          tan(Psi(lambda)) = |rho|.
 % didx :   (Optional) a vector with the layer indices that are
 %          varied during the optimization. Default is [2:length(S)-1].
-% itmax :  (Optional) Maximum number of iterations. Default is 500.
+% itmax :  (Optional) Maximum number of iterations. Default is 100.
 % tol :    (Optional) Specifies the tolerance for the stopping
 %          critera. Default is 1e-5.
 %
@@ -39,7 +39,7 @@ function [Sopt] = tf_ellip_fit(S, theta, lambda, tanpsi, didx, itmax, tol)
         error('tf_fit_ellip: at least four input arguments required.');
     end
     if isempty(tol), tol = 1e-5; end
-    if isempty(itmax), itmax = 500; end
+    if isempty(itmax), itmax = 100; end
     if isempty(didx), didx = [2:length(S)-1]; end
 
     % refractive indices at wavelengths of interest
@@ -49,10 +49,6 @@ function [Sopt] = tf_ellip_fit(S, theta, lambda, tanpsi, didx, itmax, tol)
     d = zeros(length(S), 1);
     d(2:length(S)-1) = [S(2:length(S)-1).d];
     d0 = d(didx);  % initial thicknesses
-
-    % find a minimum of the merit function
-    lb = zeros(size(d0)); % thickness >= 0
-    ub = Inf(size(d0));   % no upper bound
 
     % find thicknesses
     if is_octave
@@ -72,7 +68,7 @@ function [Sopt] = tf_ellip_fit(S, theta, lambda, tanpsi, didx, itmax, tol)
         end
         opts.MaxIter = itmax;
         opts.TolX = tol;
-        [dopt,~,res,flag,out] = lsqcurvefit(@(X,L)tf_rho_oct(X,L,d,nk,theta,didx), ...
+        [dopt,~,res,flag,out] = lsqcurvefit(@(X,L)tf_rho_mat(X,L,d,nk,theta,didx), ...
                                             d0,lambda,tanpsi,[],[],opts);
         iter = out.iterations;
         
@@ -83,7 +79,7 @@ function [Sopt] = tf_ellip_fit(S, theta, lambda, tanpsi, didx, itmax, tol)
     if flag == 1, fprintf('>> Fit successful.\n'); end
     if flag == 0, fprintf('>> Failed to find a solution.\n'); end
     fprintf('   Iterations :   %d\n', iter);
-    fprintf('   RMS residuum : %g\n', sqrt(sum(res.^2)) );
+    fprintf('   RMS residuum : %g\n', sqrt( sum(res.^2))/length(res) );
     tf_disp_d(dopt, didx, S);
 
     % return optimized film stack
