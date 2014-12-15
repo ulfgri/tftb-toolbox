@@ -17,7 +17,7 @@ function [tb_ver, sw_ver] = tf_version;
 
 % toolbox version and version date
 tb_version = '70+ (beta)';
-tb_date = '2014-December-07';
+tb_date = '2014-December-14';
 ltb_ver = [tb_version, '  (', tb_date, ')'];
 if exist('OCTAVE_VERSION')
     interpreter = 'Octave';

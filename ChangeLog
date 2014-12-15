@@ -1,7 +1,12 @@
+2014-December-14, Ulf Griesmann
 - begin eliminating 'levmar' library because it is too
   difficult to compile on all required platforms.
 - improved 'tf_fitn.m'; no longer uses 'levmar'. Much better 
   convergence with Octave 'leasqr'.
+- new functions 'tf_ellip_fit.m' and 'tf_ellip_model.m' to 
+  extract layer thicknesses, refractive index n(lambda),
+  and extinction coefficient k(lambda) from ellipsometric 
+  measurement data.
 
 2014-December-07, Ulf Griesmann
 - change 'tf_plotpd' to plot in different modes 'std'
