@@ -71,7 +71,8 @@ function [R] = tf_ellip_match(S, theta, lambda, tanpsi, D, didx)
     
     % plot if no output argument
     if ~nargout
-      
+        
+        figure % start a new plot
         plot(D, R, 'b', 'LineWidth',lwidth);
         grid on
         xlabel(sprintf('Thickness of layer %d / nm',didx), ...
