@@ -1,8 +1,12 @@
+- rename tf_ellip_fit.m --> tf_ellip_d.m
+- (temporarily) remove tf_ellip_model.m because it does 
+  not work
+
 2014-December-14, Ulf Griesmann
 - begin eliminating 'levmar' library because it is too
   difficult to compile on all required platforms.
 - improved 'tf_fitn.m'; no longer uses 'levmar'. Much better 
-  convergence with Octave 'leasqr'.
+  convergence than with Octave 'leasqr'.
 - new functions 'tf_ellip_fit.m' and 'tf_ellip_model.m' to 
   extract layer thicknesses, refractive index n(lambda),
   and extinction coefficient k(lambda) from ellipsometric 

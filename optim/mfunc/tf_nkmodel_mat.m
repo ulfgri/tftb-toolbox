@@ -1,5 +1,5 @@
-function rho = tf_nkmodel_mat(x,lambda,d,nk,theta,midx,nc,didx)
-%function rho = tf_nkmodel_mat(x,lambda,d,nk,theta,midx,nc,didx)
+function absrho = tf_nkmodel_mat(x,lambda,d,nk,theta,midx,nc,didx)
+%function absrho = tf_nkmodel_mat(x,lambda,d,nk,theta,midx,nc,didx)
 %
 % Merit function for calculation of Chebychev polynomial model
 % parameters from ellipsometric data. MATLAB version.
@@ -14,7 +14,7 @@ function rho = tf_nkmodel_mat(x,lambda,d,nk,theta,midx,nc,didx)
 % midx :   index of layer that is modeled with a Chebychev polynomial
 % nc :     number of Chebychev polynomial model coefficients
 % didx :   indices of film thicknesses for optimization
-% rho :    tan(Phi) == |rho| for the varied parameters
+% absrho : tan(Phi) == |rho| for the varied parameters
 
 % Initial version, Ulf Griesmann, December 2014
 
@@ -24,7 +24,7 @@ function rho = tf_nkmodel_mat(x,lambda,d,nk,theta,midx,nc,didx)
     end
 
     % calculate rho at  each wavelength
-    rho = zeros(size(lambda));
+    absrho = zeros(size(lambda));
     
     % update thickness(es)
     nd = 0;
@@ -44,8 +44,8 @@ function rho = tf_nkmodel_mat(x,lambda,d,nk,theta,midx,nc,didx)
         dl = d / lambda(l);
       
         % calculate rho = tan(Psi)
-        rho(l) = abs(-tf_ampl(dl, nk(:,l), theta, 'p') / ...
-                      tf_ampl(dl, nk(:,l), theta, 's'));
+        absrho(l) = abs(-tf_ampl(dl, nk(:,l), theta, 'p') / ...
+                         tf_ampl(dl, nk(:,l), theta, 's'));
     end
 end
 

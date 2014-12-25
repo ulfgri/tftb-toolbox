@@ -5,13 +5,14 @@ function tf_plotnk(ri, range, ttl, bnew)
 %              index spectra as function of wavelength.
 %
 % Input:
-% ri :      a structure (or cell array with structures) with 
+% ri :      EITHER a structure (or cell array with structures) with 
 %           refractive index data as a function of wavelength 
 %           in micrometer
 %              ri.nk :     refractive index
 %              ri.lambda : wavelengths in micrometer
-%           or a function handle with a refractive index
-%           function.
+%           OR a function handle with a refractive index
+%           function. In this case a range argument must
+%           also be supplied.
 % range :   (Optional) a 1x2 vector with lower and upper bound of the
 %           wavelength range to be plotted. MUST be provided if 
 %           a function handle is used to describe a refractive index.
@@ -74,7 +75,7 @@ for k = 1:length(ri)
    else
       plot(ri{k}.lambda, real(ri{k}.nk), ncol(ci), 'Linewidth',lwidth);
    end
-   xlabel('wavelength / um', 'Fontsize',lfsize);
+   xlabel('Wavelength / um', 'Fontsize',lfsize);
    ylabel('Refractive index n', 'Fontsize',lfsize);
    if length(ri) > 1 && k==1
       hold on

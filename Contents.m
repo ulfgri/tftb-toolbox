@@ -96,12 +96,13 @@
 %                      with with calculated data as function of 
 %                      layer thickness (rms of difference) e.g. to
 %                      estimate a layer thickness.
-%    tf_ellip_fit    - fit layer thicknesses to match ellipsometric
-%                      measurement data with Psi for materials with
-%                      known optical constants.
-%    tf_ellip_model  - calculate models for optical constants
-%                      n(lambda), k(lambda) from spectroscopic
-%                      ellipsometry data.
+%    tf_ellip_d    -   calculate layer thicknesses from spectroscopic
+%                      ellipsometry data for materials with known
+%                      optical constants.
+%    tf_ellip_nk  -    calculate Kramers-Kroning consistent optical
+%                      constants n(lambda), k(lambda) from
+%                      spectroscopic ellipsometry data using
+%                      B-Spline models.
 %
 % Film properties:
 % ----------------------
