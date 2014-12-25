@@ -2,7 +2,7 @@
 A Thin Film Multilayer Toolbox for Octave and MATLAB
 ====================================================
 
-Ulf Griesmann, 2013,2014
+Ulf Griesmann, 2013,2014,2015
 ulf.griesmann@nist.gov, ulfgri@gmail.com
 
 Most of this software is in the public domain; some parts, e.g. 
