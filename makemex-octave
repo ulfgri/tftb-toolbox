@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# shell script to compile .mex functions in Linux/Unix
+#
+
+# the following flags are for gcc
+export CFLAGS='-O3 -fomit-frame-pointer -march=native -mtune=native'
+
+cd optim/b-splines/@fastBSpline/private
+mkoctfile --mex -s evalBin.c
+mkoctfile --mex -s evalBinTimesY.c
+mkoctfile --mex -s evalBSpline.c
+rm *.o
+
+cd ../../../..

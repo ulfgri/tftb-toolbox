@@ -1,6 +1,9 @@
 - rename tf_ellip_fit.m --> tf_ellip_d.m
 - (temporarily) remove tf_ellip_model.m because it does 
   not work
+- set up framework for compiling mex files.
+- create Octave compatible version of fastBSpline class
+  for ellipsometric modeling.
 
 2014-December-14, Ulf Griesmann
 - begin eliminating 'levmar' library because it is too
