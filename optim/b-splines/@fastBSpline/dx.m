@@ -6,10 +6,13 @@ function dsp = dx(sp)
 % Given a spline sp, dsp is another fastBSpline object such that 
 % dsp(x) is the derivative of sp evaluated at x
 
-    sp.weights = [0;sp.weights;0];
-    sp.knots = sp.knots([1,1:end,end]');
-    wp = protect(sp.order*diff(sp.weights) ./ ...
-                 (sp.knots(sp.order + (2:length(sp.weights)))-sp.knots((2:length(sp.weights)))));
-    dsp = fastBSpline(sp.knots(2:end-1),wp);
+    weights = [0;sp.weights;0];
+    knots   = sp.knots([1,1:end,end]');
+    spord   = length(knots)-length(weights)-1;
+
+    wp = protect(spord*diff(weights) ./ ...
+                 (knots(spord + (2:length(weights)))-knots((2:length(weights)))));
+    
+    dsp = fastBSpline(knots(2:end-1),wp);
 
 end

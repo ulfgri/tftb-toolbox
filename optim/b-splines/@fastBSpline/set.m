@@ -26,9 +26,11 @@ function spo = set(spi, varargin)
                  error('knots must be non-decreasing.');
              end
              spo.knots = argval(:);
+             spo.order = set_order(spo.knots,spo.weights);
              
          case 'weights'
              spo.weights = argval(:);
+             spo.order = set_order(spo.knots,spo.weights);
              
          case 'outOfRange'
              spo.outOfRange = argval;
@@ -42,4 +44,16 @@ function spo = set(spi, varargin)
     % check spline consistency
     checkNum(spi);
     
+end
+
+
+function spord = set_order(knots,weights)
+%
+% calculate spline order
+%
+    if length(knots) <= length(weights)
+        error('fastBSpline.set: #knots must be > #weights.');
+    end
+    spord = length(knots)-length(weights)-1;
+
 end

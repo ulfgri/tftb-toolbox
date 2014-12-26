@@ -82,6 +82,11 @@ function spelm = fastBSpline(knots, weights)
     % initialize properties
     sp.knots = knots;
     sp.weights = weights;
+    sp.order = length(knots)-length(weights)-1;
+    if length(knots) <= length(weights)
+        error('fastBSpline: #knots must be > #weights.');
+    end
+
     sp.outOfRange = 1;
 
     % create fastSPline object
