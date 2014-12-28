@@ -96,27 +96,36 @@
 %                      with with calculated data as function of 
 %                      layer thickness (rms of difference) e.g. to
 %                      estimate a layer thickness.
-%    tf_ellip_d    -   calculate layer thicknesses from spectroscopic
+%    tf_ellip_d      - calculate layer thicknesses from spectroscopic
 %                      ellipsometry data for materials with known
 %                      optical constants.
-%    tf_ellip_sub -    calculate the complex refractive index of a
+%    tf_ellip_sub    - calculate the complex refractive index of a
 %                      material from spectroscopic ellipsometry
 %                      data of a substrate, i.e. a single material 
 %                      interface.
-%    tf_ellip_nk  -    calculate Kramers-Kroning consistent optical
+%    tf_ellip_nk     - calculate Kramers-Kroning consistent optical
 %                      constants n(lambda), k(lambda) from
 %                      spectroscopic ellipsometry data using
 %                      B-Spline models.
+%    tf_ellip_data   - read ellipsometry data
+%
 %
 % Film properties:
 % ----------------------
-%    tf_stoney.m     - Stoney's formula for film stress
+%    tf_stoney       - Stoney's formula for film stress
 %                      measurements 
 %
 % Miscellaneous:
 % --------------
-%    tf_write.m      - write thin film stack data to a file as a table
-%                      in HTML or plain text, or as Octave/MATLAB code.
+%    tf_write        - write thin film stack data to a file as a table
+%                      in HTML or plain text, or as Octave/MATLAB
+%                      code.
+%    nk_to_eps       - convert refractive index to dielectric function
+%    eps_to_nk       - convert dielectric function to refractive
+%                      index
+%    lambda_to_omega - convert wavelength to angular frequency
+%    omega_to_lambda - convert angular frequency to wavelength
+%
 %
 % Units
 % =====
