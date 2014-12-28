@@ -4,6 +4,12 @@
 - set up framework for compiling mex files.
 - create Octave compatible version of fastBSpline class
   for ellipsometric modeling.
+- set of auxiliary functions in directory ./aux
+- make tf_nk.m much more flexible
+- new function tf_ellip_sub.m to calculate the refractive
+  index of a material (substrate) from the reflection at a
+  single interface.
+- bug fix in tf_ellip.m for substrates only.
 
 2014-December-14, Ulf Griesmann
 - begin eliminating 'levmar' library because it is too

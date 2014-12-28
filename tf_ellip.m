@@ -38,8 +38,10 @@ function [Psi, Delta] = tf_ellip(stack, lambda, theta, bunwrap)
 
     % compute all thicknesses in units of lambda
     d = zeros(length(stack), length(lambda));
-    for l = 1:length(lambda)  
-        d(2:length(stack)-1, l) = [stack(2:length(stack)-1).d] / lambda(l);
+    if length(stack) > 2
+        for l = 1:length(lambda)  
+            d(2:length(stack)-1, l) = [stack(2:length(stack)-1).d] / lambda(l);
+        end
     end
 
     % compute all indices

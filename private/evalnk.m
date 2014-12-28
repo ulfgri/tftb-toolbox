@@ -7,7 +7,8 @@ function nk = evalnk(stack, lambda)
 % stack :   structure array with material stack definition
 % lambda :  a vector of wavelengths
 % nk :      a matrix of complex refractive indices. Each row 
-%           vector contains the indices at the wavelengths lambda
+%           vector contains the indices for a layer at each of
+%           the wavelengths lambda.
 
 % check arguments 
 if iscolumn(lambda), lambda = lambda'; end

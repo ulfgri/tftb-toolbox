@@ -99,6 +99,10 @@
 %    tf_ellip_d    -   calculate layer thicknesses from spectroscopic
 %                      ellipsometry data for materials with known
 %                      optical constants.
+%    tf_ellip_sub -    calculate the complex refractive index of a
+%                      material from spectroscopic ellipsometry
+%                      data of a substrate, i.e. a single material 
+%                      interface.
 %    tf_ellip_nk  -    calculate Kramers-Kroning consistent optical
 %                      constants n(lambda), k(lambda) from
 %                      spectroscopic ellipsometry data using

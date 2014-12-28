@@ -10,6 +10,7 @@ function tf_plotnk(ri, range, ttl, bnew)
 %           in micrometer
 %              ri.nk :     refractive index
 %              ri.lambda : wavelengths in micrometer
+%              ri.name :   string with identifier (optional)
 %           OR a function handle with a refractive index
 %           function. In this case a range argument must
 %           also be supplied.
