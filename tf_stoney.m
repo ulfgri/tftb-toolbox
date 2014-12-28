@@ -24,6 +24,7 @@ function [s, us] = tf_stoney(Es, nus, ds, df, K, unc)
 %             unc.df  : uncertainty of df
 %             unc.K   : uncertainty of K
 %
+% Output:
 % s :    thin film stress in N / m^2
 % us :   uncertainty of the film stress if 'unc' was supplied.
 %
