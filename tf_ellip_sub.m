@@ -33,7 +33,7 @@ function ri = tf_ellip_sub(lambda, tanpsi, cosdel, theta, rien, name)
         error('tf_ellip_sub: at least 4 arguments are required.');
     end
     if isempty(name), name = 'Substrate'; end
-    if isempty(rien), rien = @n_air;
+    if isempty(rien), rien = @n_air; end
     
     tanpsi = tanpsi(:); % make column vectors
     cosdel = cosdel(:);
