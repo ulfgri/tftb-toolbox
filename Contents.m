@@ -1,7 +1,7 @@
 % A Thin Film Multilayer Toolbox for Octave and MATLAB
 % ====================================================
 % 
-% Ulf Griesmann, 2013,2014
+% Ulf Griesmann, 2013,2014,2015
 % ulf.griesmann@nist.gov, ulfgri@gmail.com
 %
 % Most functions of this software are in the public domain.
@@ -30,6 +30,7 @@
 %    tf_maxgarn.m    - effective index of Maxwell Garnet model
 %    tf_fitn.m       - fit Cauchy and Sellmeier models to data
 %
+%
 % Film stack design:
 % ------------------
 %    tf_layer.m       - add a layer structure to a film stack
@@ -46,17 +47,19 @@
 %                       algorithm
 %    tf_needle.m      - synthesize new stack with needle method
 %
-% Film stack analysis:
-% --------------------
+%
+% Film stack analysis and visualization:
+% --------------------------------------
 %    tf_stack.m      - display thin film stack data
 %    tf_plot.m       - plot T, R, A, and etc.
-%    tf_plotpd.m     - plot ellipsometric Psi,Delta, and rho
+%    tf_plotPD.m     - plot ellipsometric Psi,Delta, and rho
 %    tf_plotN.m      - plot refractive index profiles
 %    tf_plotrad.m    - plot reflectance amplitude diagrams
 %    tf_plotY.m      - plot admittance diagrams
 %    tf_plotE.m      - plot electric field strength in stack
 %    tf_plotGD.m     - plot group delay (GD) and dispersion (GDD)
 %    tf_plotrgb.m    - plot an array of RGB color swatches
+%
 %
 % Light reflection and transmission:
 % ----------------------------------
@@ -77,6 +80,7 @@
 %    tf_int_sub.m    - reflectance and transmittance for multilayers
 %                      on a substrate.
 %
+%
 % Film stack optical properties:
 % ------------------------------
 %    tf_spectrum.m     - spectral response of film stack
@@ -87,13 +91,14 @@
 %    tf_color.m        - calculate reflected and transmitted color
 %                        of a thin film stack for CIE illuminants.
 %
+%
 % Ellipsometry:
 % -------------
 %    tf_psi.m        - calculate ellipsometric Psi and Delta
 %    tf_ellip.m      - Ellipsometric spectra Psi(lambda) &
 %                      Delta(lambda) for a thin film stack
 %    tf_ellip_match  - Visually compare measured ellipsometry data
-%                      with with calculated data as function of 
+%                      with calculated data as function of 
 %                      layer thickness (rms of difference) e.g. to
 %                      estimate a layer thickness.
 %    tf_ellip_d      - calculate layer thicknesses from spectroscopic
@@ -114,6 +119,7 @@
 % ----------------------
 %    tf_stoney       - Stoney's formula for film stress
 %                      measurements 
+%
 %
 % Miscellaneous:
 % --------------
