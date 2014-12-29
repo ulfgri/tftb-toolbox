@@ -20,8 +20,8 @@ function [Y] = tf_admit(d, nk, theta, pol)
 
 % Initial version, Ulf Griesmann, November 2013
 
-% calculate admittance
-[B,C] = tf_bc(d, nk, theta, pol);
-Y = C / B;
+    % calculate admittance
+    [B,C] = tf_bc(d, nk, theta, pol);
+    Y = C / B;
 
-return
+end
