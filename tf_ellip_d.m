@@ -101,17 +101,22 @@ function [Sopt] = tf_ellip_d(S, theta, lambda, tanpsi, didx, itmax, tol)
     end
 
     if ~nargout
-        Psi = tf_ellip(Sopt, lambda, theta);
+      
+        % calculate tan(Psi)
+        dl = (lambda(end) - lambda(1)) / 255;
+        lambda_calc = [lambda(1):dl:lambda(end)];
+        Psi = tf_ellip(Sopt, lambda_calc, theta);
         tanpsi_calc = tand(Psi);
     
+        % plot with measured tan(Psi)
         figure
-        plot(lambda,tanpsi_calc,'b', 'LineWidth',lwidth);
+        plot(lambda_calc,tanpsi_calc,'b', 'LineWidth',lwidth);
         hold on
         plot(lambda,tanpsi,'r.', 'MarkerSize',msize);
         grid on
         xlabel('Wavelength / um', 'FontSize',lfsize);
         ylabel('tan(Psi)', 'FontSize',lfsize);
-        title('tan(Psi) Fit', 'FontSize',tfsize);
+        title('Layer Thickness Fit', 'FontSize',tfsize);
         legend('Model','Measured');
     end
 
