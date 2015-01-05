@@ -24,12 +24,25 @@ function [Sopt] = tf_ellip_d(S, theta, lambda, tanpsi, didx, itmax, tol)
 %
 % Output:
 % Sopt :   a structure array with a material stack having optimized
-%          layer thicknesses that fit the ellipsometric measurements.
+%          layer thicknesses that fit the ellipsometric
+%          measurements. When no output argument is present, the
+%          ellipsometric function tan(Psi) and the measured data
+%          are plotted.
 %
 % NOTE: In MATLAB this function requires the MATLAB optimization toolbox.
 
 % Initial version, Ulf Griesmann, December 2014
 
+    % constants
+    lwidth = 2;   % plot line width
+    tfsize = 16;  % title font size
+    lfsize = 14;  % label/legend font size
+    if is_octave
+       msize = 12;% marker size for plotting
+    else
+       msize = 24;
+    end
+    
     % check arguments
     if nargin < 7, tol = []; end
     if nargin < 6, itmax = []; end
@@ -82,10 +95,24 @@ function [Sopt] = tf_ellip_d(S, theta, lambda, tanpsi, didx, itmax, tol)
     tf_disp_d(dopt, didx, S);
 
     % return optimized film stack
-    if nargout
-        Sopt = S;
-        for k = 1:length(didx)
-            Sopt(didx(k)).d = dopt(k);
-        end
+    Sopt = S;
+    for k = 1:length(didx)
+        Sopt(didx(k)).d = dopt(k);
     end
+
+    if ~nargout
+        Psi = tf_ellip(Sopt, lambda, theta);
+        tanpsi_calc = tand(Psi);
+    
+        figure
+        plot(lambda,tanpsi_calc,'b', 'LineWidth',lwidth);
+        hold on
+        plot(lambda,tanpsi,'r.', 'MarkerSize',msize);
+        grid on
+        xlabel('Wavelength / um', 'FontSize',lfsize);
+        ylabel('tan(Psi)', 'FontSize',lfsize);
+        title('tan(Psi) Fit', 'FontSize',tfsize);
+        legend('Model','Measured');
+    end
+
 end

@@ -24,6 +24,8 @@
 
 ----------
 
+- if no output argument is present in tf_ellip_d.m, plot
+  measured and calculated Psi,Delta. (DONE)  
 - tf_listnk function to list materials in a collection (DONE)
 - update tf_plotpd to plot ellipsometric psi, delta in polar form
   if so desired by the user: psi(delta) (DONE)
