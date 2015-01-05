@@ -1,5 +1,0 @@
-2014-January-04, Ulf Griesmann
-- version ug-8
-- changed to SVD in lmbc_core.c for solving linear equations,
-  because it is the most robust method.
-  

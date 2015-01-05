@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# shell script to compile .mex functions in Linux/Unix
-#
-
-export CFLAGS='-O3 -march=native -fomit-frame-pointer'
-
-# for Linux with OpenBLAS
-mkoctfile --mex -s -I.. -L.. -llevmar -lopenblas levmar.c
