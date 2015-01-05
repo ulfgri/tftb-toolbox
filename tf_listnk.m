@@ -1,4 +1,5 @@
 function tf_listnk(coll)
+%function tf_listnk(coll)
 %
 % tf_listnk :  lists all materials in a refractive
 %              index collection
@@ -44,11 +45,12 @@ function tf_listnk(coll)
         nk_dir = [tf_rootdir(), 'nk/', coll];
         cd(nk_dir);
     
-        % list of material names
+        % list of material names with tabulated index data
         nk_nam = dir('*.nk');
         nk_nam = {nk_nam.name};
         nk_nam = cellfun(@(x)x(1:end-3), nk_nam, 'UniformOutput',0);
         
+        % list of materials with refractive index functions
         m_nam = dir('*.m');
         m_nam = {m_nam.name};
         m_nam = cellfun(@(x)[x(1:end-2),'<F>'], m_nam, 'UniformOutput',0);
