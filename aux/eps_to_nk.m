@@ -1,18 +1,19 @@
-function nk = eps_to_nk(eps12)
-%function nk = eps_to_nk(eps12)
+function nk = eps_to_nk(epsilon)
+%function nk = eps_to_nk(epsilon)
 %
-% eps_to_nk: convert the dielectric function eps = eps1 + i*eps2
+% eps_to_nk: convert the dielectric function 
+%            epsilon = epsilon1 + i*epsilon2
 %            into the refractive index n - i*k
 %
 % Input:
-% eps12 : dielectric functions
+% epsilon : dielectric function(s)
 %
 % Output:
 % nk :    complex refractive index n - i*k
 
 % Ulf Griesmann, December 2014
 
-    nk = complex(  sqrt(0.5*(abs(eps12) + real(eps12))), ...
-                  -sqrt(0.5*(abs(eps12) - real(eps12))) );
+    nk = complex(  sqrt(0.5*(abs(epsilon) + real(epsilon))), ...
+                  -sqrt(0.5*(abs(epsilon) - real(epsilon))) );
 
 end
