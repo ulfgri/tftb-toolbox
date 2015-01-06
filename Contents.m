@@ -97,6 +97,8 @@
 %    tf_psi.m        - calculate ellipsometric Psi and Delta
 %    tf_ellip.m      - Ellipsometric spectra Psi(lambda) &
 %                      Delta(lambda) for a thin film stack
+%
+%    In directory 'ellipsometry':
 %    tf_ellip_match  - Visually compare measured ellipsometry data
 %                      with calculated data as function of 
 %                      layer thickness (rms of difference) e.g. to
