@@ -111,7 +111,6 @@ function tf_plotPD(L, P, D, topt, mode, bnew)
          end
       
      otherwise
-         error(sprintf('tf_plotpd: unknown mode argument ''%s''', ...
-                       mode));
+         error(sprintf('tf_plotpd: unknown mode argument ''%s''',  mode));
     end
 end

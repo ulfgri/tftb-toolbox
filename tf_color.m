@@ -32,10 +32,13 @@ function [rgbr,rgbt] = tf_color(stack, type, theta, pol, fname, illum, obs, swsi
 %           Default is [400,400].
 %
 % Output:
-% rgbr, :   (Optional) 3x1 vectors with RGB triples for
+% rgbr, :   (Optional) 3x1 vectors with sRGB triples for
 % rgbt      reflection color and transmission color. When an
 %           output argument is present, the color swatch is not
 %           displayed. 
+%
+% Reference:
+% http://en.wikipedia.org/wiki/SRGB
 
 % Initial version, Ulf Griesmann, October 2013
 
@@ -162,9 +165,9 @@ function RGB = cie_to_rgb(XYZ)
 % transform into RGB space
 if isrow(XYZ), XYZ = XYZ'; end
 
-RGB =  [1.96253, -0.61068, -0.34137; ...
-       -0.97876,  1.91615,  0.03342; ...
-        0.02869, -0.14067,  1.34926] * XYZ;
+RGB =  [3.2406, -1.5372, -0.4986; ...
+       -0.9689,  1.8758,  0.0415; ...
+        0.0557, -0.2040,  1.0570] * XYZ;
 
 % add white if the color is outside the RGB gamut
 if min(RGB) < 0
