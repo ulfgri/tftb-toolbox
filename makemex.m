@@ -24,7 +24,7 @@ if ~(exist('OCTAVE_VERSION')==5)
     mex -O evalBin.c
     mex -O evalBinTimesY.c
     mex -O evalBSpline.c
-    cd curdir;
+    eval(['cd ',curdir]);    
 
 else % we are on Octave with gcc
 
@@ -44,6 +44,6 @@ else % we are on Octave with gcc
     mex evalBSpline.c
     system('del *.o');
 
-    cd curdir;    
+    eval(['cd ',curdir]);    
 
 end
