@@ -74,9 +74,11 @@ function spelm = fastBSpline(knots, weights)
 % Disclaimer: fastBSpline is not meant to replace Matlab's spline functions; 
 %             it does not include any code from the Mathworks
 
+% Author: Patrick Mineault
+
     % check arguments
     if nargin < 2
-        error('two input arguments are required.');
+        error('fastBSpline: constructor requires two arguments.');
     end
     
     % initialize properties
@@ -87,7 +89,7 @@ function spelm = fastBSpline(knots, weights)
         error('fastBSpline: #knots must be > #weights.');
     end
 
-    sp.outOfRange = 1;
+    sp.outOfRange = 1; % use constant out-of-range values
 
     % create fastSPline object
     spelm = class(sp, 'fastBSpline');

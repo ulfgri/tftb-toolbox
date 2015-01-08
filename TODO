@@ -1,4 +1,8 @@
 
+- explore implementation of layer groups. S(k).d and S(k).n could become
+  arrays instead of scalars. This would make it more natural to describe GRIN layers,
+  rugate filters, parametric layers, etc. 
+  
 - extend the support for effective media models to better
   describe material mixtures (tf_maxgarn --> tf_effmed)
 
@@ -6,7 +10,7 @@
   toolbox instead of levmar - at least as an alternative
   
 - analyze ellipsometric data by fitting of spectroscopic models
-  using B-Splines and Legendre polynomials
+  using B-Splines
 
 - check derivatives in group delay functions
 
@@ -19,7 +23,7 @@
 - clean up index data base (Palik in particular ...)
 
 - 'tf_tolerance' function for calculating how a merit function depends
-  on layer thickness tolerances. (Monte Carlo ?)
+  on layer thickness and refractive index tolerances. (Monte Carlo ?)
 
 
 ----------

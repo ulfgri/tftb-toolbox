@@ -34,6 +34,9 @@ function spo = set(spi, varargin)
              
          case 'outOfRange'
              spo.outOfRange = argval;
+             if (spo.outOfRange ~= 0) && (spo.outOfRange ~= 1)
+                 error('fastBSpline.set: outOfRange must be 0 or 1.');
+             end
              
          otherwise
              error('unknown b-spline property.');
