@@ -66,7 +66,7 @@ function [Sopt] = tf_ellip_d(S, theta, lambda, tanpsi, didx, itmax, tol)
     if is_octave
       
         if exist('leasqr') ~= 2
-            error('tf_ellip_fit: must install/load package ''optim''.');
+            error('tf_ellip_d: must install/load package ''optim''.');
         end
         [rhout,dopt,flag,iter] = leasqr(lambda,tanpsi,d0, ...
                                         @(L,X)tf_rho_oct(L,X,d,nk,theta,didx), ...
