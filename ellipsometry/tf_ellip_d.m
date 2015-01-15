@@ -48,7 +48,7 @@ function [Sopt] = tf_ellip_d(S, theta, lambda, tanpsi, didx, itmax, tol)
     if nargin < 6, itmax = []; end
     if nargin < 5, didx = []; end
     if nargin < 4
-        error('tf_fit_ellip: at least four input arguments required.');
+        error('tf_ellip_d: at least four input arguments required.');
     end
     if isempty(tol), tol = 1e-5; end
     if isempty(itmax), itmax = 100; end
@@ -76,7 +76,7 @@ function [Sopt] = tf_ellip_d(S, theta, lambda, tanpsi, didx, itmax, tol)
     else
 
         if exist('lsqcurvefit') ~= 2 % use optimization toolbox
-            error('tf_ellip_fit: ''lsqcurvefit'' from MATLAB optimization toolbox required.');
+            error('tf_ellip_d: ''lsqcurvefit'' from MATLAB optimization toolbox required.');
         end
         opts.MaxIter = itmax;
         opts.TolX = tol;
