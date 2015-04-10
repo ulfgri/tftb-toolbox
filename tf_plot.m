@@ -26,8 +26,10 @@ function tf_plot(X, R, T, A, opts, xrange, blin, bnew)
 % xrange :  (Optional) a 1x2 vector with lower and upper bound of the
 %           independent variable to be plotted
 % blin :    (Optional) scalar, if ~= 0, plots have a linear
-%           y-axis. Default is 0 (logarithmic). Can also be a
-%           vector when R,T,A are cell arrays.
+%           y-axis. Alternatively, 'blin' can be a 1x2 vector
+%           where blin(1) controls the y-axis of the reflectance
+%           plot, blin(2) that of the transmittance plot.
+%           Default is [0,0] (both logarithmic). 
 % bnew :    if ~= 0, a new plotting window is opened. Default is 1.
 %
 
@@ -60,7 +62,13 @@ if ~isfield(opts,'grid'),   opts.grid = 0; end
 
 % make arguments cell arrays
 if ~iscell(R), R = {R}; end
-if isempty(blin), blin = zeros(1,length(R)); end
+if isempty(blin), blin = [0,0]; end
+if length(blin) == 1
+    blin = repmat(blin,1,2);
+end
+if length(blin) ~= 3
+    error('tf_plot: argument ''blin'' must have length 1 or 2.');
+end
 
 % set up plot
 nump = 3;
@@ -109,7 +117,7 @@ for k = 1:length(R)
    ci = 1 + mod(k, length(pcol));
    curp = 1;
    subplot(1,nump,curp);
-   if blin(k)
+   if blin(1)
      plot(X, R{k}, pcol(ci), 'Linewidth',lwidth);
    else
      semilogy(X, R{k}, pcol(ci), 'Linewidth',lwidth);
@@ -132,7 +140,7 @@ for k = 1:length(R)
       ci = 1 + mod(k+1, length(pcol));
       curp = curp + 1;
       subplot(1,nump,curp);
-      if blin(k)
+      if blin(2)
          plot(X, T{k}, pcol(ci), 'Linewidth',lwidth);
       else
          semilogy(X, T{k}, pcol(ci), 'Linewidth',lwidth);
