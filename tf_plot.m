@@ -66,7 +66,7 @@ if isempty(blin), blin = [0,0]; end
 if length(blin) == 1
     blin = repmat(blin,1,2);
 end
-if length(blin) ~= 3
+if length(blin) ~= 2
     error('tf_plot: argument ''blin'' must have length 1 or 2.');
 end
 
