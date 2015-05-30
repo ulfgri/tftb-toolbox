@@ -52,8 +52,7 @@ if isempty(bnew), bnew = 1; end
 
 % make it backward compatible
 if ischar(opts)
-   txt = opts;
-   opts = struct('xlabel',txt);
+   opts = struct('xlabel',opts);
 end
 if ~isfield(opts,'rlabel'), opts.rlabel = 'R'; end
 if ~isfield(opts,'tlabel'), opts.tlabel = 'T'; end

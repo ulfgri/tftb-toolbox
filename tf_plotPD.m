@@ -36,11 +36,13 @@ function tf_plotPD(L, P, D, topt, mode, bnew)
     if nargin < 5, mode = []; end
     if nargin < 4, topt = []; end
     if nargin < 3
-        error('tf_plotpd :  at least three arguments required.');
+        error('tf_plotPD :  at least three arguments required.');
+    end
+    if ischar(topt) % for backward compatibility
+        topt = struct('xlabel',topt);
     end
     if isempty(topt) 
-        topt.xlabel = 'Lambda / um';
-        topt.title = [];
+        topt.xlabel = struct('xlabel','Lambda / um', 'title',[]);
     end
     if ~isfield(topt, 'xlabel')
         topt.xlabel = 'Lambda / um';
