@@ -12,6 +12,7 @@ function tf_plotPD(L, P, D, topt, mode, bnew)
 %           options:
 %              topt.xlabel :  x-axis label; default: 'Lambda / um'
 %              topt.title :   plot title; default: []
+%              topt.grid :    turn on grid if > 0; default: 1
 % mode :    (Optional) a string with the plot mode:
 %              'std' :  plot Psi(L) and Delta(L)
 %              'mag' :  plot tan(Psi(L)) and cos(Delta(L))
@@ -42,13 +43,16 @@ function tf_plotPD(L, P, D, topt, mode, bnew)
         topt = struct('xlabel',topt);
     end
     if isempty(topt) 
-        topt.xlabel = struct('xlabel','Lambda / um', 'title',[]);
+        topt = struct('xlabel','Lambda / um', 'title',[]);
     end
     if ~isfield(topt, 'xlabel')
-        topt.xlabel = 'Lambda / um';
+        topt = setfield(topt, 'xlabel','Lambda / um');
     end
     if ~isfield(topt, 'title')
-        topt.title = [];
+        topt = setfield(topt, 'title',[]);
+    end
+    if ~isfield(topt,'grid') 
+        topt = setfield(topt, 'grid',1);
     end
     if isempty(mode), mode = 'std'; end
     if isempty(bnew), bnew = 0; end
@@ -69,12 +73,18 @@ function tf_plotPD(L, P, D, topt, mode, bnew)
          if ~isempty(topt.title)
              title(topt.title);
          end
+         if topt.grid  
+             grid on
+         end
          
          % plot Delta
          subplot(1,2,2);
          plot(L, D, 'b', 'Linewidth',lwidth);
          xlabel(topt.xlabel, 'Fontsize',lfsize);
          ylabel('Delta (deg)', 'Fontsize',lfsize);
+         if topt.grid  
+             grid on
+         end
 
      case 'mag'
          % plot tan(Psi) = |rho|
@@ -85,12 +95,18 @@ function tf_plotPD(L, P, D, topt, mode, bnew)
          if ~isempty(topt.title)
              title(topt.title);
          end
+         if topt.grid  
+             grid on
+         end
          
          % plot cos(Delta) = cos(arg(rho))
          subplot(1,2,2);
          plot(L, cosd(D), 'b', 'Linewidth',lwidth);
          xlabel(topt.xlabel, 'Fontsize',lfsize);
          ylabel('cos(Delta)', 'Fontsize',lfsize);
+         if topt.grid
+             grid on
+         end
 
      case 'rho'
          % plot ellipsometric rho in complex plane
@@ -110,6 +126,9 @@ function tf_plotPD(L, P, D, topt, mode, bnew)
          ylabel('Im(rho)', 'Fontsize',lfsize);
          if ~isempty(topt.title)
              title(topt.title);
+         end
+         if topt.grid  
+             grid on
          end
       
      otherwise
