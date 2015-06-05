@@ -42,7 +42,7 @@ lfsize = 14;  % label/legend font size
 if nargin < 8, bnew = []; end
 if nargin < 7, blin = []; end
 if nargin < 6, xrange = []; end
-if nargin < 5, text = []; end
+if nargin < 5, opts = []; end
 if nargin < 4, A = []; end
 if nargin < 3, T = []; end
 if nargin < 2
@@ -54,6 +54,7 @@ if isempty(bnew), bnew = 1; end
 if ischar(opts)
    opts = struct('xlabel',opts);
 end
+if ~isfield(opts,'xlabel'), opts.xlabel = 'Wavelength / um'; end
 if ~isfield(opts,'rlabel'), opts.rlabel = 'R'; end
 if ~isfield(opts,'tlabel'), opts.tlabel = 'T'; end
 if ~isfield(opts,'alabel'), opts.alabel = 'A'; end
