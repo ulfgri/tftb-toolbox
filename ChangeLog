@@ -1,3 +1,6 @@
+- fixed a bug in tf_*_sub.m functions that affected the
+  calculation of transmittances when substrate effects are 
+  included (thanks to Petar Atanackovic for pointing it out).
 - rename tf_ellip_fit.m --> tf_ellip_d.m
 - (temporarily) remove tf_ellip_model.m because it does 
   not work

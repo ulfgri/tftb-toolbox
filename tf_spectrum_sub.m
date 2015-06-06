@@ -33,39 +33,39 @@ function [R, T, A] = tf_spectrum_sub(fstack, bstack, lambda, theta, pol)
 
 % Initial version, Ulf Griesmann, January 2014
 
-% check input
-if nargin < 5, pol = 'u'; end
-if nargin < 4
-   error('tf_spectrum_sub :  4 input arguments required.');
+    % check input
+    if nargin < 5, pol = 'u'; end
+    if nargin < 4
+       error('tf_spectrum_sub :  4 input arguments required.');
+    end
+    if iscolumn(lambda), lambda = lambda'; end
+
+    % pre-allocate arrays
+    R = zeros(size(lambda));
+    T = zeros(size(lambda));
+    A = zeros(size(lambda));
+
+    % compute front thicknesses in units of lambda
+    df = [fstack.d];
+    if isrow(df), df = df'; end
+    df = bsxfun(@rdivide, df, lambda);
+
+    % compute front indices
+    nkf = evalnk(fstack, lambda); 
+
+    % compute back thicknesses in units of lambda
+    db = [bstack.d];
+    if isrow(db), db = db'; end
+    db = bsxfun(@rdivide, db, lambda);
+
+    % compute all back indices
+    nkb = evalnk(bstack, lambda); 
+
+    % calculate reflectance/transmittance for lambda(l)
+    for l = 1:length(lambda)
+       [R(l), T(l)] = tf_int_sub(df(:,l),nkf(:,l),db(:,l),nkb(:,l),theta, pol);
+    end
+
+    A = 1 - R - T;
+
 end
-if iscolumn(lambda), lambda = lambda'; end
-
-% pre-allocate arrays
-R = zeros(size(lambda));
-T = zeros(size(lambda));
-A = zeros(size(lambda));
-
-% compute front thicknesses in units of lambda
-df = [fstack.d];
-if isrow(df), df = df'; end
-df = bsxfun(@rdivide, df, lambda);
-
-% compute front indices
-nkf = evalnk(fstack, lambda); 
-
-% compute back thicknesses in units of lambda
-db = [bstack.d];
-if isrow(db), db = db'; end
-db = bsxfun(@rdivide, db, lambda);
-
-% compute all back indices
-nkb = evalnk(bstack, lambda); 
-
-% calculate reflectance/transmittance for lambda(l)
-for l = 1:length(lambda)
-    [R(l), T(l)] = tf_int_sub(df(:,l),nkf(:,l),db(:,l),nkb(:,l),theta, pol);
-end
-
-A = 1 - R - T;
-
-return
