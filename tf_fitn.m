@@ -9,7 +9,7 @@ function [par, res] = tf_fitn(lambda, rin, type, par0, mit)
 %            Sellmeier model:
 %               n^2 = 1 + sum_k( lambda^2 * A(k) / (lambda^2 - B(k)) )
 %                  A(k) are "oscillator strengths"
-%                  B(k) are resonance wavelengths squared
+%                  B(k) are resonance wavelengths ("poles")squared
 %
 %            Cauchy model:
 %               n = A + sum_k( B(k) / lambda^(2*k) )
@@ -33,9 +33,8 @@ function [par, res] = tf_fitn(lambda, rin, type, par0, mit)
 % B. Tatian, "Fitting refractive-index data with the Sellmeier
 % dispersion formula", Appl. Opt. 23(24), 4477-4485, 1984
 %
-% NOTE 1: REQUIRES THE LEVMAR FUNCTION.
-% NOTE 2: Starting values for the B coefficients are typically one or two poles 
-%         in the UV and one in the IR.
+% NOTE: Starting values for the B coefficients are typically one or two poles 
+%       in the UV and one in the IR.
 
 % Initial version, Ulf Griesmann, November 2013
 
