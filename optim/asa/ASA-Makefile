@@ -2,11 +2,11 @@
 # /***********************************************************************
 # * Adaptive Simulated Annealing (ASA)
 # * Lester Ingber <ingber@ingber.com>
-# * Copyright (c) 1987-2014 Lester Ingber.  All Rights Reserved.
+# * Copyright (c) 1987-2015 Lester Ingber.  All Rights Reserved.
 # * ASA-LICENSE file has the license that must be included with ASA code.
 # ***********************************************************************/
 #
-## $Id: ASA-Makefile,v 30.10 2014/07/28 21:14:05 ingber Exp ingber $
+## $Id: ASA-Makefile,v 30.18 2015/01/27 22:43:08 ingber Exp ingber $
 
 ## ********************************************************************
 ## First read ASA-README, then examine this ASA-Makefile and ASA-NOTES.
@@ -346,6 +346,10 @@ DEFINE_OPTIONS = -DASA_TEST=TRUE # -DMY_TEMPLATE=TRUE
 ## perform an adaptive tuning of selected ASA OPTIONS.
 #-DASA_FUZZY=FALSE
 
+## When ASA_FUZZY_PRINT is set to TRUE, the local fitting routines
+## print out from the user module.
+#-DASA_FUZZY_PRINT=FALSE
+
 ## When FITLOC is set to TRUE, three subroutines become available to
 ## shunt asa() over to a local simplex optimization.
 #-DFITLOC=FALSE
@@ -523,7 +527,7 @@ doc:
 	groff -wall -R -t -Tascii -ms ASA-README.ms > ASA-README+.txt
 	cat ASA-README+.txt | sed -e "s/\[1m//g" | sed -e "s/\[0m//g" | sed -e "s/\[4m//g" | sed -e "s/\[24m//g" | sed -e "s/\[22m//g" > ASA-README.txt
 	groff -wall -R -t -e -ms ASA-README.ms > tp.ASA-README.ps
-	psselect -p1,58-,2-56 tp.ASA-README.ps > ASA-README.ps
+	/bin/psselect -p1,58-,2-56 tp.ASA-README.ps > ASA-README.ps
 	rm tp.ASA-README.ps
 	ps2pdf ASA-README.ps
 	HTML/xread_html

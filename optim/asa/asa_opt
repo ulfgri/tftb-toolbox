@@ -62,7 +62,7 @@ Param#:Minimum:Maximum:InitialValue:Integer[1or2]orReal[-1or-2]
 /***********************************************************************
 * Adaptive Simulated Annealing (ASA)
 * Lester Ingber <ingber@ingber.com>
-* Copyright (c) 1987-2014 Lester Ingber.  All Rights Reserved.
+* Copyright (c) 1987-2015 Lester Ingber.  All Rights Reserved.
 * ASA-LICENSE file has the license that must be included with ASA code.
 ***********************************************************************/
 
@@ -78,6 +78,6 @@ parameter_maximum[2] = 500;
 OPTIONS->Limit_Generated = 700;
 OPTIONS->User_Quench_Param_Scale[3] = 0.8; /* assumes QUENCH_PARAMETERS=TRUE */
 
-$Id: asa_opt,v 30.10 2014/07/28 21:14:12 ingber Exp ingber $
+$Id: asa_opt,v 30.18 2015/01/27 22:43:15 ingber Exp ingber $
 #endif /* ASA_SAVE */
 

@@ -7,11 +7,11 @@ extern "C" {
 /***********************************************************************
 * Adaptive Simulated Annealing (ASA)
 * Lester Ingber <ingber@ingber.com>
-* Copyright (c) 1987-2014 Lester Ingber.  All Rights Reserved.
+* Copyright (c) 1987-2015 Lester Ingber.  All Rights Reserved.
 * ASA-LICENSE file has the license that must be included with ASA code.
 ***********************************************************************/
 
-  /* $Id: asa.h,v 30.10 2014/07/28 21:14:11 ingber Exp ingber $ */
+  /* $Id: asa.h,v 30.18 2015/01/27 22:43:14 ingber Exp ingber $ */
 
   /* asa.h for Adaptive Simulated Annealing */
 

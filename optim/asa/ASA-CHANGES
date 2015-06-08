@@ -1,0 +1,5690 @@
+/***********************************************************************
+* Adaptive Simulated Annealing (ASA)
+* Lester Ingber <ingber@ingber.com>
+* Copyright (c) 1987-2015 Lester Ingber.  All Rights Reserved.
+* ASA-LICENSE file has the license that must be included with ASA code.
+***********************************************************************/
+
+$Id: ASA-CHANGES,v 30.18 2015/01/27 22:43:07 ingber Exp ingber $
+
+========================================================================
+			CONTENTS
+
+		@@CHANGES
+		@@CONTRIBUTORS
+		@@VERSION DATES
+========================================================================
+		@@CHANGES
+========================================================================
+15 Jan 15
+
+ASA-NOTES
+Added to Section @@Equality and Inequality Constraints information on
+paper by Hime Aguiar and colleagues addressing use of equality constraints
+in ASA when inverse mappings of the equality space can be calculated.
+
+========================================================================
+7 Jan 15
+
+ASA-README.ms
+Updated references.
+
+========================================================================
+11 Oct 14
+
+asa.c
+Deleted unused parallel_id not in struct.
+
+ASA-Makefile, ASA-README.ms, asa.c, asa_usr.c
+Added print to asa_usr_out when ASA_FUZZY_PRINT is TRUE, from
+FuzzyControl() and/or AlterQuench().
+
+========================================================================
+28 Jul 14
+
+ASA-README.ms, asa.c, asa_usr_asa.h
+Added OPTIONS->parallel_id to be available when ASA_PARALLEL is TRUE,
+just before the call to user_cost_function().
+
+========================================================================
+8 Apr 14
+
+ASA-README.ms, asa_usr.c asa_usr.h
+Added code to restore regular annealing schedules under some conditions
+when ASA_FUZZY is TRUE:
+*ASA_FUZZY_Init_User_Quench_Cost_Scale
+*ASA_FUZZY_Init_User_Quench_Param_Scale
+
+========================================================================
+21 Jan 14
+
+asa.c, ASA-README.ms
+When ASA_PARALLEL is TRUE, the do loop around generated states that
+tests for invalid states is taken over, not within, blocks of parallel
+generated states.
+
+========================================================================
+19 Jan 14
+
+asa.c, asa.h, asa_usr.c, ASA-README.ms
+Corrected and cleaned up some ASA_PARALLEL code.
+
+========================================================================
+6 Jan 14
+
+asa.c
+Cleaned up ASA_PARALLEL loop.
+
+========================================================================
+2 Jan 14
+
+ASA-Makefile, ASA-README.ms, asa.c, asa.h, asa_usr.c, asa_usr_asa.h
+Set up ASA to run OpenMP with ASA_PARALLEL.
+
+========================================================================
+24 Oct 13
+
+ASA-README.ms
+Updated references.
+
+========================================================================
+19 Oct 13
+
+asa.c, ASA-README.ms
+In the cost function, when User_Tangents is TRUE, the user should
+test the incoming *cost_flag for a value of -1 (changed from FALSE) to
+calculate tangents.  If ASA_QUEUE is TRUE, then the value of *cost_flag
+is tested for FALSE in previous states in queue and an invalid statement
+is available in the printout.
+
+========================================================================
+25 Sep 13
+
+ASA-Makefile, ASA-README.ms
+Since -mno-cygwin has been deprecated in Cygwin, there are comments to
+use i686-pc-mingw32-gcc.exe, e.g.,
+CC = /bin/i686-pc-mingw32-gcc.exe
+to not use the cygwin1.dll library.
+
+========================================================================
+13 Sep 13
+
+All files
+All references to the ASA-LICENSE have been changed to reflect that the
+information in the ASA-LICENSE file must be included with the ASA code,
+not necessarily the file itself.
+
+========================================================================
+12 Sep 13
+
+ASA-LICENSE, ASA-README.ms
+The ASA-LICENSE has been replaced with a BSD 3-Clause License, as posted
+on http://opensource.org/licenses/BSD-3-Clause .
+
+========================================================================
+13 Jun 13
+
+ASA-README.ms
+Updated references.
+
+========================================================================
+8 Apr 13
+
+asa.c
+Added existence test for "asa_exit_anytime".
+
+========================================================================
+2 Apr 13
+
+asa.c, asa_usr.c, asa_usr_asa.h, ASA-Makefile
+When USER_ASA_USR_OUT is TRUE, the user must define
+OPTIONS->Asa_Out_Usr_File to override the USER_OUT default of asa_out.
+
+========================================================================
+24 Mar 13
+
+asa.c
+moved fflush() and fclose() out of TIME_CALC section.
+
+asa_usr.c
+Under fitloc() and calcf(), moved some ASA_RESOLUTION variables under
+FITLOC_ROUND to avoid warnings of not used when FITLOC_ROUND is FALSE.
+
+asa_usr_cst.c, asa_usr.c
+When ASA_TEST is TRUE, removed parameter_upper_bound-parameter_lower_bound tests.
+
+ASA-NOTES:
+Section, @@Options for Large Spaces, changed a Program Option to
+increase Temperature_Ratio_Scale (smaller negative exponent)
+
+========================================================================
+7 Aug 12
+
+ASA-README.html
+Fixed typos and obsolete links.
+
+========================================================================
+2 Jul 12
+
+ASA-README.html
+Fixed bug that left out RCS version.
+
+========================================================================
+13 Apr 12
+
+ASA-README.ms
+Emphasized that Simulated Annealing is NOT Simulated Quenching.
+
+========================================================================
+4 Feb 12
+
+ASA-LICENSE, ASA-README.ms
+Added https://code.google.com/p/adaptive-simulated-annealing to ASA-LICENSE.
+
+========================================================================
+29 Dec 11
+
+ASA-Makefile
+added filter for some ESC characters in .txt and .html files.
+
+========================================================================
+23 Dec 11
+
+asa.c, asa_usr.c
+Renamed some goto labels to include ASA in names, to avoid conflicts
+with other codes.
+
+========================================================================
+10 Nov 11
+
+asa.c, asa_usr.c
+Added irrelevant code to stop "set but not used" warnings on Ubuntu.
+
+AS-README.ms
+Updated 2012 reference for paper.
+
+========================================================================
+27 Jul 11
+
+asa.c
+If the calculated *initial_cost_temperature is not set using
+USER_INITIAL_COST_TEMP, and if it is essentially zero, then it is reset
+to e = 2.718.  If ASA_PRINT is TRUE a warning is printed.
+
+ASA-LICENSE
+Corrected spelling typos.
+
+========================================================================
+25 Jul 11
+
+ASA-NOTES
+Modified section
+@@Equality Constraints
+to
+@@Equality and Inequality Constraints
+where the method of Lagrange multipliers is discussed for including
+equality and inequality constraints.
+
+========================================================================
+15 Jun 11
+
+ASA-README.ms
+Updated references.
+
+========================================================================
+6 March 11
+
+ASA-README.ms
+ASA_FUZZY does not do well on ASA_TEST_POINT.  Added a Caution that is
+appropriate for many other variants of SA:
+Caution: Often ASA_FUZZY will turn on QUENCHing > 1, violating the proof
+of ASA.  For many systems, this speeding up of the sampling process can
+be a welcome efficiency, but in some systems global minima may be missed,
+e.g., in systems with multiple scales.
+
+ASA-README.html
+fixed bug in formatting
+
+========================================================================
+5 March 11
+
+ASA-README.ms, ASA-Makefile, asa.c, asa_usr.c, asa_usr.h
+When ASA_FUZZY is set to TRUE, a modified fuzzy-logic algorithm
+originally developed by Hime Junior performs an adaptive tuning of
+selected ASA OPTIONS.  ASA_FUZZY has several adaptive parameters defined
+in asa_usr_asa.h, and some fixed #define parameters in the several
+subroutines at the bottom of asa_usr.c.  The default functions are set to
+tune QUENCH_COST and QUENCH_PARAMETERS parameters, so these are tested
+to be TRUE in the default asa_usr_asa.h.  If you change any defaults,
+pay attention to sections labeled ASA_FUZZY at top and bottom sections
+of asa_usr.c, and in asa_usr.h.
+
+========================================================================
+9 Feb 11
+
+ASA-LICENSE, ASA-README.ms
+Clause 5 was deleted, and Clause 6 was renumbered to
+Clause 5, to follow guidelines of the "New BSD License",
+http://en.wikipedia.org/wiki/BSD_License, beginning with Version 28.1.
+
+========================================================================
+14 Dec 10
+
+asa_usr.c
+Added free() and fclose() statements in SELF_OPTIMIZE functions to have
+no errors reported under cppcheck.  These only occurred in places that
+were returning fatal errors code anyway.
+
+========================================================================
+10 Dec 10
+
+ASA-README.ms, ASA-Makefile, asa.c, asa_usr.c, asa_usr.h, asa_usr_asa.h, asa_usr_cst.h
+When ADAPTIVE_OPTIONS is set to TRUE, it is possible to change relevant
+OPTIONS in the USER_DEFINES struct in asa_usr_asa.h during run time,
+by including an asa_adaptive_options file.  This can be very useful to
+efficiently determine how to tune long runs.
+
+========================================================================
+16 Jul 10
+
+ASA-LICENSE, ASA-README.ms
+ftp is no longer supported to retrive ASA.
+
+========================================================================
+4 Jan 10
+
+ASA-NOTES:
+Noted that when using SUNPRO CC, the 'extern "C" {' line and its '}'
+line should be commented out in [].h files.
+
+asa_usr.c
+Added (double) cast to test "if (fabs ((double) seed) > 0)".
+
+========================================================================
+4 Nov 09
+
+ASA-README.ms:
+Modified TRD reference.
+
+========================================================================
+3 Nov 09
+
+ASA-README.ms:
+The 2005 TRD report has been withdrawn as requested by the publisher of
+"Handbook of Technical Trading Analysis" (Wiley, 2009) in which an
+updated version appears.
+
+========================================================================
+19 Aug 09
+
+ASA-README.ms:
+Updated references.
+
+========================================================================
+25 Jun 09
+
+asa_usr.c:
+Added number_asa_usr_open to track multiple calls to asa_usr_out,
+similar to number_asa_open in asa.c that tracks multiple calls to asa_out.
+
+========================================================================
+20 Jun 09
+
+asa_usr.c:
+If your USER_COST_FUNCTION modifies your other programs, and final calls
+to asa() and/or fitloc() make additional modifications, you might run
+a last call to USER_COST_FUNCTION().  An ASA_TEMPLATE is provided after
+FITLOC for this purpose.
+
+========================================================================
+14 Apr 09
+
+asa.c, asa_usr.c:
+Added fscanf_ret= to all fscanf calls, to stop warnings under optimization
+options on some Linux platforms.
+
+ASA-Makefile, ASA-README.ms:
+Added comment that if you use gcc across different levels of compiler
+optimization on different platforms, you may wish to invoke -ffloat-store
+to be sure to get the same precision in your results. This option is
+added to ASA-Makefile.
+
+Added comment for Cygwin that if -mno-cygwin flag has been removed,
+use a mingw-targeted cross-compiler.
+
+========================================================================
+26 Jan 09
+
+ASA-README.ms:
+Added references to some code snippets in asa_examples.txt.
+
+========================================================================
+30 Dec 08
+
+Updated Copyright in all files.
+
+========================================================================
+13 Sep 08
+
+asa.c:
+Moved fopen ("asa_exit_anytime", "w") up to initialization section.
+
+========================================================================
+24 Jul 08
+
+ASA-README.ms, asa.c, asa_usr_asa.h:
+When ASA_EXIT_ANYTIME is set to TRUE, the first call to asa() creates the
+file asa_exit_anytime.  To  permit IMMEDIATE_EXIT before calculating the
+next generated state, simply delete the file asa_exit_anytime, and asa()
+will exit with code IMMEDIATE_EXIT.  This can be useful on long runs.
+
+========================================================================
+26 May 08
+
+ASA-LICENSE, ASA-README.ms:
+Added "or publication" to Condition 4.
+
+========================================================================
+24 Apr 08
+
+Makefile:
+Corrected collecting pages for ASA-README.ps and ASA-README.pdf.
+
+========================================================================
+8 Mar 08
+
+ASA-README-ms, asa.c:
+When calculating derivatives, an invalid cost function, i.e., returning
+*cost_flag = FALSE from the cost function, will exit asa() with *exit_code
+INVALID_COST_FUNCTION_DERIV.  Also, when calculating derivatives, no
+extra test is performed to check that parameters are within their lower
+and upper bounds (since meshes for derivatives may exceed these bounds).
+If this is not desired, then within the cost function, within a test
+for USER_OPTIONS->Locate_Cost == 3, a decision may be made whether to
+return this *exit_code.
+
+========================================================================
+20 Feb 08
+
+asa_usr.c, asa_usr.h:
+Added OPTIONAL_DATA_PTR info to asa_main() ASA_TEMPLATE.
+
+========================================================================
+19 Feb 08
+
+ASA-README.ms:
+Added some examples for using OPTIONAL_DATA_PTR and Asa_Data_Ptr.
+
+========================================================================
+18 Feb 08
+
+ASA-README.ms, asa_usr.c, asa_usr.h, asa_usr_asa.h:
+To enable clean compilations under c++/g++, when using user-defined
+USER[] functions, added HAVE_ANSI #defines for Cost_Schedule(),
+Acceptance_Test(), Generating_Distrib(), Reanneal_Cost_Function(), and
+Reanneal_Params_Function().  Used const void *OPTIONS_TMP as place-holder,
+similar to use in some asa.c functions, in asa_usr_asa.h and asa_usr.c,
+for USER_OPTIONS and RECUR_USER_OPTIONS in referring and referred
+functions in asa_usr.c.
+
+asa_usr.c:
+Corrected dereferencing of cost_last and cost_best in
+user_reanneal_cost().  Wrapped all code in user_reanneal_cost() in
+#define ASA_TEMPLATE.
+
+asa.c:
+moved immediate_flag in asa() to prevent warning.
+
+ASA-README.ms:
+Added some reference papers on use of ASA.  There is now an RLaB
+interface to ASA, which is referenced in Section @@RLAB Interface with
+ASA in asa_contrib.txt.
+
+========================================================================
+26 Dec 07
+
+Updated Copyright in all files.
+
+ASA-README.ms:
+Added some references.
+
+========================================================================
+9 Mar 07
+
+ASA-README.ms:
+Added comment on comparing algorithms to section Use of Documentation
+for Tuning.
+
+========================================================================
+1 Feb 07
+
+ASA-README.ms:
+Updated information on files utils_code.txt and utils_code.html.
+
+========================================================================
+31 Jan 07
+
+ASA-README.ms:
+ASA is now also listed at http://asa-caltech.sourceforge.net
+(http://asa-caltech.sf.net).
+
+========================================================================
+21 Nov 06
+
+asa.c:
+If Delta_X is set to 0, then no tangents are calculated.  No tangents
+for any parameter are calculated if User_Delta_Parameter[] is 0.
+
+========================================================================
+20 Oct 06
+
+ASA-NOTES:
+Added 2 URLS to section @@FORTRAN Issues.
+
+========================================================================
+26 Sep 06
+
+asa.c:
+Changed reporting of "new best", from when MULTI_MIN is TRUE, to when
+ASA_PRINT_MORE is TRUE.
+
+========================================================================
+25 Sep 06
+
+ASA-NOTES:
+Added section @@Some Reflections After a Score of Years.
+
+========================================================================
+23 Sep 06
+
+asa.c:
+Added another cast (double) tmp_var_int, which may be unnecessary for most
+(all) systems.
+
+========================================================================
+16 Aug 06
+
+asa.c:
+When ASA_SAVE is TRUE, corrected size for Asa_Out_File to 80 in fread
+and fwrite.
+
+========================================================================
+27 Jul 06
+
+asa.c, asa.h:
+Moved char exit_msg[160] from asa.h to asa.c to avoid compilation problems
+on some systems with some applications that include asa.h in multiple files.
+
+========================================================================
+20 Jul 06
+
+Makefile:
+When using Cygwin to create a DLL, corrected target asadll: from
+-Wl,--export-all-symbol to -Wl,--export-all .
+
+========================================================================
+17 Jul 06
+
+ASA-README.html:
+Fixed HTML warning re hr may not occur inside p.
+
+========================================================================
+13 Jul 06
+
+asa.c, asa.h, asa_usr.c:
+When using a DOS version of ASA, e.g., ASA.zip, on a Unix machine, some
+systems do not process continuation "\" lines properly.  These lines
+are now joined to long lines in the code.
+
+========================================================================
+3 May 06
+
+asa_usr.c:
+Deleted extra fclose() in ASA_TEMPLATE_SAVE.
+
+========================================================================
+26 Feb 06
+
+ASA-README.ms, asa.c:
+The final values in asa.c of *best_number_generated_saved and
+*best_number_accepted_saved at the best cost function will be those of
+the first instance of the final best value.
+
+========================================================================
+23 Feb 06
+
+ASA-README.ms, asa.c:
+When MULTI_MIN is set to TRUE and Multi_Specify is set to 0, and multiple
+best cost functions are found, the parameters of the final cost function
+reported will be the parameters of the last best cost function.
+
+========================================================================
+26 Jan 06
+
+ASA-README.html:
+Changed DOCTYPE to W3C.
+
+========================================================================
+13 Jan 06
+
+ASA-README.ms:
+Included statement that ASA will compile under C++ as well as under
+C compilers.
+
+========================================================================
+2 Jan 06
+
+asa.c:
+Added test if (*initial_cost_temperature < EPS_DOUBLE) then exit asa()
+with exit_code INVALID_COST_FUNCTION.
+
+========================================================================
+1 Jan 06
+
+asa_usr.c:
+Shortened recur_initialize_parameters_value to less than 31 chars, to
+recur_initialize_params_value.
+
+========================================================================
+29 Nov 05
+
+ASA-README.ms, asa.c:
+When ASA_PIPE or ASA_PIPE_FILE are TRUE, the current_generated_state as
+well as the best_generated_state are printed.
+
+========================================================================
+28 Nov 05
+
+asa.c:
+When ASA_QUEUE and ASA_RESOLTUION are TRUE, comparisons with a new
+generated state are made relative to EPS_DOUBLE, since Queue_Resolution
+= Coarse_Resolution.  When ASA_QUEUE is TRUE, dropped a decrement of
+number_generated.
+
+========================================================================
+7 Oct 05
+
+asa.c:
+When MULTI_MIN is TRUE, asa_exit() calculates cost functions, and their
+associated parameters, in descending order, to leave the final state as
+the best state.
+
+========================================================================
+12 Sep 05
+
+ASA-README.ms:
+Referred Section on parameter_lower_bound to Section on
+parameter_upper_bound.
+
+========================================================================
+26 Aug 05
+
+ASA-README.ms:
+Direct users to asa_examples.txt for an example of use of
+OPTIONAL_DATA_PTR and MULTI_MIN.
+
+========================================================================
+22 Aug 05
+
+ASA-CHANGES, ASA-LICENSE, ASA-Makefile, ASA-NOTES, ASA-README.ms:
+Added ASA- prefix to CHANGES, LICENSE, Makefile, and NOTES to
+prevent conflicts with other software.
+
+========================================================================
+7 Jul 05
+
+asa.c:
+"&" were left off save_queue and save_queue_indx in fread() and fwrite()
+used when both ASA_QUEUE and ASA_SAVE are TRUE.
+
+========================================================================
+3 Apr 05
+
+ASA-README.ms:
+Enhanced details in Use of Documentation for Tuning.
+
+========================================================================
+1 Mar 05
+
+NOTES:
+In section @@Options for Large Spaces, changed decrease
+Cost_Parameter_Scale_Ratio to increase Cost_Parameter_Scale_Ratio.
+
+
+========================================================================
+21 Jan 05
+
+asa_usr.c:
+Fixed placement of ASA_TEMPLATE_QUEUE's to account for choices in
+ASA_QUEUE and ASA_RESOLUTION.
+
+========================================================================
+12 Jan 05
+
+asa_usr.c:
+Corrected asa_usr_out printout when MULTI_MIN is TRUE.
+
+========================================================================
+11 Jan 05
+
+asa.c:
+When MULTI_MIN is TRUE, tightened Multi_Grid[] test with -EPS_DOUBLE.
+
+========================================================================
+7 Jan 05
+
+asa_usr.c:
+When ASA_TEMPLATE_ASA_OUT_PID is TRUE, changed pid_file[] from
+user_out_{pid} to asa_usr_out_{pid}.
+Corrected recur_cost_function(), changing fprintf() to printf(), and
+corrected asa_main() used with SELF_OPTIMIZE, defining user_exit_msg[].
+Deleted ASA_SAMPLE from recur_cost_function().
+
+asa_usr_asa.h:
+If SELF_OPTIMIZE is TRUE, changed default of INCL_STDOUT to FALSE.
+
+========================================================================
+3 Jan 05
+
+asa_usr_asa.h:
+Wrapped #ifndef TIME_CALC if INCL_STDOUT is TRUE.
+
+asa_usr_cst.c:
+Wrapped #if TIME_CALC with #if FALSE in case printf() is not active.
+
+ASA-README.ms, asa.c:
+Added notes to set TIME_STD to TRUE and TIME_GETRUSAGE to FALSE under
+Cygwin with -mno-cygwin.
+
+asa.c:
+Added initialization print_time() call when TIME_GETRUSAGE is FALSE.
+
+========================================================================
+1 Jan 05
+
+Updated Copyright in all files.
+
+========================================================================
+12 Dec 04
+
+ASA-README.ms, Makefile:
+The Makefile can be used to create DLL functions for Windows.
+
+========================================================================
+6 Dec 04
+
+asa_usr.h:
+Exit_USER prototype out of place in HAVE_ANSI section.
+
+asa.h, asa_usr.h, asa_usr_asa.h:
+Added #ifdef __cplusplus braces.
+
+========================================================================
+23 Sep 04
+
+asa.c:
+Removed statement that had no effect.
+
+ASA-README.ms, Makefile:
+Fixed headers in ASA-README.pdf.  Deleted footers in ASA-README.html.
+
+========================================================================
+10 Jun 04
+
+asa_usr.c:
+In fitloc(), fixed bug in declaration of x.
+
+========================================================================
+13 May 04
+
+Makefile:
+Changed zip: Modified to convert all files except .pdf files to DOS.
+
+========================================================================
+12 May 04
+
+Makefile:
+Changed zip: in Makefile to drop -l flag which corrupts ASA-README.pdf.
+Users will have to convert all unzipped files from Unix to Dos.
+
+========================================================================
+23 Feb 04
+
+asa.c:
+Changed casts in multi_compare() and sort_parallel() to enable compilation
+under g++.
+
+========================================================================
+19 Feb 04
+
+asa.c:
+In asa_exit(), changed *curvature_flag to curvatureFlag, and removed
+associated calloc() and free().
+
+========================================================================
+11 Feb 04
+
+asa_usr.c:
+Moved memory creation for USER_OPTIONS and OPTIONAL_DATA_PTR to top of
+file to permit use of Asa_Data_Ptr for more OPTIONS.
+
+========================================================================
+10 Feb 04
+
+asa.c:
+Set default ptr_asa_out to NULL.
+
+asa.c, asa.h:
+added *multi_cost_qsort and *gener_block_state_qsort.
+
+========================================================================
+17 Jan 04
+
+Makefile, ASA-README.ms:
+Updated references.
+
+All files:
+Updated Copyright.
+
+========================================================================
+25 Jul 03
+
+Makefile, asa.c, asa_usr.c, ASA-README.ms:
+Some compilers on some systems under some levels of optimization will not
+compile if stdout is present in the code.  All instances of stdout and
+printf in the user and the asa modules can be commented out by setting
+INCL_STDOUT to FALSE.  Note that this also will suppress some output
+from such OPTIONS as ASA_PIPE, TIME_CALC, etc.
+
+========================================================================
+9 May 03
+
+asa.c, asa_usr.c:
+Changed use of LONG_INT in some calloc() to ALLOC_INT.
+
+========================================================================
+25 Apr 03
+
+ASA-README.ms, asa_usr.c:
+Added caution to examine parameters in fitloc(), passed on to simplex(),
+when using FITLOC set to TRUE.
+
+========================================================================
+13 Apr 03
+
+asa_usr_cst.c:
+Corrected print pointer, active when TIME_CALC is TRUE.
+
+========================================================================
+22 Feb 03
+
+Renamed files to facilitate their use in larger projects:
+asa_user.h -> asa_usr_asa.h
+user.c -> asa_usr.c
+user.h -> asa_usr.h
+user_cst.c -> asa_usr_cst.c
+readme.ms -> ASA-README.ms
+test_asa -> asa_test_asa
+test_usr -> asa_test_usr
+
+========================================================================
+12 Feb 03
+
+asa.c:
+ASA_PIPE_FILE prints out first header line with a "%" as first character,
+which can provide a useful comment signal to a graphics tool, replacing
+the previous "#".
+
+========================================================================
+6 Jan 03
+
+readme.ms:
+Added section Generic ASA Interfaces
+
+========================================================================
+1 Jan 03
+
+updated copyright in all files.
+
+========================================================================
+5 Nov 02
+
+user.c, user_cst.c:
+In cost_function(), removed (LING_INT) cast, and cast indices to ALLOC_INT.
+
+========================================================================
+31 Oct 02
+
+readme.ms:
+Added note that, when using MULTI_MIN, Most likely, the minimum of
+USER_OPTIONS->Multi_Number and USER_OPTIONS->N_Accepted should be set
+to USER_OPTIONS->Multi_Number for further use.
+
+========================================================================
+23 Oct 02
+
+user.c:
+Deleted static from *rand_seed and *recur_rand_seed which is a bug when
+using ASA_LIB.
+
+========================================================================
+12 Oct 02
+
+Updated copyright date and prepared docs on Cygwin.
+
+========================================================================
+14 Aug 02
+
+user.c, user_cst.c:
+In ASA_TEST in cost_function(), cast (LONG_INT) *parameter_dimension.
+
+========================================================================
+3 Jun 02
+
+asa.c, asa.h, asa_user.h, Makefile, readme.ms, user.c:
+Changed pre-compile OPTIONS MULTI_NUMBER to adaptive
+USER_OPTIONS->Multi_Number.
+
+========================================================================
+22 Apr 02
+
+asa.h, user.c, user.h:
+To permit compilation under g++ as well as gcc, moved initializations
+from user.h to user.c to avoid problems using user_cst.c, and changed
+global exit_msg[] to user_exit_msg[] in user.c and to exit_msg[] in asa.h.
+
+========================================================================
+19 Apr 02
+
+readme.ms:
+The code is stable and therefore the ASA_List no longer is necessary.
+
+
+========================================================================
+5 Mar 02
+
+asa.c, asa.h, readme.ms:
+Print out values of parameters dropped out of sampling by setting
+minimum = maximum.
+
+========================================================================
+29 Oct 01
+
+readme.ms:
+Changed ingber_fees.html to ingber_terms.html.
+
+========================================================================
+12 Oct 01
+
+readme.ms:
+Renamed ASA-README and ASA-README+ to ASA-README.txt and ASA-README+.txt.
+
+========================================================================
+11 Oct 01
+
+NOTES, readme.ms:
+Changed FILE.ps.gz references to FILE.pdf references.
+
+Added ASA-README.pdf to source code.
+
+========================================================================
+14 Sep 01
+
+NOTES, readme.ms:
+Added info on using QUENCHing for large parameter dimensions.
+
+========================================================================
+27 Aug 01
+
+readme.ms:
+Added comment re if MULTI_NUMBER is larger than the actual number of
+accepted states, then there will be a set of duplicate states returned
+which likely should be filtered via a unique macro.
+
+========================================================================
+11 Aug 01
+
+NOTES, readme.ms:
+Added .txt suffix to 00index.txt, asa_contrib.txt, asa_examples.txt,
+asa_new.txt, and ingber_fees.txt.
+
+readme.ms:
+Added info about ASA-README.pdf in the www.ingber.com archive.
+
+========================================================================
+1 Aug 01
+
+asa.c, asa_user.h, Makefile, readme.ms:
+When USER_ACCEPT_THRESHOLD is TRUE, a  simple alternative to the Boltzmann
+function becomes available for the acceptance test, simply defining 
+the probability of acceptance to be 1 if delta_cost <= cost_temp and
+0 otherwise.
+
+========================================================================
+19 Jul 01
+
+asa.c, asa.h, readme.ms, user.c, user.h, user_cst.c:
+Setting the lower bound equal to the upper bound will remove a parameter
+from consideration.  Whenever this occurs, within asa() the effective
+dimension defining the size of the search space is reduced by the number
+of parameters so removed.
+
+========================================================================
+21 Jun 01
+
+asa.c:
+Fixed bug in use of ASA_PRINT with MULTI_MIN.
+
+========================================================================
+14 Jun 01
+
+asa.h, asa_user.h, user.h:
+Added protective #define wrappers.
+
+========================================================================
+13 May 01
+
+readme:
+Changed to file utils_file_formats.txt.
+
+========================================================================
+4 May 01
+
+readme:
+Added user_cst.c to
+gcc -g -DASA_TEST=TRUE -o asa_run user.c user_cst.c asa.c -lm
+
+========================================================================
+27 Mar 01
+
+asa.c:
+Put all calloc initializations before first call to cost function.
+If the first call to cost function returns an invalid state, then memory
+is correctly freed before exiting asa().
+
+========================================================================
+16 Mar 01
+
+asa_user.h, user.c, user.h, readme.ms:
+The default name of the cost function is cost_function.  This can be
+changed in asa_user.h (or the Makefile) by defining USER_COST_FUNCTION.
+When SELF_OPTIMIZE is TRUE, the default name of the recur cost function is
+recur_cost_function.  This can be changed in asa_user.h (or the Makefile)
+by defining RECUR_USER_COST_FUNCTION.  This of course requires compiling
+in the new cost function(s) and prototype(s).
+
+========================================================================
+20 Feb 01
+
+*.[ch]
+Changed indenting to `gindent -br -brs -ce -cdw -nut -sob -pmt`.
+
+========================================================================
+25 Jan 01
+
+readme.ms:
+The background image file asa_back.jpg referenced in ASA\-README.html can
+be downloaded as http://www.ingber.com/asa_back.jpg from the ASA archive.
+
+========================================================================
+24 Jan 01
+
+readme.ms:
+Added note on availability of support for ASA_PARALLEL in asa_contrib.
+
+========================================================================
+17 Jan 01
+
+asa.c, asa.h, readme.ms:
+When ASA_PARALLEL is TRUE, each block of generated states is sorted to
+permit the lowest cost functions to pass first through the acceptance
+test.
+
+========================================================================
+14 Jan 01
+
+Makefile, NOTES, readme.ms, user.c, user_cst.c:
+Changed user_cst.h to user_cst.c.
+
+========================================================================
+30 Dec 00
+
+Updated copyright.
+
+========================================================================
+19 Dec 00
+
+readme.ms, user.c, user.h:
+Put SHUFFLE in user.h, and changed "256" random dimensions to SHUFFLE
+in user.c.  Removed creation and freeing of memory for Random_Array as
+this is pointed to static random_array.
+
+========================================================================
+18 Dec 00
+
+asa.c:
+Deleted extra fclose(ptr_save); line used when ASA_SAVE is TRUE.
+
+asa.c, readme.ms:
+When ASA_SAVE is set to TRUE, Number_Cost_Samples is set to 1 after
+the initial run.
+
+========================================================================
+12 Dec 00
+
+readme.ms:
+Emphasized free use of code.
+
+========================================================================
+28 Nov 00
+
+readme.ms:
+Updated reference to utilities.
+
+========================================================================
+26 Nov 00
+
+NOTES, readme.ms:
+Merged all files under MISC.DIR into main ingber.com directory.
+
+========================================================================
+17 Nov 00
+
+Changed indenting to version GNU indent 2.2.6.
+
+========================================================================
+24 Oct 00
+
+readme.ms, user.h, user.c:
+randflt() calls resetable_randflt() each time to implement the RNG.
+This is to provide the capability of getting the same runs if the same
+multiple calls to asa() are made, e.g., when using ASA_LIB set to TRUE.
+
+========================================================================
+19 Sep 00
+
+user.c:
+Changed initialization of random generator to enforce consistent
+first random number generated upon multiple calls to asa_main() when
+ASA_TEMPLATE_LIB is set to TRUE.  This changes test_asa and test_usr.
+
+========================================================================
+7 Sep 00
+
+Makefile, asa_user.h, readme.ms, user.c:
+Changed cast on Asa_Data_Ptr to OPTIONAL_PTR_TYPE.
+========================================================================
+21 Aug 00
+
+NOTES, readme.ms:
+Only RATFOR version of VFSR is included in asa_contrib.
+
+========================================================================
+2 Aug 00
+
+NOTES:
+Included reference to old 1987 RATFOR and FORTRAN VFSR code contained
+in asa_contrib.
+
+Makefile:
+Added zip: target.
+
+readme.ms:
+ASA-shar is dropped from the archive, as ASA.tar.gz and ASA.zip are now
+sufficient for practically all users.
+
+========================================================================
+29 Jul 00
+
+readme.ms:
+Included reference to old 1987 RATFOR and FORTRAN VFSR code contained
+in asa_contrib.
+
+========================================================================
+21 Jul 00
+
+readme.ms:
+Changed reference to ASA code to Caltech Alumni Association, properly
+given to the internet archive that first published the code and maintains
+email addresses for the ASA_list
+
+========================================================================
+26 May 00
+
+asa.c, user.c:
+Fixed 2 leaks when MULTI_MIN is TRUE.
+
+========================================================================
+19 May 00
+
+user.c:
+Fixed OPTIONAL_DATA_PTR wrapper around data_ptr_flg.
+
+========================================================================
+13 May 00
+
+user.c:
+Fixed free() bug if data_ptr_flg is 0 in SELF_OPTIMIZE section.
+
+========================================================================
+10 May 00
+
+user.c:
+Updated SELF_OPTIMIZE section to be able to use asa_opt_recur file.
+
+user.c, user.h:
+Pass name of cost function to fitloc() so it can be used recursively.
+
+asa.c, asa_user.c, readme.ms, user.c:
+Modified ASA_SAVE to be effective at highest level of recursion.
+
+========================================================================
+9 May 00
+
+asa_user.c, readme.ms, user.c:
+Modified OPTIONAL_PTR_TYPE for multiple names at general levels of
+recursion.
+
+asa.c, asa_user.c, readme.ms, user.c:
+Added OPTIONS->Asa_Recursive_Level.
+
+========================================================================
+8 May 00
+
+user.c:
+Added MULTI_MIN capability to SELF_OPTIMIZE section.
+
+asa_user.c, readme.ms, user.c:
+Modified OPTIONAL_PTR_TYPE for general levels of recursion.
+
+========================================================================
+5 May 00
+
+user.c, readme.ms:
+If OPTIONAL_DATA_PTR is being used for RECUR_USER_OPTIONS as well
+as for USER_OPTIONS, do not create (or free) additional memory in
+recur_cost_function() for Asa_Data_Dim_Ptr and Asa_Data_Ptr to be
+passed to the inner cost_function(), but rather link pointers to those
+in RECUR_USER_OPTIONS.  Typically, define separate structures within the
+structure defined by Asa_Data_Ptr to access info depending on whether the
+run in a particular level of cost function in this recursive operation.
+In user.c, there are guidelines to set "#if TRUE" to "#if FALSE"
+at these points of the code.
+
+========================================================================
+3 May 00
+
+asa.c:
+Updated changes to Asa_Data_Dbl when ASA_TEMPLATE_SELFOPT is TRUE.
+
+========================================================================
+4 Apr 00
+
+asa.c:
+Fixed bug in freeing multi_params when MULTI_MIN is TRUE.
+
+========================================================================
+15 Mar 00
+
+asa.c:
+Corrected reference to last_generated_state to last_saved_state.
+
+========================================================================
+28 Feb 00
+
+user.c:
+Sharpened accuracy of bound testing when FITLOC is TRUE.
+
+========================================================================
+25 Feb 00
+
+asa.c, asa_user.c, readme.ms:
+Changed from use of system() to popen() when ASA_SAVE or ASA_SAVE_BACKUP
+is TRUE.
+
+========================================================================
+21 Jan 00
+
+NOTES, readme.ms:
+Added a section in NOTES, Some Tuning Guidelines.
+
+asa.c:
+Added the last_saved_state cost function to output from ASA_PIPE
+and ASA_PIPE_FILE.
+
+========================================================================
+18 Jan 00
+
+readme.ms:
+Added short abstract to first page.
+
+========================================================================
+29 Dec 99
+
+asa.c:
+Corrected some pointer bugs when ASA_SAVE and MULTI_MIN are both TRUE.
+
+========================================================================
+28 Dec 99
+
+asa.c, readme.ms, user.c:
+Deleted Cauchy and Gaussian examples under USER_GENERATED_FUNCTION, as
+extra care usually is needed by user the to handle parameter ranges.
+
+========================================================================
+26 Dec 99
+
+asa.c:
+Set default size of arrays created under ASA_QUEUE to 1 if Queue_Size
+is initially zero, to permit proper freeing of memory when leaving asa()
+in case Queue_Size is set to zero adaptively.
+
+========================================================================
+8 Dec 99
+
+Makefile, asa.c, asa_user.h, readme.ms:
+If ASA_SAVE_OPT is set to TRUE, when asa is restarted, if the file
+asa_opt_save is present in the same directory as asa_opt, then new values
+of ASA parameters and OPTIONS are read in after initializing to the
+point of the last writing of asa_save, without requiring recompilation.
+
+readme.ms:
+Added note on availability of MATLAB interface in asa_contrib.
+
+========================================================================
+30 Nov 99
+
+Makefile, readme.ms:
+Use psselect to put contents after cover page in ASA-README.ps.
+
+Makefile, asa.c, readme.ms:
+Moved some OPTIONS to Printer Options section.
+
+========================================================================
+27 Nov 99
+
+asa.c, asa_user.h, user.c:
+Put array for temporary storage of exit_msg[] in asa_user.h.
+
+========================================================================
+25 Nov 99
+
+asa.c, user.c:
+Added char exit_msg[] for Exit_ASA() and Exit_USER() to avoid multiple
+warnings of char* conversions under some compilers.
+
+========================================================================
+18 Nov 99
+
+asa.c, readme.ms:
+If ASA_QUEUE and ASA_PRINT_MORE are TRUE then, whenever a queued cost
+function is used, this is recorded in asa_out.
+
+========================================================================
+16 Nov 99
+
+asa.c, asa_user.h, readme.ms, user.c;
+ASA_QUEUE and ASA_RESOLUTION may be used separately or together, creating
+somewhat different sampling procedures.
+
+========================================================================
+14 Nov 99
+
+asa_user.h, readme.ms:
+When ASA_SAVE_BACKUP is TRUE, ASA_SAVE is automatically set to TRUE
+in asa_user.h.
+
+========================================================================
+13 Nov 99
+
+Makefile, asa_opt, asa.c, asa_user.h, readme.ms, user.c:
+If ASA_SAVE is set to TRUE, when ASA_SAVE_BACKUP is set to TRUE, asa
+saves enough information after each newly best accepted state to restart
+from any previous best accepted state when that asa_save.{best_state}
+is copied to asa_save.  The new asa_opt file (with modified first and
+last lines) can be used to insert new code before restarting runs.
+
+========================================================================
+10 Nov 99
+
+readme.ms:
+Added more references to arrays to be developed under several OPTIONS,
+adding more hyperlinks in ASA-README.html.
+
+========================================================================
+4 Nov 99
+
+asa.c:
+ASA_PIPE_FILE prints out first header line with a "#" as first character,
+which can provide a useful comment signal to a graphics tool.
+
+asa.h, asa_user.h:
+Moved G_FIELD and G_PRECISION defines to asa_user.h.
+
+========================================================================
+21 Oct 99
+
+asa.c:
+fclose (ptr_asa_pipe).
+
+========================================================================
+19 Oct 99
+
+Makefile, asa.c, asa_user.h, readme.ms:
+When ASA_PIPE_FILE is set to TRUE, asa prints to asa_pipe lines of data
+that can be used to examine run data.
+
+========================================================================
+30 Sep 99
+
+user.c:
+Added some more info around some TEMPLATEs.
+
+Makefile, asa.c, asa_user.h, readme.ms, user.c:
+Changed OPTIONAL_DATA, Asa_Data_Dim, and Asa_Data, to
+OPTIONAL_DATA_DBL, Asa_Data_Dim_Dbl, and Asa_Data_Dbl.
+
+========================================================================
+29 Sep 99
+
+Makefile, asa.c, asa_user.h, readme.ms:
+Added OPTIONAL_DATA_PTR to return/pass additional array or structure
+information of type OPTIONAL_PTR_TYPE to the user module from/through
+the asa module.
+
+Makefile, asa.c, asa_user.h, readme.ms:
+Added ASA_PIPE to print to STDOUT lines of data after calls to the cost
+function, which can be used to update databases or graphs in real time.
+
+ASA-README.html:
+Added asa_back.jpg file (asa_back.jpg.uu in the shar version).
+
+========================================================================
+21 Sep 99
+
+asa.c, readme.ms, user.c:
+Added comments re use of USER_ACCEPT_ASYMP_EXP to be used as a template
+for USER_ACCEPTANCE_TEST.  Moved some declarations inside #if
+statements to avoid unnecessary warnings of unused variables.
+
+========================================================================
+8 Sep 99
+
+asa.c, asa.h, readme.ms:
+Added INVALID_COST_FUNCTION_DERIV with an exit code of 9, to tell user
+when an invalid cost function or parameter is developed within the
+calculation of numerical derivatives, causing an asa() exit.
+
+========================================================================
+19 Aug 99
+
+NOTES, readme.ms:
+All .Z files changed to .gz files.  ASA is now available in ASA.tar.gz,
+ASA.zip and ASA-shar formats.
+
+========================================================================
+28 Jul 99
+
+Makefile:
+Modified CC to use profile.
+
+========================================================================
+15 Feb 99
+
+ASA-README.html:
+Changed color of background for easier viewing.
+
+========================================================================
+7 Feb 99
+
+Makefile, asa_user.h, readme.ms, user.c:
+Added USER_OUT to permit naming of user output file, defaults to "user_out."
+
+========================================================================
+4 Feb 99
+
+readme.ms, user.c:
+If FITLOC is TRUE, a value of Fit_Local set >= 1 is required to enter
+the local code.  If Fit_Local is set to 2, any better fit found by the
+local code better than asa() is ignored if that local fit is achieved
+by violating the ranges of the parameters.
+
+========================================================================
+27 Jan 99
+
+asa.c:
+Corrected a few casts used when ASA_SAVE is TRUE.
+
+========================================================================
+15 Jan 99
+
+asa.c, asa.h, readme.ms:
+Generalized the macro COST_FUNCTION_TEST to the function
+cost_function_test() to return exit_code INVALID_COST_FUNCTION if the
+user returns either an invalid cost function value or a parameter that
+lies outside the proper range.
+
+========================================================================
+26 Sep 98
+
+asa.c, asa.h, readme.ms, user.c, user.h:
+CALLOC_FAILED = -1.  Calloc memory allocation has failed in asa.c.
+This error will call Exit_ASA(), the location will be printed to
+stdout, and asa() will return  the double -1 to the calling program.
+In user.c, if asa() returns this *exit_code a warning will be printed
+both to stdout and to user_out.
+
+asa_main() now returns an integer.  main() or asa_main() returns 0 for
+a normal run, -1 if any calloc allocation has failed in asa.c, or -2 if
+any calloc allocation has failed in user.c.
+
+initialize_parameters() and recur_initialize_parameters() also now
+return integers, 0 for a normal run or -2 if any calloc allocation has
+failed.
+
+asa.c:
+print_string() and print_string_index() return errors in user input
+both to stdout and, if ASA_PRINT is TRUE, to ASA_OUT.
+
+========================================================================
+25 Sep 98
+
+ASA-README.html:
+Added links to parameters left out by previous macros.
+
+========================================================================
+24 Sep 98
+
+ASA-README.html:
+Added color to text and background.
+
+========================================================================
+12 Jul 98
+
+asa.c:
+More print statements added when MULTI_MIN is set to TRUE.
+
+asa.c, asa_user.c, readme.ms, user.c:
+If Multi_Specify is set to 0, the selection of best-generated states
+includes all sampled instances of the cost functions.  If Multi_Specify
+is set to 1, the selection of best-generated states is constrained to
+include only those with different values of the cost function.
+
+========================================================================
+9 Jul 98
+
+asa.c, readme.ms:
+Included some commented alternative code under "cost-value-distinct
+best-generated states" which can alter the default selection of all
+best-generated states to including only those with different values of
+the cost function.
+
+asa.c, readme.ms:
+Modified MULTI_MIN algorithm.  Added tests to ensure that Multi_Grid is
+greater than EPS_DOUBLE, greater than Coarse_Resolution if
+ASA_RESOLUTION is TRUE, and greater than Queue_Size if ASA_QUEUE is
+TRUE.
+
+========================================================================
+8 Jul 98
+
+asa.c, user.c:
+Added print statements to user.c and corrected some code in asa.c when
+MULTI_MIN is set to TRUE.
+
+asa.c:
+Modified parameters in multi_compare() for non-ANSI compilers.
+
+asa.c, readme.ms:
+If MULTI_MIN is TRUE and Curvature_0 is FALSE, all MULTI_NUMBER
+curvatures are calculated.
+
+asa.c, readme.ms:
+Clarified calculation of the MULTI_NUMBER lowest best-generated sampled
+values of the cost function.  Enhanced MULTI_MIN algorithm to include
+Multi_Grid.
+
+========================================================================
+7 Jul 98
+
+Makefile, asa.c, asa.h, asa_user.h, readme.ms, user.c:
+When MULTI_MIN is set to TRUE, the lowest MULTI_NUMBER values of the
+cost function and their parameters are saved.
+
+========================================================================
+18 Jun 98
+
+readme.ms:
+Deleted ftp.alumni.caltech.edu as only www.alumni.caltech.edu is up
+most of the time.
+
+========================================================================
+29 May 98
+
+readme.ms:
+Fixed bug in numbering Contents pages in ASA-README.ps.
+
+========================================================================
+26 Apr 98
+
+readme.ms:
+Updated references.
+
+========================================================================
+9 Jan 98
+
+asa.c, asa_user.h, readme.ms, user.c, user.c:
+When FITLOC is TRUE, OPTIONS->Iter_Max determines the maximum
+iterations of the cost_function () by simplex ().  This replaces
+intermax.
+
+========================================================================
+8 Jan 98
+
+user.c:
+Added some declarations in calcf() when ASA_RESOLUTION set to TRUE.
+
+========================================================================
+28 Dec 97
+
+user.c:
+Added reference to simplex code.
+
+========================================================================
+18 Dec 97
+
+Makefile, asa.c, asa_user.h, readme.ms, user.c:
+When FITLOC is set to TRUE, FITLOC_PRINT controls printing in fitloc ()
+and simplex () in the user module.
+
+========================================================================
+7 Dec 97
+
+Makefile, asa.c, asa_user.h, readme.ms, user.c:
+If FITLOC is set to TRUE and FITLOC_ROUND is TRUE, then each time
+parameters are passed to or between the local routines, simplex (),
+calcf (), and fitloc (), they are first processed by rounding integers
+or respecting rounding according to ASA_RESOLUTION constraints prior to
+any further calculations.
+
+========================================================================
+5 Dec 97
+
+user.c:
+Fixed return of information from fitloc().
+
+========================================================================
+1 Dec 97
+
+asa.c:
+Fixed bug in test for FITLOC OPTIONS settings.
+
+========================================================================
+30 Nov 97
+
+asa.c, asa_user.h, readme.ms, user.c, user.h: 
+When FITLOC is TRUE, OPTIONS->Penalty provides adaptive control of
+weights for violations of constraints, exceeding boundaries, etc.
+Some typos were corrected in the sections added for FITLOC.
+
+Changed name of README's to ASA-README's.
+
+========================================================================
+29 Nov 97
+
+Makefile, NOTES, asa.c, asa_user.h, readme.ms, user.c, user.h:
+When FITLOC is set to TRUE, three subroutines become active to perform
+a local fit after leaving asa ().  This can be useful to shunt asa ()
+to a local code after the region of the global fit is known with some
+confidence, which many times is an efficient procedure.
+
+Changed the default of IO_PROTOTYPES to FALSE since newer operating
+systems require this.
+
+README.html is now bundled together with the ASA code.
+
+========================================================================
+7 Nov 97
+
+asa.c, asa.h:
+Removed ASA_PRINT constraints around TIME_CALC so time routines
+can be used by the user module even when ASA_PRINT is FALSE.
+
+========================================================================
+27 Oct 97
+
+readme.ms:
+Updated ICONIP'96 reference.
+
+========================================================================
+28 Aug 97
+
+asa.h:
+Added NaN test to COST_FUNCTION_TEST(x).
+
+asa.c:
+Corrected test on Curvature_0.
+
+========================================================================
+26 Aug 97
+
+asa.c, asa.h, readme.ms:
+The exit flag INVALID_COST_FUNCTION is set to 8 when the user returns a
+value of the cost function to asa () which is not a valid number, e.g.,
+not between -MAX_DOUBLE and MAX_DOUBLE.
+
+Updated Locate_Cost.  The value is printed out when exiting asa().
+
+========================================================================
+23 Aug 97
+
+asa.c, readme.ms:
+ASA_RESOLUTION acts at max and min boundaries similar to how integers
+are treated.  ASA_RESOLUTION takes precedence over parameter_type []
+when parameter_type [] is integral when calculating new generated
+parameters.
+
+========================================================================
+6 Aug 97
+
+NOTES:
+Some exception fault "errors" on some PC compilers that have problems
+handling too large and/or too small exponentials  can be circumvented
+by setting CHECK_EXPONENT set to TRUE.
+
+asa.c, asa.h, readme.ms:
+An additional module for using TIME_CALC set to TRUE, setting
+TIME_GETRUSAGE to FALSE, is more portable to compile across some
+platforms, but it can require different parameters for timing results.
+
+========================================================================
+15 Jul 97
+
+readme.ms:
+Changed to Chicago address.
+
+========================================================================
+25 Jun 97
+
+user.c:
+Added alternative RNG.
+
+========================================================================
+20 Jun 97
+
+readme.ms:
+Filled out URLs for several files, e.g., so they will be active in
+ASA-README.html.
+
+========================================================================
+17 Jun 97
+
+readme.ms:
+Separated fees from documentation.
+
+========================================================================
+14 Jun 97
+
+readme.ms:
+Clarified use of DEFINE_OPTIONS and OPTIONS.
+
+========================================================================
+8 Jun 97
+
+readme.ms:
+Included information on access-via-email.
+
+========================================================================
+6 Jun 97
+
+readme.ms:
+Corrected some typos in descriptions of OPTIONS_FILE_DATA and
+RECUR_OPTIONS_FILE_DATA.
+
+ASA-README.html:
+Renamed from README.html.  This file will not be included with the
+code, but made available in the archive.
+
+========================================================================
+5 Jun 97
+
+README.html:
+Removed <PRE>...</PRE> format.
+
+========================================================================
+4 Jun 97
+
+README.html:
+Added cross-references among subsections.
+
+========================================================================
+31 May 97
+
+Makefile, readme.ms
+Added README.html from README.  Corrected some header section titles.
+
+========================================================================
+29 May 97
+
+readme.ms:
+Added section Use of Documentation for Tuning.
+
+========================================================================
+18 May 97
+
+readme.ms:
+Added information on fees and contributions.
+
+========================================================================
+12 May 97
+
+readme.ms:
+Updated reference to ASA code.
+
+========================================================================
+8 May 97
+
+readme.ms:
+Updated URL information.
+
+========================================================================
+13 Apr 97
+
+readme.ms:
+Added info about private directory.
+
+========================================================================
+24 Mar 97
+
+readme.ms:
+Updated references.
+
+========================================================================
+2 Mar 97
+
+readme.ms:
+Changed format of README and README+.
+
+========================================================================
+3 Feb 97
+
+readme.ms:
+Changed a typo, using cost_exit instead of cost_flag.
+
+========================================================================
+10 Jan 97
+
+asa.c, asa_user.h, readme.ms, user.c:
+In asa_user.h, the OPTIONS *Best_Cost and *Best_Parameters are pointers
+to the saved best state calculated in asa(), and Locate_Cost is set to
+12 instead of 2 if newly generated parameters enter the cost function
+just after a new best state is achieved.  The ASA_TEMPLATE just after
+the comment MY_TEMPLATE_diminishing_ranges in user.c illustrates the
+use.
+
+asa.c, asa_user.h, readme.ms, user.c:
+Similarly, in asa_user.h, the OPTIONS *Last_Cost (replacing Last_Cost,
+used when USER_ACCEPTANCE_TEST is TRUE) and *Last_Parameters are
+pointers to the last saved state calculated in asa().
+
+========================================================================
+30 Dec 96
+
+readme.ms:
+Updated references.
+
+========================================================================
+20 Dec 96
+
+all files:
+Updated Copyright notice to 1997.
+
+========================================================================
+9 Dec 96
+
+asa.c, asa_user.c, readme.ms:
+Locate_Cost is a flag set in asa(), telling at what point the cost
+function is being called.
+
+========================================================================
+4 Dec 96
+
+readme.ms:
+Removed references to a_file.
+
+========================================================================
+30 Nov 96
+
+asa.c, readme.ms:
+Immediate_Exit saved upon entering cost_derivatives() or when
+reannealing the cost temperature, and restored to that value upon
+leaving.
+
+========================================================================
+22 Nov 96
+
+NOTES, readme.ms:
+Added section on Judging Importance-Sampling.
+
+========================================================================
+20 Nov 96
+
+readme.ms:
+updated references
+
+========================================================================
+13 Nov 96
+
+CHANGES:
+Added entries back to 1992.
+
+readme.ms:
+updated references
+
+========================================================================
+3 Nov 96
+
+readme.ms:
+Added reference to asa_contrib that contains source code for
+doubly-linked and hashed lists that can be used for ASA_QUEUE.
+
+========================================================================
+15 Sep 96
+
+NOTES, asa.c, readme.ms, user.c, user.h:
+When USER_GENERATING_FUNCTION is true, the functions defined by
+Generating_Distrib [user_generating_distrib(), and
+recur_user_generating_distrib() if SELF_OPTIMIZE is TRUE] include the
+passed array last_saved_parameter[].  This array contains all the last
+saved parameters, which are sometimes required for algorithms requiring
+decisions based on all current parameters.
+
+========================================================================
+11 Sep 96
+
+readme.ms:
+Updated references.
+
+========================================================================
+16 Aug 96
+
+Makefile, NOTES, asa.c, asa_user.h, readme.ms:
+Added QUENCH_PARAMETER_SCALE and QUENCH_COST_SCALE, to independently
+control the influences of the quenching scales on the temperature
+scales and the temperature indexes.
+
+========================================================================
+24 Jul 96
+
+readme.ms:
+Updated references.
+
+========================================================================
+3 Jul 96
+
+readme.ms:
+Updated references.
+
+========================================================================
+14 Jun 96
+
+Makefile, asa_opt, readme.ms:
+Added MY_TEMPLATE_[...] locations in Makefile and reformatted white
+space in asa_opt to facilitate use of scripts to alter new versions of
+ASA for user problems.
+
+========================================================================
+13 Jun 96
+
+user.c:
+Added 3 MY_TEMPLATE locations after calls to asa ().
+
+========================================================================
+10 June 96
+
+asa.c, asa_user.h, readme.ms, user.c:
+Changed all occurrences of MY_COST in user.c to distinct names of type
+MY_TEMPLATE_[...] to aid user-defined insertions of code in user.c and
+in asa_user.h when MY_TEMPLATE is set to TRUE (the default).
+
+========================================================================
+9 Jun 96
+
+readme.ms, user.c:
+If the value of seed fed to asa_seed() is less than 0, this signals the
+default randflt() to initialize the array of seeds to be shuffled.
+This is especially useful when using repeated calls to asa_main() when
+ASA_LIB is TRUE.
+
+asa.c:
+Corrected bug in testing whether to bypass derivative calculations in
+asa_exit().
+
+========================================================================
+22 May 96
+
+readme.ms:
+Updated references.
+
+========================================================================
+9 May 96
+
+readme.ms:
+Updated references.
+
+========================================================================
+2 May 96
+
+readme.ms:
+Changed location of directory for transferring private files from
+LIMBO.DIR to public_html.  Such files now can be retrieved via WWW or
+FTP.
+
+readme.ms:
+Corrected indenting of several items in Contents.
+
+========================================================================
+29 Apr 96
+
+readme.ms:
+Updated references.
+
+========================================================================
+22 Apr 96
+
+Makefile, asa.c, asa_user.h, user.c, readme.ms:
+When USER_ACCEPT_ASYMP_EXP is TRUE, an asymptotic form of the
+exponential function as an alternative to the Boltzmann function
+becomes available for the acceptance test.  A parameter
+OPTIONS->Asymp_Exp_Param becomes available, with a default of 1.0
+giving the standard Boltzmann function.
+
+========================================================================
+19 Apr 96
+
+asa.c:
+Made index_cost_constraint available when either USER_INITIAL_COST_TEMP
+or USER_REANNEAL_COST is FALSE, and corrected test on
+User_Cost_Temperature.
+
+========================================================================
+16 Apr 96
+
+readme.ms:
+Corrected some archive addresses.
+
+========================================================================
+10 Apr 96
+
+Makefile, asa.c, asa.h, asa_user.h, readme.ms:
+Moved MIN_EXPONENT and MAX_EXPONENT from static variables in asa.c to
+#define's in asa.h.  When CHECK_EXPONENT is TRUE, EXPONENT_CHECK(x) in
+asa() checks that an exponent x is within a valid range and, if not,
+adjusts its magnitude to fit in the range.
+
+========================================================================
+8 Apr 96
+
+user.c:
+Changed rand_seed to recur_rand_seed when ASA_TEMPLATE_SELFOPT is TRUE.
+Changed cast in fprintf for ALLOC_INT recur_v.
+
+========================================================================
+7 Apr 96
+
+readme.ms:
+Updated new ftpmail address.
+
+========================================================================
+6 Apr 96
+
+Makefile, asa.c, asa_user.h, readme.ms, user.c:
+When ASA_TEST_POINT is set to TRUE, the precise system referenced in
+user.c in used instead of the ASA_TEST system used by many
+researchers.  This system is solved in asa_examples.
+
+========================================================================
+4 Apr 96
+
+asa.c:
+Moved an #endif to its proper place!
+
+========================================================================
+12 Mar 96
+
+NOTES, readme.ms:
+Added comments on use of QUENCH_PARAMETERS OPTIONS to create a hybrid
+global-local adaptive quenching search algorithm, e.g., together with
+USER_REANNEAL_PARAMETERS set to TRUE.
+
+========================================================================
+29 Feb 96
+
+readme.ms:
+Deleted 0lower.dir as this was not being used.
+
+========================================================================
+12 Feb 96
+
+readme.ms:
+Corrected a couple of typos re location of new archive.
+
+========================================================================
+4 Feb 96
+
+NOTES, readme.ms:
+Removed pgp-2.6.2 info from commercial archive.
+
+========================================================================
+18 Jan 95
+
+readme.ms:
+Added reference to a new UTILS.DIR/CODE.DIR storing most of the code
+described in the files in UTILS.DIR.
+
+========================================================================
+16 Jan 95
+
+readme.ms:
+Added reference to same file structure under ingber/ for both WWW and
+FTP access.
+
+========================================================================
+15 Jan 95
+
+asa.c, asa.h, asa_user.h, readme.ms:
+Moved all FDLIBM code to MISC.DIR/asa_contrib.
+
+asa.h:
+Moved FDLIBM code to MISC.DIR/asa_contrib so that these routines can be
+placed independently in the asa or the user module.
+
+readme.ms:
+Cleaned up a few typos.
+
+========================================================================
+13 Jan 96
+
+NOTES, asa.c, readme.ms:
+The file MISC.DIR/asa_contrib in the ASA archive contains some code
+contributed by users; this file may evolve into an index for a separate
+directory.  There is a CONTENTS of sections headers that can be used to
+search on topics in your browser or editor.
+
+The file MISC.DIR/asa_examples in the ASA archive contains some example
+problems using ASA.  There is a CONTENTS of sections headers that can
+be used to search on topics in your browser or editor.
+
+========================================================================
+10 Jan 96
+
+NOTES:
+Added some background correspondence to section on @@Quenching.
+
+========================================================================
+8 Jan 96
+
+asa.c:
+Cleaned up some printing statements in test_asa().  Bypass most
+printing within asa_exit() if *exit_status = INVALID_USER_INPUT.
+
+asa.c, asa.h:
+Added print_string_index() to print out index with descriptive string
+if *exit_status = INVALID_USER_INPUT.
+
+========================================================================
+6 Jan 96
+
+user.c, user_cst.h:
+In ASA_TEST, changed d[i] to d_i.
+
+========================================================================
+5 Jan 96
+
+NOTES:
+Added instructions on how to use quenching to solve the 12-dimensional
+ASA_TEST problem.
+
+user.c, user_cst.h:
+Changed dimension statement for d[4] in ASA_TEST to permit easy
+modifications of *parameter_dimension from asa_opt.
+
+========================================================================
+1 Jan 96
+All files:
+Updated Copyright notice to include 1996.
+
+========================================================================
+30 Dec 95
+
+asa.c:
+Use fabs when calculating standard deviations to avoid any problems
+with roundoff.
+
+Makefile, asa.h, asa.c, asa_user.h, readme.ms:
+Removed use of MAX_INTEGER and INTEGER_TOO_LARGE.
+
+========================================================================
+29 Dec 95
+
+asa.c:
+When Number_Cost_Samples < -1 and when Reanneal_Cost > 1 or < -1, added
+EPS_DOUBLE to the calculated cost temperature in case sampling selects
+states all with same values of the cost function.
+
+Makefile, asa.h, asa.c, asa_user.h, readme.ms:
+Added DEFINE_OPTIONS MAX_INTEGER=99999 and *exit_code
+INTEGER_TOO_LARGE=6.  These can give important control and feedback for
+different tuning when reannealing.
+
+========================================================================
+19 Dec 95
+
+asa.c, readme.ms:
+When Reanneal_Cost < -1 or > 1, when periodically reannealing, the
+initial and current cost temperatures or just the initial cost
+temperature, resp., are calculated as a deviation over a sample of cost
+functions.
+
+========================================================================
+17 Dec 95
+
+NOTES, readme.ms:
+Added comments to section on Efficiency Versus Necessity in the README
+on the importance of doing homework on a system in addition to
+implementing ASA.
+
+========================================================================
+15 Dec 95
+
+NOTES, asa.c, readme.ms:
+The NOTES contains some contributed code in the section @@Hashed Lists
+for ASA_QUEUE.  This may be useful for some systems.
+
+========================================================================
+8 Dec 95
+
+readme.ms:
+Changed file name asa_new-X.Y back to asa_new, as some people were
+having browser problems trying to locate previous versions of
+asa_new-X.Y.
+
+========================================================================
+7 Dec 95
+
+user.c:
+Added credit for asa_seed().
+
+readme.ms:
+Added description of asa_seed().
+
+readme.ms:
+Changed publication date of asa95_lessons to asa96_lessons.
+
+user.h:
+Added main() prototype for ASA_TEMPLATE_LIB=TRUE.
+
+asa_user.h:
+Defined ASA_TEST=TRUE to be part of ASA_TEMPLATE=TRUE.
+
+user.c:
+Added printout to stdout in main() defined for ASA_TEMPLATE_LIB=TRUE.
+
+========================================================================
+6 Dec 95
+
+asa.c:
+Fixed bug in using STDOUT to print output to stdout.
+
+NOTES, readme.ms, user.h, user.c:
+When ASA_LIB is TRUE, the function asa_seed() becomes available to set
+the initial random seed.  ASA_TEMPLATE_LIB=TRUE illustrates this use.
+
+========================================================================
+5 Dec 95
+
+Makefile, asa.c, asa_user.h, readme.ms, user.h, user.c:
+Added ASA_TEMPLATE_LIB permitting passing of parameters using asa_main().
+
+asa.c:
+Added test to check that initial parameters are within bounds.
+
+========================================================================
+1 Dec 95
+
+readme.ms:
+Corrected typos in section headers of Asa_Data_Dim_int.
+
+========================================================================
+20 Nov 95
+
+readme.ms:
+Mentioned availability of ASA-README.txt and ASA-README.ps.Z in the
+archive.  Corrected typo in last section.
+
+========================================================================
+17 Nov 95
+
+readme.ms:
+Included LICENSE in the README.
+
+========================================================================
+16 Nov 95
+
+asa.c, readme.ms:
+When OPTIONS->Immediate_Exit is set to TRUE, asa() exits without
+calculating any closing tangent or curvature arrays.
+
+========================================================================
+4 Nov 95
+
+asa.c, readme.ms:
+Modified Maximum_Cost_Repeat to permit a value of 0 to bypass this
+test.
+
+readme.ms:
+Noted similar treatment of the cost temperature using
+Number_Cost_Samples and Reanneal_Cost.
+
+========================================================================
+3 Nov 95
+
+asa.c, readme.ms:
+If Reanneal_Cost < -1, then the current cost temperature is calculated
+as the deviation over a sample of -Reanneal_Cost number of cost
+functions.
+
+readme.ms:
+Corrected description of calculation when Reanneal_Cost < -1.
+
+========================================================================
+1 Nov 95
+
+asa.c:
+Changed cast to produce integers in generate_new_state() from (int) to
+(LONG_INT).
+
+asa.c, asa_user.h, readme.ms, user.c:
+When ASA_RESOLUTION is TRUE, Coarse_Resolution[] defines the resolution
+of parameters in the fit.
+
+========================================================================
+29 Oct 95
+
+asa.c:
+Changed casts on some ASA_QUEUE parameters.
+Added EPS_DOUBLE to tests using Queue_Resolution.
+Put adaptive formatting for all %g printout, except for TIME_CALC.
+
+readme.ms:
+Noted utility of using Queue_Size = 0 for recursive fits, and the
+possible compiler warnings of "uninitialized" this may generate.
+
+========================================================================
+29 Oct 95
+
+Makefile, asa.c, asa_user.h, readme.ms, user.c:
+When ASA_QUEUE is set to TRUE, a FIFO queue saves generated states, to
+avoid extra cost function calculations.
+
+========================================================================
+28 Oct 95
+
+readme.ms:
+Added motivation for use of global optimization to Context section.
+
+========================================================================
+22 Oct 95
+
+asa.c:
+Corrected some comment statements in reanneal().
+
+readme.ms:
+Added markets96_momenta.ps to references.
+
+========================================================================
+4 Oct 95
+
+asa.c, readme.ms:
+The default reannealed initial cost temperature is taken to be the
+minimum of the current initial cost temperature and the maximum of the
+absolute values of the best and last cost functions and their
+difference.
+
+========================================================================
+1 Oct 95
+
+asa.c, readme.ms:
+When reannealing the cost temperature, the current cost temperature is
+set to the maximum of the current cost temperature and the absolute
+value of the difference of the best and last values of the cost
+function, constrained not to exceed the current initial cost
+temperature.
+
+asa.c, readme.ms, user.c, user.h:
+When USER_REANNEAL_COST, added *current_cost_temperature to the
+parameter list of Reanneal_Cost_Function(), and change default
+reannealing algorithm as just above.
+
+readme.ms:
+Edited section on numerical derivatives.
+
+========================================================================
+30 Sep 95
+
+asa.c:
+Improved readability of output to ASA_OUT.
+
+========================================================================
+29 Sep 95
+
+asa.c, asa.h:
+Added valid_state_generated_flag and exit_status to list of items in
+test_asa_options().  Enhanced printout of reason for invalid options.
+
+readme.ms:
+Emphasized that ASA_TEMPLATE, with no suffix, should not be set to
+TRUE.
+
+========================================================================
+28 Sep 95
+
+asa.c, asa_user.h:
+Added some missing (double) casts to EPS_DOUBLE and SMALL_FLOAT.
+
+asa.c, asa.h, readme.ms:
+Added test_asa_options() to check parameters and OPTIONS for validity,
+before the first call to the cost function, and to print out invalid
+options.
+
+asa.c:
+Fixed warnings when ASA_PRINT is set to FALSE.
+
+user.c:
+Print out exit_code to user_out.
+
+========================================================================
+24 Sep 95
+
+asa_opt, user.c, readme.ms:
+If OPTIONS_FILE_DATA and QUENCH_COST are TRUE, then
+*User_Quench_Cost_Scale is read in from asa_opt.  If OPTIONS_FILE_DATA,
+QUENCH_COST, and QUENCH_PARAMETERS are TRUE, then
+*User_Quench_Cost_Scale and User_Quench_Param_Scale[] all are read in
+from asa_opt.
+
+If RECUR_OPTIONS_FILE_DATA and QUENCH_COST are TRUE, then
+*User_Quench_Cost_Scale is read in from asa_opt_recur.  If
+RECUR_OPTIONS_FILE_DATA, QUENCH_COST, and QUENCH_PARAMETERS are TRUE,
+then *User_Quench_Cost_Scale and User_Quench_Param_Scale[] all are read
+in from asa_opt_recur.
+
+readme.ms:
+Stated that when Reanneal_Cost > 1 or < 1 it is the _initial_ cost
+temperature that is being reannealed by being set by the sampled cost
+functions.  Because of the fat tail of the parameter temperature
+distributions, the current cost temperature is not being directly set
+by the sampled cost functions.
+
+========================================================================
+16 Sep 95
+
+asa_opt, user.c, readme.ms:
+If OPTIONS_FILE_DATA, QUENCH_COST, and QUENCH_PARAMETERS are all TRUE,
+then *User_Quench_Cost_Scale and User_Quench_Param_Scale[] all are
+read in from asa_opt.
+
+If RECUR_OPTIONS_FILE_DATA, QUENCH_COST, and QUENCH_PARAMETERS are all
+TRUE, then *User_Quench_Cost_Scale and User_Quench_Param_Scale[] all
+are read in from asa_opt_recur.
+
+========================================================================
+15 Sep 95
+
+asa.c, asa.h, readme.ms:
+The range of choices to control the initial and the reannealed values
+of the cost temperature have been increased by the expanded use of
+Number_Cost_Samples and Reanneal_Cost, resp.  The choices include
+averaged absolute values or deviations of sampled cost functions.
+
+asa.c, asa.h, readme.ms:
+Added INVALID_USER_INPUT[7] to exit codes.
+
+readme.ms:
+Added URL format to all references.
+
+========================================================================
+14 Sep 95
+
+asa.c, readme.ms:
+If Number_Cost_Samples is initially -1, it is set to -2 in asa().
+
+========================================================================
+12 Sep 95
+
+asa.c, asa.h, readme.ms, user.c:
+When Reanneal_Cost > 1, the reannealed cost temperature is calculated
+as the deviation over a sample of Reanneal_Cost number of cost
+functions, i.e., the square-root of the difference of the squares of
+the first and second moments normalized by the ratio of Reanneal_Cost
+to Reanneal_Cost - 1.
+
+asa.c:
+When Number_Cost_Samples < -1, the initial cost temperature is
+calculated as the deviation over a sample of -Number_Cost_Samples
+number of cost functions, i.e., the square-root of the difference of
+the squares of the first and second moments normalized by the ratio of
+-Number_Cost_Samples to -Number_Cost_Samples - 1.
+
+========================================================================
+8 Sep 95
+
+NOTES, readme.ms:
+Minor editing changes.
+
+========================================================================
+1 Sep 95
+
+readme.ms:
+Added smni95_lecture.ps.Z.
+
+CHANGES:
+Bug in maintenance software kept deleting old VFSR version numbers in
+VERSION DATES section that matched with new ASA version numbers.
+
+========================================================================
+
+19 Aug 95
+
+asa_opt:
+Entries used specifically for ASA_TEST are recorded, in case these are
+written over during use for other problems.
+
+========================================================================
+25 Aug 95
+
+user_cst.h:
+Added explicit directions on how to use this file together with asa_opt.
+
+========================================================================
+19 Aug 95
+
+user_cst.h:
+Changed name of user_cst.c to user_cst.h to prevent possible confusion
+when using some PC or Mac compilers to compile all *.c files.
+
+user.c:
+Added test to recognize asa_opt under fopen().
+
+NOTES:
+Added some info on placing asa_opt file under some PC and Mac compilers.
+
+========================================================================
+13 Aug 95
+
+readme.ms:
+Added note on the possible necessity of making a transformation of a
+discrete parameters to a new parameter which can be expressed as a set
+of sequential integers.
+
+========================================================================
+8 Aug 95
+
+readme.ms:
+Clarified use of Include_Integer_Parameters when used with
+parameter_type[].
+
+asa.c:
+Fixed bug in cost_derivatives(), in one Include_Integer_Parameters
+test, inside of a test of *curvature_flag, requiring adding braces.
+
+========================================================================
+6 Aug 95
+
+asa_opt:
+Added defaults for integer or real type in comments.
+
+NOTES:
+Added some dates to sections where some updates in other files might
+give conflicting references.
+
+========================================================================
+4 Aug 95
+
+user.c:
+Test for values of pid > 99999 or < 0 when using
+ASA_TEMPLATE_ASA_OUT_PID.
+
+========================================================================
+3 Aug 95
+
+Makefile, asa.c, asa_user.h, readme.ms, user.c:
+Added ASA_TEMPLATE_ASA_OUT_PID to permit numbering of asa_out__x and
+user_out_x files, where x is the system pid.
+
+Makefile:
+Put in FALSE for defaults of ASA_TEMPLATEs.
+
+Makefile, asa_user.h, readme.ms, user.h:
+Moved include statement and prototype for ASA_TEMPLATE_ASA_OUT_PID to
+user.h from asa_user.h.
+
+========================================================================
+15 Jul 95
+
+readme.ms:
+Cleaned up some formatting.
+
+========================================================================
+14 Jul 95
+
+NOTES, readme.ms:
+Added my PGP public key to the NOTES file.
+
+========================================================================
+6 Jul 95
+
+readme.ms:
+The section on Bug Reports and Help With ASA was expanded to include
+statements on confidentiality of all queries, and on arrangements that
+can be made to secure queries using the PGP cryptosystem and/or to
+exchange large files using FTP.
+
+========================================================================
+2 Jul 95
+
+Makefile, readme.ms:
+Added user_cst.c to dependencies of user.o.
+
+========================================================================
+14 Jun 95
+
+Makefile, NOTES, asa_user.h, readme.ms, user.c, user_cst.c:
+Added user_cst.c containing cost_function() to the distribution as a
+trimmed version of the ASA_TEST problem.  The default for COST_FILE is
+now TRUE.  The version with more documentation and hooks for various
+templates is cost_function() in user.c
+
+readme.ms:
+Added notes that N_Accepted and N_Generated typically will have values
+less in the cost function than in the ASA_OUT file, since these are
+only incremented after passing some tests back in asa().
+
+========================================================================
+9 Jun 95
+
+asa_user.h:
+Removed INT_ALLOC set to TRUE which slipped in during a test run.
+Added MY_TEMPLATE example at top of file.
+
+========================================================================
+5 Jun 95
+
+readme.ms:
+Updated status of referenced paper.  Added information on construction
+of individualized TEMPLATEs.
+
+NOTES:
+Added some information to FORTRAN Issues section.
+
+========================================================================
+30 May 95
+
+user.c:
+Corrected cast on read_long when INT_LONG is FALSE.
+
+asa.c:
+Corrected cast in fprintf statement for *seed.
+
+readme.ms, user.c, user.h:
+Changed cast on asa_main() to void().
+
+========================================================================
+30 May 95
+
+readme.ms:
+Updated names of some files in archive.
+
+========================================================================
+25 May 95
+
+readme.ms:
+Changed asa_new to asa_new-X.Y, where X and Y are current version
+numbers.  Added to references those reprints available in archive.
+
+========================================================================
+23 May 95
+
+readme.ms:
+The new WWW address is http://www.alumni.caltech.edu/~ingber/.
+
+========================================================================
+16 May 95
+
+readme.ms:
+Added trailing slash to http://alumni.caltech.edu/~ingber/ as this was
+causing Caltech server to make an extra connection each access not
+using this slash.
+
+========================================================================
+30 Apr 95
+
+NOTES, readme.ms:
+Added section Number of Generated States Required, recommending use
+of log-log plots to extrapolate to the number of generated states
+required to achieve a global minimum.
+
+========================================================================
+23 Apr 95
+
+Makefile, NOTES, asa.c, asa_user.c, readme.ms, user.c:
+The special ASA_TEMPLATEs used for examples are now tagged with
+{ASA_TEMPLATE_MULTIPLE, ASA_TEMPLATE_SELFOPT, ASA_TEMPLATE_SAMPLE,
+ASA_TEMPLATE_PARALLEL, ASA_TEMPLATE_SAVE}; the sets of Pre-Compile
+OPTIONS these use are defined in asa_user.h.
+
+========================================================================
+19 Apr 95
+
+asa.c, readme.ms:
+Modified reanneal() to set the scale of the annealing of the cost
+temperature within the scale of the minimum of the current cost
+temperature and the absolute values of the current best and last saved
+minima.
+
+user.c:
+Added example in user_reanneal_cost() to illustrate bypassing the
+resetting of the current cost temperature.
+
+========================================================================
+17 Apr 95
+
+readme.ms:
+Added 1995 ASA paper that has been accepted for publication.
+
+========================================================================
+16 Apr 95
+
+asa.c, asa_user.c, user.c:
+Changed {exp, log, pow} to {F_EXP, F_LOG, F_POW} to clean up code.  The
+new functions select pre-compile choices between {exp, log, pow} and
+{s_exp, s_log, s_pow}, depending on {FALSE, TRUE} selected for
+{FDLIBM_EXP, FDLIBM_LOG, FDLIBM_POW}.
+
+========================================================================
+13 Apr 95
+
+readme.ms:
+In the User Options section, emphasis is placed on the ability to
+calculate defaults when the Program Options or the DEFINE_OPTIONS pull
+in new code.
+
+asa.c, asa_user.h, readme.ms, user.c:
+In reanneal(), the algorithm for rescaling the initial cost function
+temperature is now taken to be the min of the initial cost temperature
+and the max of {cost_best, cost_last, EPS_DOUBLE}, to handle cases
+where at the time reanneal() is called the cost function might be at
+zero or going from a positive value through zero on its way to a
+negative value.
+
+CHANGES, Makefile, NOTES, asa.c, asa_opt, asa_user.h, readme.ms, user.c:
+Program Options used to trigger required settings of additional Program
+Options of arrays in the user module, {User_Initial_Cost_Temp,
+Ratio_Temperature_Scales, User_Initial_Parameters_Temps,
+Delta_Parameters, Quench_Parameters, Quench_Cost}, were moved to
+DEFINE_OPTIONS, {USER_INITIAL_COST_TEMP, RATIO_TEMPERATURE_SCALES,
+USER_INITIAL_PARAMETERS_TEMPS, DELTA_PARAMETERS, QUENCH_PARAMETERS,
+QUENCH_COST}, and they were removed from asa_opt.
+
+========================================================================
+12 Apr 95
+
+asa.c, user.c, user.h:
+In reanneal() in asa.c, added EPS_DOUBLE to calculation of
+*initial_cost_temperature to prevent problems when cost_last goes to
+zero when entering reanneal().  Such circumstances still require use of
+Reanneal_Cost_Function to perform some alternative algorithm in
+user_reanneal_cost() and recur_user_reanneal_cost().
+
+Makefile, asa.c, asa_opt, asa_user.h, user.c, readme.ms:
+Moved OPTIONS Maximum_Reanneal_Index and Reanneal_Rescale to
+DEFINE_OPTIONS MAXIMUM_REANNEAL_INDEX and REANNEAL_SCALE, since they
+likely are not ever used adaptively.  Maximum_Reanneal_Index  and
+Reanneal_Rescale have been removed from asa_opt.
+
+NOTES, readme.ms:
+Moved discussion from NOTES to readme.ms on which options to put into
+the Program Options and which to put into the DEFINE_OPTIONS.
+
+========================================================================
+6 Apr 95
+
+readme.ms:
+Put in caution statements for the FDLIBM codes:  "This code should
+first be tested with the standard ASA_TEST OPTIONS to see if the
+resulting asa_out file agrees with the test_asa file."
+
+========================================================================
+2 Apr 95
+
+asa.c, readme.ms:
+When OPTIONS->Acceptance_Frequency_Modulus is 0, *number_accepted is
+not tested in the PERIODIC TESTING/REANNEALING/PRINTING SECTION.
+When OPTIONS->Generated_Frequency_Modulus is 0, *number_generated is
+not tested in the PERIODIC TESTING/REANNEALING/PRINTING SECTION.
+
+========================================================================
+26 Mar 95
+
+asa.c, asa_user.h, readme.ms, user.c:
+When FDLIBM_EXP is set to TRUE, a function defined s_exp() is used
+instead of exp().
+
+========================================================================
+25 Mar 95
+
+asa_user.h, asa.h:
+Placed some FDLIBM_POW and FDLIBM_LOG info in more standard locations.
+
+asa.c
+Added defines FDLIBM_POW, FDLIBM_LOG, and SYSTEM_CALL to header of
+asa_out.
+
+========================================================================
+24 Mar 95
+
+NOTES, asa.c, asa_user.h, readme.ms, user.c:
+When FDLIBM_POW is set to TRUE, a function defined s_pow() is used
+instead of pow().
+When FDLIBM_LOG is set to TRUE, a function defined s_log() is used
+instead of log().
+
+========================================================================
+22 Mar 95
+
+asa.c:
+Took out extra fread and fwrite lines for User_Quench_Param_Scale,
+invoked when ASA_SAVE is TRUE.
+
+========================================================================
+17 Mar 95
+
+readme.ms:
+Added 1995 ASA paper.
+
+========================================================================
+9 Mar 95
+
+user.c:
+From versions 1.5 through and possibly past 3.20, there likely was a
+bug in not having memory allocated to USER_OPTIONS->Asa_Data before
+memory was allocated to USER_OPTIONS.  While this occurred some time
+ago, the fix should have been recorded in this file.
+
+========================================================================
+8 Mar 95
+
+user.c:
+Put in reference to Tsallis statistics for ASA_TEMPLATE used for
+USER_ACCEPTANCE_TEST.
+
+========================================================================
+28 Feb 95
+
+readme.ms, user.c:
+Modified the power of the cost temperature in user_cost_schedule to
+improve the accuracy of the ASA_TEMPLATE provided for ASA_SAMPLE.
+Added a note to the README that the selected OPTIONS must also provide
+for good convergence in the optimal region.
+
+========================================================================
+26 Feb 95
+
+NOTES:
+Included more information under Colville Examples.  Added sections on
+Dynamic Hill Climbing (DHC) and Tsallis Statistics.
+
+========================================================================
+19 Feb 95
+
+Makefile, NOTES, asa.h, readme.ms:
+Changed G_F.G_P to G_FIELD.G_PRECISION for clarity.
+
+========================================================================
+18 Feb 95
+
+Makefile, asa.c, asa.h, readme.ms:
+The field width and precision of doubles is specified in asa as
+G_F.G_P, e.g., as %gG_F.G_P or %g-G_F.G_P.  These two Printing
+DEFINE_OPTIONS are available to change the default of 12.7.
+
+asa.c, asa.h, readme.ms:
+Added new *exit_code IMMEDIATE_EXIT to take effect when the new Program
+Options OPTIONS->Immediate_Exit is set to TRUE.
+
+NOTES:
+Clarified some results obtained on the Shubert problem.
+
+========================================================================
+17 Feb 95
+
+NOTES:
+Added some statement about nature of adaptive interaction sometimes
+required between the user and the system.  Added statement about
+trade-off between using DEFINE_OPTIONS and Program Options to turn on
+some Program Options.
+
+readme.ms, test_asa, test_usr:
+TIME_CALC has been left to its default of FALSE.
+
+asa.c, readme.ms:
+On exiting asa(), N_Accepted and N_Generated contain the values
+obtained at the best value of the cost function.
+
+========================================================================
+16 Feb 95
+
+readme.ms:
+Corrected typos in discussion on SELF_OPTIMIZE so that
+RECUR_OPTIONS_FILE and RECUR_OPTIONS_FILE_DATA are properly
+referenced.
+
+Makefile:
+Removed redundant DEFINE_OPTIONS from examples.
+
+asa.c, asa_user.h, readme.ms:
+Added N_Generated to the OPTIONS.  N_Accepted and N_Generated are now
+always active to help monitor the fit.
+
+========================================================================
+12 Feb 95
+
+NOTES:
+Added section Use of COST_FILE on Shubert Problem which was used on a
+comparison of SA and taboo search.
+
+========================================================================
+11 Feb 95
+
+NOTES, asa.c, asa_opt, asa_user.h, readme.ms, user.c:
+Expanded Testing_Frequency_Modulus to Acceptance_Frequency_Modulus and
+Generated_Frequency_Modulus to independently decide when to enter
+testing section in the main annealing loop in asa().
+
+========================================================================
+11 Feb 95
+
+readme.ms:
+Added directions to change name of cost_function in user.h as well as
+in user.c if this is desired when setting COST_FILE to TRUE.
+
+========================================================================
+10 Feb 95
+
+readme.ms:
+Explained that the Maximum_Cost_Repeat test, invoked when the the cost
+function repeats itself within limits set by Cost_Precision before
+quitting, is performed only when Acceptance_Frequency_Modulus is
+invoked, in order to help prevent exiting prematurely in a local
+minimum.
+
+========================================================================
+9 Feb 95
+
+readme.ms:
+Corrected typos referring to OPTIONS_FILE and OPTIONS_FILE_DATA under
+discussion of COST_FILE.
+
+========================================================================
+8 Feb 95
+
+asa.c, asa_user.c, readme.ms, user.c:
+Added COST_FILE to permit using a separate file to define the cost
+function.
+
+========================================================================
+8 Feb 95
+
+CHANGES, readme.ms:
+Added CONTENTS and section headers to facilitate using this file.
+
+LICENSE:
+Changed DISCLAIMER to caps & lower case instead of all caps.
+
+========================================================================
+7 Feb 95
+
+asa.c:
+Moved calculation of curr_cost_temp in accept_new_state() out of set of
+initial tests when USER_ACCEPTANCE_TEST is TRUE.
+
+asa.c, asa_user.h, readme.ms, user.c:
+Added OPTIONS->Prob_Bias when ASA_SAMPLE is TRUE to permit calculation
+of sampling statistics even when USER_ACCEPTANCE_TEST is TRUE.
+
+========================================================================
+5 Feb 95
+
+All files:
+The names of all OPTIONS were changed to caps & lower case to help
+distinguish them from other DEFINES.
+
+========================================================================
+1 Feb 95
+
+LICENSE:
+Changed from use of GPL COPYING license to a simpler LICENSE, based in
+part on a University of California License, whose intent is to protect
+the integrity of the algorithm, promote widespread usage, and require
+reference to current source code.
+
+asa.c, readme.ms, user.c:
+An approach to using ASA_SAMPLE to perform integrals was added to
+sample() in user.c.  The OPTIONS->Bias_Acceptance calculation in the
+user module now includes the complement of the Boltzmann test if the
+new state is not accepted.  Warnings were placed in readme.ms to be
+sure to copy code from the asa module to the user module if
+USER_ACCEPTANCE_TEST is set to TRUE when other OPTIONS like ASA_SAMPLE
+also are activated.
+
+========================================================================
+27 Jan 95
+
+user.c:
+Included example of calling acceptance criteria within the cost
+function when both USER_ACCEPTANCE_TEST and ASA_TEMPLATE are TRUE.
+
+========================================================================
+25 Jan 95
+
+Makefile, NOTES, asa.c, asa.h, asa_user.c, user.c, user.h, readme.ms:
+When USER_ACCEPTANCE_TEST is TRUE, some additional variables become
+available to the OPTIONS and STATE structures.  When applicable, this
+permits an acceptance test within the user_cost-function() as well as
+in the USER_OPTIONS->user_acceptance_test(), e.g., to decide if the
+acceptance test will fail based on only a partial calculation of the
+cost function.
+
+asa.c:
+Corrected several calls to fread and fwrite when ASA_SAVE is TRUE.
+
+========================================================================
+18 Jan 95
+
+Makefile:
+Modified target "doc:" to keep README+ instead of README+.uu.
+
+NOTES:
+Added section explaining the use of Temperature_Ratio_Scale and
+Temperature_Anneal_Scale.
+
+asa_opt:
+Put NOTE at bottom to keep all comment lines with no extra "white"
+spaces.
+
+readme.ms:
+Mentioned section just above in NOTES, and added more info on searching
+for locations in user.c to place cost_function().
+
+user.c:
+Print out final cost function and parameters in user_out.
+
+========================================================================
+13 Jan 95
+
+All files:
+Added DEFINE_OPTIONS OPTIONS_FILE_DATA to permit reading most
+initialization data from asa_opt.  This should suffice for most
+applications, just requiring insertion of the user's cost_function into
+user.c.  Similarly, RECUR_OPTIONS_FILE and RECUR_OPTIONS_FILE_DATA were
+added for use when SELF_OPTIMIZE is TRUE.
+
+Added comments around MY_COST locations.
+
+========================================================================
+12 Jan 95
+
+All files:
+Updated Copyright 1995 notices.
+
+========================================================================
+10 Jan 95
+
+readme.ms:
+Added note to consider a possible use of Quenching OPTIONS when
+adaptively modifying the number of active parameters in the fit.
+
+========================================================================
+30 Dec 94
+
+readme.ms:
+Corrected typos in describing use of OPTIONS->User_Cost_Temperature.
+
+========================================================================
+20 Dec 94
+
+user.c:
+Included examples of Cauchy and Gaussian distributions in
+[recur]_user_generating_function().
+
+========================================================================
+19 Dec 94
+
+asa.c, asa.h, readme.ms, user.c, user.h:
+Corrected use of commented modifications to
+[recur_]user_generating_function() by passing init_param_temp_v which
+can change during reannealing.
+
+asa.c, asa.h, readme.ms, user.c, user.h:
+For USER_ACCEPTANCE_TEST, added more parameters to
+[recur_]user_acceptance_test() on the same order as given to
+[recur_]user_generating_function().
+
+========================================================================
+18 Dec 94
+
+Makefile, NOTES, asa.c, asa.h, asa_user.h, readme.ms, user.c, user.h:
+Added USER_GENERATING_FUNCTION to permit using an alternative function
+to the ASA distribution for generating new states.
+Changed name of COST_PARAMETER_SCALE to Cost_Parameter_Scale_Ratio.
+
+========================================================================
+17 Dec 94
+
+Makefile, NOTES, asa.c, asa.h, asa_user.h, readme.ms, user.c, user.h:
+Added USER_ACCEPTANCE_TEST to permit using an alternative function to
+the Boltzmann distribution for the acceptance test.
+
+========================================================================
+16 Dec 94
+
+Makefile, NOTES, asa.c, asa.h, asa_opt, asa_user.h, readme.ms, user.c, user.h:
+Added OPTIONS->Reanneal_Parameters and OPTIONS->Reanneal_Cost to
+independently control reannealing of the cost temperature and the
+parameter temperatures.
+Added USER_REANNEAL_PARAMETERS and USER_REANNEAL_COST to control
+reannealing of temperatures with user-defined functions in user.c.
+Breaking out separate algorithms for the cost temperature can be very
+useful for systems where the scales of the acceptance criteria do not
+simply correlate the cost temperature with the current best value of
+the cost function.
+
+========================================================================
+15 Dec 94
+
+NOTES:
+Added sub-topics for searches on keywords.  Added reference to use of
+parameter_minimum[] and parameter_maximum[] in the README to discussion
+of Equality Constraints.
+
+readme.ms:
+Added mention of use of searches on key words in files in browser or
+editor.
+
+========================================================================
+13 Dec 94
+
+NOTES:
+Expanded discussion on Equality Constraints.
+
+========================================================================
+8 Dec 94
+
+NOTES, readme.ms:
+Added some comments addressing the possible use of the Quenching
+OPTIONS to slow down annealing by setting User_Quench_Param_Scale[] to
+values less than 1.
+
+========================================================================
+7 Dec 94
+
+readme.ms:
+Added example of use of adaptively using parameter_lower_bound[] and
+parameter_upper_bound[] to efficiently check subsets of new
+cost_parameters[] in cost_function() for correlated constraints.
+
+NOTES:
+Updated some comments to reflect recent changes in the code.
+
+========================================================================
+23 Nov 94
+
+NOTES, readme.ms:
+Added information to NOTES that reflects on recurring queries in ASA
+correspondence.
+
+========================================================================
+13 Nov 94
+
+asa.c, asa_user.h, readme.ms:
+Corrected several casts used when ASA_SAVE is set to TRUE.
+
+Makefile:
+Added OPTIONAL_DATA_INT.
+
+========================================================================
+12 Nov 94
+
+asa.c, asa.h, readme.ms:
+Added SYSTEM_CALL[TRUE] to permit user to avoid system call in asa.c,
+to copy asa_save to asa_save.old, on machines that do not permit these
+commands.
+
+========================================================================
+8 Nov 94 [modified 14 Apr 95]
+
+Makefile, asa.c, asa_user.h:
+In Makefile, set USER_INITIAL_COST_TEMP and
+USER_INITIAL_PARAMETERS_TEMPS to TRUE when ASA_SAVE and ASA_TEMPLATE
+are TRUE, to bypass any calculations of the user cost function and use
+of the random number generator before asa_save is read in.  This also
+gives the user the option of saving all shuffled random seeds in the
+user module.
+
+asa.c:
+When ASA_SAVE is TRUE, all OPTIONS are saved in case they have been
+adaptively changed by the user.
+
+asa.c, asa.h, asa_user.h, readme.ms, user.c, user.h:
+Added the Program Option OPTIONAL_DATA_INT to save integer data if
+required.
+
+========================================================================
+7 Nov 94
+
+asa.c, asa.h, asa_user.h, readme.ms, user.c:
+Added ASA_SAVE to recover runs from last best accepted state.
+
+========================================================================
+6 Nov 94
+
+asa.c, asa.h, asa_user.h, readme.ms, user.c, user.h:
+Pass the random seed, first defined in the user module, throughout the
+asa() calls.
+
+========================================================================
+26 Oct 94
+
+NOTES, readme.ms:
+Added comments to direct people to NOTES for parallel code.
+
+========================================================================
+23 Oct 94
+
+asa.c, asa.h, asa_user.h, readme.ms, user.c:
+Corrected ASA_PARALLEL code by adding OPTIONS->Gener_Block.
+Permit OPTIONS->Gener_Block_Max to be greater than number of
+processors.
+
+asa.c, readme.ms:
+If and when OPTIONS->Gener_Mov_Avr is set to 0, then
+OPTIONS->Gener_Block is not changed thereafter.
+
+========================================================================
+22 Oct 94
+
+asa.c, asa.h, asa_user.h, readme.ms, user.c:
+Introduced some hooks as a structure for a parallelized ASA.
+
+========================================================================
+20 Oct 94
+
+user.c:
+In the ASA_TEMPLATE for ASA_SAMPLE, User_Tangents is set to TRUE to
+illustrate the use of this OPTIONS.
+
+========================================================================
+19 Oct 94
+
+asa.c, asa_user.h, readme.ms, user.c:
+Added OPTIONS->User_Tangents[FALSE] to permit user to calculate
+tangents[] when User_Tangents is set to TRUE, instead of using the
+default numerical evaluation.
+
+asa.c:
+The value of number_invalid_generated_states is now kept track of
+during the calculation of derivatives.
+
+========================================================================
+13 Oct 94
+
+asa.c, asa.h:
+Created asa_print_options() to move printing of user's options to a
+separate procedure, making it easier to read asa.c.
+
+========================================================================
+11 Oct 94
+
+user.c:
+Changed cast on kranf in randflt() to unsigned to permit use of
+arbitrary values, e.g., that might arise from using task id's.
+
+asa.c, asa.h:
+For the sake of some efficiency, MIN_EXPONENT and MAX_EXPONENT,
+arguments to the macro EXPONENT_CHECK(), were changed to static
+variables.
+
+asa.c:
+A bug was corrected in one of the loops testing both
+Sequential_Parameters and PARAMETER_RANGE_TOO_SMALL(), that could cause
+a never-ending loop.
+
+========================================================================
+5 Oct 94
+
+NOTES, readme.ms:
+Added emphasis in OPTIONS FOR LARGE SPACES section that these
+suggestions are to _speed up_ annealing/quenching, while some
+suggestions in the README are to _slow down_ annealing.
+
+========================================================================
+3 Oct 94
+
+Makefile, NOTES, readme.ms:
+Used a more standard format for FLAGS, replacing CFLAGS with
+CDEBUGFLAGS, CFLAGS and LDFLAGS.
+
+========================================================================
+30 Sep 94
+
+NOTES:
+Added simple routine to enable users to change random seed.
+
+asa.c, asa.h, asa_user.h, readme.ms:
+Completed ANSI prototypes for parameter calls to
+*user_random_generator(...) and *user_cost_function(...), to enable
+code to compile smoothly under C++.
+
+========================================================================
+30 Aug 94
+
+readme.ms:
+Added availability of code and papers via WWW
+http://alumni.caltech.edu/~ingber/
+
+========================================================================
+19 Aug 94
+
+readme.ms, user.c:
+Added MY_COST guides for quick reference to insert user's own cost
+function.
+
+========================================================================
+28 Jun 94
+
+readme.ms:
+Added acknowledgment of award from the Pittsburgh Supercomputing
+Center through the National Science Foundation (NSF).
+
+========================================================================
+9 Jun 94
+
+readme.ms:
+Announced parallelizing ASA project.
+
+========================================================================
+6 Jun 94
+
+user.c:
+Deleted free statements for USER_OPTIONS->Cost_Schedule,
+USER_OPTIONS->Reanneal_Params_Function, RECUR_USER_OPTIONS->Cost_Schedule,
+RECUR_USER_OPTIONS->Reanneal_Params_Function which causes crashes on some
+machines when USER_COST_SCHEDULE and USER_REANNEAL_PARAMETERS are used.
+
+user.c:
+Fixed memory leak when ASA_SAMPLE=TRUE.
+
+========================================================================
+4 Jun 94
+
+NOTES:
+Removed contributed code that had Copyright other than the GPL.
+
+user.c:
+Slowed down USER_COST_SCHEDULE in sample() when ASA_SAMPLE and
+ASA_TEMPLATE are TRUE (template in Makefile) to permit better sampling
+at all four local optima of the test function.
+
+========================================================================
+27 May 94
+
+Makefile, asa.c, asa_user.h, readme.ms, user.c, user.h:
+When ASA_SAMPLE is set to TRUE, data is collected by ASA during its
+global optimization process to importance-sample the user's variable
+Five OPTIONS become available to monitor the sampling: N_Accepted,
+Bias_Acceptance, Bias_Generated, Average_Weights, and Limit_Weights.
+
+========================================================================
+4 May 94
+
+NOTES:
+Included more info on using time modules on PCs.
+
+========================================================================
+27 Apr 94
+
+user.c:
+Corrected test of argc to be argc > 1.  This caused problems on some
+machines.
+
+readme.ms:
+Added information about asa_new.
+
+========================================================================
+19 Apr 94
+
+readme.ms:
+Corrected typo in defining range of RNG for acceptance criteria.
+
+========================================================================
+18 Apr 94
+
+readme.ms:
+Formatted Table of Contents to include section numbers.
+
+========================================================================
+17 Apr 94
+
+asa.c, readme.ms, user.c:
+Permit curvature calculations whenever tangents are calculated if
+OPTIONS->Curvature_0 is set to -1.
+
+========================================================================
+16 Apr 94
+
+readme.ms:
+Reformatted page numbering of Table of Contents.
+
+========================================================================
+15 Apr 94
+
+Makefile, readme.ms:
+Include README+.uu instead of README+Z.uu in ASA-shar.
+
+asa.h, asa_user.h:
+Moved some TIME_CALC items from asa_user.h to asa.h.
+
+========================================================================
+13 Apr 94
+
+user.c:
+Placed comments on using 'ptr_out = stdout;' if printout is desired to
+stdout instead of user_out.
+
+========================================================================
+10 Apr 94
+
+asa.c, asa.h, readme.ms, user.h:
+ASA can print to stdout if ASA_OUT or USER_OPTIONS->Asa_Out_File is set
+to "STDOUT".  #include <string.h> was added to asa.h and user.h.
+
+Makefile, asa.c, asa.h, asa_user.h, readme.ms, user.c, user.h:
+Created asa_user.h to contain all common definitions and macros
+previously repeated in asa.h and user.h.
+
+asa.c, asa.h, asa_user.h, readme.ms, user.c, user.h:
+The time module was redefined in the user and asa modules so that only
+one copy of this code now resides in asa.c
+
+asa.c:
+At the risk of offending C purists, a goto EXIT_ASA was inserted at
+several locations, eliminating over 300 lines of code, making this file
+more readable (usually the rationale for _not_ using goto).
+
+========================================================================
+8 Apr 94
+
+readme.ms:
+Put in caution that passing asa.[13nl] which is the equivalent of
+README[+] through man may strip out some items like \\"asa_out\\".
+
+asa.c, asa.h, readme.ms, user.c, user.h:
+Added Limit_Generated OPTION, but now permit either Limit_Acceptances
+or Limit_Generated to take 0 to run without these constraints, e.g.,
+which can be useful for machines that do not process large integers.
+
+readme.ms:
+Defined Table of Contents at end.
+
+========================================================================
+7 Apr 94
+
+readme.ms:
+Added an index of all headers.
+
+========================================================================
+6 Apr 94
+
+The inclusion of user-defined functional changes in addition to ASA
+parameter modifications justifies a change in the major version
+number.
+
+asa.c:
+Made off-diagonal curvature calculation a bit more efficient.
+
+NOTES, readme.ms:
+Added some information on the use of USER_COST_SCHEDULE.
+
+========================================================================
+5 Apr 94
+
+asa.c:
+Curvatures are now calculated correctly at boundaries of specified
+ranges.
+
+asa.c:
+Some initialization equations were copied into the main annealing loop
+to permit greater adaptive use of Temperature_Ratio_Scale,
+Temperature_Anneal_Scale, Cost_Parameter_Scale_Ratio, QUENCH_PARAMETERS
+and QUENCH_COST OPTIONS.
+
+readme.ms:
+Added comment on using QUENCH_COST OPTION to slow down cost temperature
+schedule.
+
+asa.c, asa.h, readme.ms, user.c, user.h:
+The function used for the cost_function temperature  schedule is of the
+form test_temperature in asa.c.  You can define your own function of
+test_temperature adaptively in user.c in Cost_Schedule() (and in
+recur_Cost_Schedule() if SELF_OPTIMIZE is TRUE) by setting the
+Pre-Compile DEFINE_OPTIONS USER_COST_SCHEDULE to TRUE.
+
+========================================================================
+31 Mar 94
+
+readme.ms:
+Added info on bitftp service and the current IP number of the Caltech
+archive.
+
+========================================================================
+29 Mar 94
+
+readme.ms:
+README+ is only compressed and uuencoded in the ASA-shar[.Z] versions.
+
+========================================================================
+17 Mar 94
+
+readme.ms:
+Added some comments to the use of QUENCH_COST.
+
+========================================================================
+12 Mar 94
+
+Makefile:
+Added README+ to doc: compilation to give enhanced text.  This is
+compressed and uuencoded to pass through shar.
+
+========================================================================
+11 Mar 94
+
+Makefile:
+Formatted README to include indents.
+
+========================================================================
+9 Mar 94
+
+NOTES:
+Added some comments to the FORTRAN section.
+
+========================================================================
+8 Mar 94
+
+asa.c:
+Added a missing *curvature_flag test to calculation of curvature[].
+
+NOTES:
+Added some instructions for calling FORTRAN cost functions from ASA.
+
+========================================================================
+4 Mar 94
+
+readme.ms:
+Added ASA.tar.Z version.
+
+========================================================================
+3 Mar 94
+
+readme.ms:
+Deleted IP number for ftp.alumni.caltech.edu as this is subject to
+change.
+
+========================================================================
+17 Feb 94
+
+asa.c, asa.h:
+Reset Sequential_Parameters to its starting value on exiting asa().
+This could be important when doing multiple runs.
+
+========================================================================
+16 Feb 94
+
+user.c:
+Clarified notation used in ASA test problem.
+
+========================================================================
+15 Feb 94
+
+asa.c, asa.h, asa_opt, readme.ms, user.c, user.h:
+Added adaptive Sequential_Parameters to OPTIONS.
+
+NOTES, readme.ms, user.c:
+Several small changes to reflect new ASA_LIB OPTION.
+
+========================================================================
+13 Feb 94
+
+asa.c, asa.h, user.c, user.h:
+Added Pre-Compile OPTION ASA_LIB to facilitate calls of asa() from
+another program when this is set to TRUE.
+
+user.h:
+Removed extra main prototype when SELF_OPTIMIZE is TRUE and HAVE_ANSI
+is FALSE.
+
+========================================================================
+9 Feb 94
+
+NOTES, readme.ms:
+Noted minor change of archive address to ftp.alumni.caltech.edu
+[131.215.48.62].
+
+========================================================================
+3 Feb 94
+
+asa.c, asa.g, user.c, user.h:
+Reformatted files using GNU indent-1.9.1.
+
+========================================================================
+1 Feb 94
+
+readme.ms:
+Added directions for compiling the ASA test problem without the use of
+the Makefile.
+
+========================================================================
+30 Jan 94
+
+readme.ms:
+The subdirectory TESTS has been eliminated, and replaced by the two
+files test_asa and test_usr.
+
+user.c:
+I wrote the ASA test problem from scratch to closely follow its
+published description.  It now runs a bit faster under gcc.
+
+========================================================================
+27 Jan 94
+
+Makefile, asa.c, asa.h, readme.ms, user.c, user.h, TESTS/asa...:
+Added Pre-Compile DEFINE_OPTIONS USER_REANNEAL_PARAMETERS.  When this is
+TRUE, the user can define the reannealing function, adaptively if
+required, in user.c in function user_reanneal() (and in
+recur_user_reanneal() if SELF_OPTIMIZE is TRUE).
+
+========================================================================
+18 Jan 94
+
+NOTES:
+The section PAPERS USING ASA was broken out into a separate file,
+asa_papers, in ftp.caltech.edu:pub/ingber.  This is to minimize
+updating versions of the ASA directory due to changes in this section.
+
+========================================================================
+17 Jan 94
+
+NOTES:
+Updated locations of papers in section PAPERS USING ASA.
+
+========================================================================
+14 Jan 94
+
+asa.c:
+Deleted quench flags as they are now unnecessary.
+
+========================================================================
+13 Jan 94
+
+asa.c, asa.h:
+Fixed bug in use of OPTIONS->User_Temperature_Ratio.
+
+readme.ms:
+Corrected function parameter lists to agree with changes in user.c and
+user.h.
+
+========================================================================
+12 Jan 94
+
+user.c, user.h:
+Cleaned up a few small memory leaks.  Removed several flags that could
+be replaced by reference to USER_OPTIONS and RECUR_USER_OPTIONS.
+
+========================================================================
+11 Jan 94
+
+NOTES, readme.ms:
+Changed names of directories to those in newly overhauled archive.
+
+========================================================================
+10 Jan 94
+
+NOTES:
+Updated references in section PAPERS USING ASA.
+
+========================================================================
+8 Jan 94
+
+readme.ms:
+Added info that ASA.zip is now maintained in the ASA archive.
+
+========================================================================
+1 Jan 94
+
+NOTES:
+Under PAPERS USING ASA, added reference to paper by Tang, Tracy,
+Boozer, deBrauw, and Brown.
+
+========================================================================
+13 Dec 93
+
+user.c:
+Corrected dimension of asa_file[].
+
+========================================================================
+26 Nov 93
+
+ASA version 2.1:
+Experimentation with SELF_OPTIMIZE, Quenching and ASA_TEMPLATEs has
+progressed to a stage warranting a change in the major version number.
+
+NOTES:
+Added ASA-related papers available in the Caltech archive.
+
+========================================================================
+22 Nov 93
+
+asa.c, user.c:
+Clarified use of OPTIONAL_DATA in ASA_TEMPLATE when used with
+SELF_OPTIMIZE.
+
+readme.ms:
+Added outline of use of each ASA_TEMPLATE.
+
+Makefile:
+Added comments on the use of the provided sets of DEFINE_OPTIONS.
+
+========================================================================
+17 Nov 93
+
+user.c:
+Cleaned up USER_ASA_OUT ASA_TEMPLATE string calls to work under Sun acc
+without errors and under gcc without warnings.
+
+========================================================================
+16 Nov 93
+
+NOTES:
+Updated references to papers.
+
+CHANGES:
+Updated references.
+
+========================================================================
+15 Nov 93
+
+asa.c, user.c:
+More fixes to handle memory leaks.
+
+========================================================================
+14 Nov 93
+
+asa.c, user.c:
+Added free() calls to get rid of pesky memory leaks which arose under
+SELF_OPTIMIZE.
+
+Makefile:
+Corrected DEFINE_OPTIONS to properly use USER_ASA_OUT and ASA_TEMPLATE
+for multiple calls to asa.
+
+========================================================================
+12 Nov 93
+
+asa.c:
+Added modification to keep parameters within bounds when calculating
+*tangents in cost_derivatives().
+
+========================================================================
+6 Nov 93
+
+Makefile, readme.ms:
+Changed packaged code to be in both ASA-shar.Z and ASA.tar.gz formats.
+
+asa.c:
+Added tests for integer parameters in generate_new_state(), in case
+some system rounds differently.
+
+========================================================================
+4 Nov 93
+
+Makefile, asa.c, asa.h, readme.ms, user.c, user.h, TESTS/asa...:
+Added TIME_STD Pre-Compile Option to use Unix-standard macros for time
+routines, as required by some systems, e.g., hpux.
+
+========================================================================
+3 Nov 93
+
+NOTES:
+Included papers by wu@mcrcim.mcgill.edu and gblais@mcrcim.mcgill.edu
+under PAPERS USING ASA.
+
+========================================================================
+23 Oct 93
+
+asa.c:
+INT_ALLOC and INT_LONG defines had to be corrected around a few
+fprintf statements.
+
+readme.ms, TESTS:
+On the Sun, gcc-2.5.0 update runs were performed.  Since the change in
+definitions of MIN_DOUBLE and MAX_DOUBLE, setting SMALL_FLOAT=E-12 does
+not agree with SMALL_FLOAT=E-18 and SMALL_FLOAT=E-20 (the latter two
+agree), unless MIN_DOUBLE=E-18 also is set.
+
+========================================================================
+15 Oct 93
+
+asa.c:
+Added print statements for some additional OPTIONS.
+
+readme.ms:
+Due to the increased volume of interaction, I had to insert statements
+that I cannot assume the task of mailing out hardcopies of code or
+papers, and that my time assisting people with their queries on my
+codes and papers must be limited to electronic mail correspondence.
+
+========================================================================
+14 Oct 93
+
+Makefile, asa.c, asa.h, readme.ms, user.c, user.h:
+Added ASA_TEST[FALSE] to be set to TRUE to use ASA test problem.  This
+permits users to add their own problem without having to overwrite the
+ASA test example.
+
+Added ASA_TEMPLATE[FALSE] wrappers around tests associated with several
+OPTIONS.  This permits use of these OPTIONS without having to delete
+these extra tests.
+
+========================================================================
+18 Sep 93
+
+user.c:
+Added reference for RNG used in the user module.
+
+========================================================================
+24 Sep 93
+
+NOTES:
+Added reference to Wall Street Journal article mentioning ASA.
+
+========================================================================
+13 Sep 93
+
+NOTES, TESTS/HP_gcc:
+Added update on modifications available for HP machines.  Added HP_gcc
+file in TESTS.
+
+TESTS/SHRT2LNG:
+Apparently this file was blanked out the past few versions, and has now
+been restored.
+
+========================================================================
+2 Sep 93
+
+NOTES:
+Placed ftp locations in PAPERS USING ASA.
+
+========================================================================
+31 Aug 93
+
+NOTES:
+Added info on setting INT_ALLOC and INT_LONG to TRUE on a PC using MS
+Quick C.
+
+========================================================================
+27 Aug 93
+
+NOTES:
+Added info on setting IO_PROTOTYPES to FALSE on a PC using Turbo C++.
+
+========================================================================
+18 Aug 93
+
+NOTES, asa.c, asa.h, user.c, user.h:
+Some minor changes to accommodate Turbo C.
+
+========================================================================
+16 Aug 93
+
+readme.ms:
+Used the standard /usr/ucb/fmt to format all paragraphs.
+
+========================================================================
+24 Jul 93
+
+Minor editing corrections.
+
+========================================================================
+10 Jul 93
+
+readme.ms:
+Added more detail on sources of documentation and how to use a copy
+of the README file as an asa manpage.
+
+========================================================================
+5 Jul 93
+
+Makefile, asa.c, asa.h, TESTS/asa...:
+Added ASA_PRINT_MORE Printing Option.
+
+========================================================================
+29 Jun 93
+
+asa.c, asa.h, user.c, user.h:
+Moved prototypes for getrusage() from .c to .h files, together with
+other prototypes.
+
+user.c:
+Found a Bus error during run for some versions of gcc (2.2.2 on a
+sparc/4.1.3) when using `#define ARRAY_LIMIT *parameter_dimension'
+when 'if __GNUC__' is TRUE, so this was set to `#define ARRAY_LIMIT
+*parameter_dimension 4'.
+
+Makefile, asa.h, user.h, readme.ms, TESTS/*_*:
+Set default of TIME_CALC to FALSE since it gives trouble on many
+machines.
+
+NOTES:
+Added contributed code to permit time routines to work on HPs.
+
+========================================================================
+16 Jun 93
+
+Makefile, asa.h, readme.ms, TESTS/asa...:
+Changed definition of MIN_DOUBLE to smallest positive double.
+
+========================================================================
+12 Jun 93
+
+NOTES:
+Added short note on how to adapt user module to permit ASA to be
+called from another code.
+
+========================================================================
+10 Jun 93
+
+CHANGES:
+Moved list of dates of modifications to bottom of file.  Included
+dates of original RATFOR/FORTRAN code from 1987 and original C code
+from 1991.
+
+========================================================================
+9 Jun 93
+
+readme.ms:
+Moved description of FUNCTION_REANNEAL_PARAMS to Pre-Compile section.
+Elaborated on proper use of Pre-Compile Options.
+
+========================================================================
+8 Jun 93
+
+Makefile, asa.c, asa.h, asa_opt, readme.ms, user.c, user.h, TESTS/...:
+Changed name of MAX_FLOAT to MAX_DOUBLE.  Changed name of MIN_FLOAT
+to MIN_DOUBLE.  Added EPS_DOUBLE to default to SMALL_FLOAT.  This is
+considered a precursor to getting better contributions to defining
+these values at a later date.  Made default of Cost_Precision to
+1.0E-18, independent of these other values.  TESTS are not effected.
+
+========================================================================
+6 Jun 93
+
+user.c:
+Shortened the names of some variable asa_out* files to not exceed
+8 characters.
+
+asa.c, asa.h, readme.ms:
+Added FUNCTION_REANNEAL_PARAMS in asa.h to give users more control over the
+function determining reannealing.
+
+========================================================================
+5 Jun 93
+
+Makefile, asa.c, readme.ms, TESTS/asa...:
+Use SMALL_FLOAT for NO_PARAM_TEMP_TEST and NO_COST_TEMP_TEST (new names
+for NO_P_TEMP_TEST and NO_C_TEMP_TEST) if they are TRUE.  Sharpened
+tests of temperatures for NO_PARAM_TEMP_TEST and NO_COST_TEMP_TEST
+set to FALSE.  Now all test cases agree in intermediate values.
+TESTS/SUN_E-12 was deleted.
+
+========================================================================
+4 Jun 93
+
+asa.c, asa.h, readme.ms, TESTS/asa...:
+Added NO_P_TEMP_TEST and NO_C_TEMP_TEST Pre-Compile options for
+testing purposes.
+
+========================================================================
+2 Jun 93
+
+asa.c:
+Fixed bug in reanneal() by placing some fabs() for some arguments
+of pow().
+
+Fixed bug in fclose() by placing statement at end of asa_exit().
+This affected calculations with SELF_OPTIMIZE= TRUE.
+
+user.c:
+Edited SELF_OPTIMIZE=TRUE and USER_ASA_OUT=TRUE sections.
+
+========================================================================
+31 May 93
+
+asa.c:
+Adjusted initialization of *number_acceptances_saved = 0.
+
+TESTS/:
+All tests were updated.
+
+user.c:
+Added USER_ASA_OUT to SELF_OPTIMIZE=TRUE portion, and cleaned up
+USER_ASA_OUT calls in SELF_OPTIMIZE=FALSE portions.
+
+========================================================================
+25 May 93
+
+NOTES:
+Added CONTENTS with SECTION_NAMES to search on topics.
+
+========================================================================
+29 May 93
+
+Makefile, asa.c, asa.h, readme.ms, user.c, user.h, TESTS/asa...:
+Added Pre-Compile Option USER_ASA_OUT to work with Program Option
+*Asa_Out_File, to permit dynamic naming of asa() output files from
+the user module.
+
+========================================================================
+24 May 93
+
+NOTES, readme.ms:
+Reorganized some references, and started list of ASA (p)reprints at
+the bottom of this file, instead of increasing length of readme.ms.
+
+asa.c:
+Minor cleaning up of some statements, taking out extra parentheses.
+
+========================================================================
+22 May 93
+
+longname.h:
+Removed and made obsolete by changes in a few parameter names in the
+asa module.
+
+asa.c, asa.h, readme.ms, user.c, user.h, TESTS/asa...:
+Changed all (*[a-zA-Z_]). constructs to [a-zA-Z_]-> to improve
+readability.  The original form was to minimize notation for many
+users, but the use of many *OPTIONS calls made this change more
+reasonable.
+
+========================================================================
+17 May 93
+
+asa.c:
+Corrected typo bugs in reanneal() introduced when inserted
+OPTIONS->User_Quench_Param_Scale[] factors.
+
+========================================================================
+16 May 93
+
+asa.c, asa.h, asa_opt, readme.ms, user.c, user.h, TESTS/asa...:
+Introduced two QUENCH_PARAMETERS and QUENCH_COST, to permit some
+"quenching" especially in very large parameter spaces.
+
+========================================================================
+15 May 93
+
+asa.h, user.c, user.h:
+Added a __GNUC__ define.  This is useful to set ARRAY_LIMIT to
+*parameter_dimension in user.c when using gcc.
+
+asa.c, asa.h:
+Removed some superfluous parameters from parameter lists.
+
+========================================================================
+15 May 93
+
+asa.c:
+Enforced fflush() for updated new best states for printout for large
+parameter spaces.
+
+readme:
+ASA now can be obtained from ftp.caltech.edu where it can be maintained
+in a timely manner.
+
+========================================================================
+14 May 93
+
+asa.c:
+Reorganized use of ASA_PRINT_INTERMED to be more useful for large
+dimensions.
+
+readme:
+Added some comments to Program Options for large dimensions.
+
+========================================================================
+13 May 93
+
+readme:
+Updated instructions for retrieval of files.  The previous instructions
+were too terse for some users.
+
+========================================================================
+11 May 93
+
+asa.c, asa.h:
+Deleted unused references to ASA_OPTIONS and ADAPTIVE define.
+
+readme.ms:
+Edited in several places and updated section on availability.
+
+========================================================================
+9 May 93
+
+Makefile, asa.c, asa.h, readme.ms, user.c, user.h:
+Added *Asa_Data to *OPTIONS when the Pre-Compile option OPTIONAL_DATA
+is set to TRUE.  This permits additional information to be returned
+to the user module from the asa module.  An example of usage is given
+for the test problem when SELF_OPTIMIZE is TRUE.
+
+========================================================================
+8 May 93
+
+Makefile, asa.h, readme.ms:
+ASA_PRINT_INTERMED[=TRUE] is added as a Pre-Compile option.  This is
+useful for large parameter spaces as well as when SELF_OPTIMIZE is
+set to TRUE.
+
+user.c:
+The test problem is modified to set the dimension and indexing of
+all arrays to correspond to *parameter_dimension.  This is useful to
+easily change the test problem, e.g., to test large parameter spaces.
+
+user.c:
+Added some output at the end of a run when SELF_OPTIMIZE is TRUE,
+in case ASA_PRINT is FALSE.
+
+asa.c:
+Closed off several fclose() statements used when SELF_OPTIMIZE is TRUE,
+but ASA_PRINT is FALSE
+
+========================================================================
+7 May 93
+
+asa.c:
+Corrected allocation of memory to temperature_scale_parameters when
+RATIO_TEMPERATURE_SCALES is set to TRUE.
+
+========================================================================
+5 May 93
+
+readme.ms:
+Latest updates of code and papers may be retrieved via anonymous ftp
+from ftp.caltech.edu in the pub/ingber directory.
+
+========================================================================
+27 Apr 93
+
+Makefile, asa.c, asa.h, readme.ms, user.h:
+The cast on *number_parameters is set by ALLOC_INT which defaults to
+the cast of LONG_INT.  On some machines, ALLOC_INT might have to be
+set to TRUE to set this cast to int if there is a strict requirement
+to use an unsigned int for calloc.
+
+========================================================================
+5 Apr 93
+
+vfsr.c:
+Removed old code that was inadvertently left in, with an fclose()
+call for NORMAL exit.  This prevented printing to the same file when
+requesting multiple calls to vfsr() from the user module.  Conditionals
+were added to have printout distinguish between multiple calls and
+recursive calls.  Thanks to Graham Campbell <campbell@ams.sunysb.edu>
+for finding this bug.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+NOTES:
+Thanks to Eric Grosse <ehg@research.att.com> for suggesting that we can
+trim down the size of the code by editing the NOTES to keep it current.
+
+========================================================================
+2 Apr 93
+
+NOTES, readme.ms:
+Added some code for precise exiting of vfsr on demand, contributed
+by Walter Roberson <roberson@hamer.ibd.nrc.ca>.
+
+========================================================================
+29 Mar 93
+
+NOTES:
+Mentioned apparent need to link with -ldl on some HP's.  The problem
+was solved by Walter Roberson <roberson@hamer.ibd.nrc.ca>.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+readme.ms, user.c, user.h, vfsr.c, vfsr.h, vfsr_opt:
+Extensive reordering was performed on all function calls to have them
+appear more logically grouped.
+
+========================================================================
+27 Mar 93
+
+readme.ms:
+Mentioned FTPmail as alternative source for getting files if Netlib
+or Statlib cannot be accessed.
+
+Formatted README for pagination to facilitate printing on an ascii
+printer.
+
+========================================================================
+24 Mar 93
+
+Makefile, user.c, user.h, vfsr.c, vfsr.h:
+Added template to illustrate how to use vfsr to self-optimize its
+Program Options using SELF_OPTIMIZE=TRUE.
+
+========================================================================
+22 Mar 93
+
+Makefile, readme.ms user.c, user.h, vfsr.c, vfsr.h, vfsr_opt, TESTS/...:
+Rewrote code to pass only local pointer-parameters to and within the
+vfsr module.  This is required if anyone wishes to write a user module
+to use vfsr recursively, e.g., for self-optimization.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+user.c, vfsr.c:
+Removed unnecessary headers for each routine.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Makefile, user.c, user.h, vfsr.c, vfsr.h, vfsr_opt:
+Removed ADAPTIVE_OPTIONS, as now Program Options are either defined
+in user.c or read in from vfsr_opt using OPTIONS_FILE=TRUE.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+NOTES:
+Placed code contributed by Barak Cohen <bardak@ccsg.tau.ac.il> which
+can be used on PCs to replace our timing modules.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+vfsr.c:
+It was pointed out by Bill Wong <bgwong@holonet.net> that some
+machines can have problems assigning a double too large for long int.
+We have taken his advice and used temp_dbl in reanneal() to avoid
+these problems.
+
+========================================================================
+17 Mar 93
+
+NOTES:
+Entered "disclaimer" about VFSR being ready as is for recursive use.
+On our TODO list is a rewrite dispensing with global parameters.
+
+========================================================================
+
+16 Mar 93
+
+vfsr.c:
+The cast on index_cost_repeat was corrected to int.  Thanks to Bill
+Wong <bgwong@holonet.net> for finding this error.
+
+vfsr.c:
+index_cost_repeat should be reset to 0 whenever a new best state
+is found.  Thanks to Walter Roberson <roberson@hamer.ibd.nrc.ca>
+for finding this bug.
+
+========================================================================
+15 Mar 93
+user.h, vfsr.h, vfsr.c:
+The cast on MAXIMUM_REANNEAL_INDEX was changed to LONG_INT, as
+was originally intended.  Without this change, the default value
+of 50000 causes VFSR to fail on some PC's.  Thanks to Barak Cohen
+<bardak@ccsg.tau.ac.il> for bringing this problem to our attention.
+
+========================================================================
+7 Mar 93
+
+readme.ms:
+To avoid confusion between the GNU Public License (GPL) in our COPYING
+file and the popular imprecise term "public domain," a modified
+statement now is included:
+   Please read the copy of this license contained in this directory.
+   Our intent is to make this code publicly available to the widest
+   audience while maintaining the integrity of the basic algorithm.
+
+========================================================================
+28 Feb 93
+
+readme.ms:
+Included a brief description of the VFSR algorithm.
+
+========================================================================
+26 Feb 93
+
+Makefile, readme.ms:
+Inserted a brief discussion on the algebra behind the Program Options
+used for annealing.  Equations are set in README.ps.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+TESTS/v..., readme.ms, user.h, user.c, vfsr.c, vfsr.h:
+Individual scales for reannealing can be set by the user by setting
+both Pre-Compile Options ADAPTIVE_OPTIONS and RATIO_TEMPERATURE_SCALES
+to TRUE, and initializing (*USER_OPTIONS).user_temperature_ratio[]
+in the user module.
+
+The same approach is now taken to set initial parameter
+or cost temperatures, i.e., by initializing the
+(*USER_OPTIONS).user_parameter_temperature array or
+(*USER_OPTIONS).user_cost_temperature in the user module.
+This replaces the kludge of using the previous "hooks."
+
+========================================================================
+25 Feb 93
+
+readme.ms:
+All descriptions of the DEFINE_OPTIONS in the Makefile are now repeated
+in the README[.ps] documentation.  Several people stated they were
+initially confused by not seeing any description of these options in
+the primary documentation.
+
+========================================================================
+24 Feb 93
+
+NOTES:
+Added some email correspondence which outlines how vfsr could be used
+recursively to optimize its Program Options in a given system, or to
+optimize other optimizers.
+
+========================================================================
+23 Feb 93
+
+readme.ms:
+Added stress that the Makefile contains a short description of the
+DEFINE_OPTIONS, and that it should be considered an extension of the
+README and README.ps files.  The three methods of passing the Program
+Options were broken up into separate sections to stress this feature.
+
+========================================================================
+17 Feb 93
+
+readme.ps:
+Cleaned up some problems in formating under refer and grefer.
+Thanks to Yuan Liu <liu@cs.umd.edu> and James Clark <jjc@ai.mit.edu>
+for their help.
+
+========================================================================
+16 Feb 93
+
+readme.ps, user.h, vfsr.h:
+Added REAL_NO_REANNEAL (-2) and INTEGER_NO_REANNEAL (2) choices to
+parameter_type[] to make choices for this parameter more explicit
+and user-friendly.  The cast on parameter_type was set back to int.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Makefile, TESTS/v..., readme.ms, user.h, user.c, vfsr.h, vfsr.c:
+Increments used in numerical derivatives of individual parameters
+can now be set adaptively.  If both Pre-Compile ADAPTIVE_OPTIONS
+and DELTA_PARAMETERS are TRUE, then a pointer delta_parameter in the
+OPTIONS structure passes these values, overriding the value of DELTA_X.
+
+This leaves parameter_type with 4 alternatives: REAL_TYPE (< 0, but
+for compatability 0 still works), INTEGER_TYPE (> 0), REAL_NO_REANNEAL
+(-2), and INTEGER_NO_REANNEAL (2).
+
+========================================================================
+14 Feb 93
+
+readme.ms:
+In the Makefile section, more explicit information was inserted on
+the three alternative methods of passing the Program Options.
+
+========================================================================
+13 Feb 93
+
+TESTS/v..., readme.ms, user.h, user.c, vfsr.c, vfsr.h:
+Added flexibility to parameter_type[].  Most users need only
+be concerned that real-valued parameters must be designated by
+negative integers and integer-valued parameters must be designated
+by positive integers.
+
+Some users may find it useful to include additional information.  If
+the absolute value of the parameter_type[] is +-2, +-4, +-6, +-8, then
+no derivatives are calculated for this parameter, effectively excluding
+it from being reannealed or having its curvature[] calculated.  (This
+only effects integer-valued parameters if INCLUDE_INTEGER_PARAMETERS is
+set to TRUE.)  If the absolute value is greater than 9, that value is
+used to multiply DELTA_X for that variable; therefore, we have set the
+cast on *parameter_type to be LONG_INT.  This flexibility can be used
+to exclude discontinuous functions from derivative operations, to have
+DELTA_X for integer-valued functions be integral, etc.  Odd numbers +-5
+and +-7, are reserved for specific user-defined options, as are even
+numbers +-6 and +-8 that require bypassing derivative calculations.
+(We will keep the other numbers for future VFSR enhancements.)
+
+The utility of having some user-defined flexibility was highlighted
+by some correspondence with Bob Goldstein <u09872@uicvm.uic.edu>
+and Brooke Paul Anderson <brooke@cco.caltech.edu>.
+
+vfsr.c:
+Corrected calculation of diagonal curvatures.
+
+========================================================================
+12 Feb 93
+
+readme.ms:
+Inserted comment that Makefile is a convenience, not a necessity,
+to use VFSR, and that care should be taken to pass the correct
+DEFINE_OPTIONS when compiling the files.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+NOTES:
+An example of some parameter tuning on a specific problem.
+
+========================================================================
+6 Feb 93
+
+vfsr_opt:
+Changed name of options_file to vfsr_opt for easier identification
+in users' libraries and to truncate this filename to 8 characters.
+
+Other filenames shortened to 8 characters were SHORT2LONG -> SHRT2LNG,
+CONVEX_cc -> CONVX_cc, COPYING-LIB -> COPYING.
+
+========================================================================
+5 Feb 93
+
+Makefile, options_file, user.c, vfsr.h:
+Changed default MAXIMUM_REANNEAL_INDEX=50000 from 100000000 to avoid
+problems on machines that cannot handle long int.  Results are not
+changed in TESTS.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Makefile, readme.ms, user.[ch], vfsr.[ch], TESTS:
+Added CURVATURE_0=FALSE to DEFINE_OPTIONS.  When CURVATURE_0=TRUE,
+then only a one-dimensional array, curvature[0], need be passed to
+the vfsr module.  This can help when dealing with very large parameter
+spaces where the curvature calculations are not required.  curvature[0]
+is still maintained a hook for USER_INITIAL_COST_TEMP=TRUE in any case.
+
+The general problem was emphasized by Bob Goldstein
+<u09872@uicvm.uic.edu>.
+
+========================================================================
+3 Feb 93
+
+Makefile, vfsr.h, user.c:
+Set default of TEMPERATURE_ANNEAL_SCALE=1000.0, freeing it from the
+previous default of TEMPERATURE_ANNEAL_SCALE=LIMIT_ACCEPTANCES/10.0.
+
+NOTES:
+Comments on setting some VFSR options in case premature convergence
+is suspected.  Thanks to Wu Kenong <wu@mcrcim.mcgill.edu> for checking
+over some of the details.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Makefile, options_file, user.c, user.h:
+Added options_file and OPTIONS_FILE=FALSE.  If both
+ADAPTIVE_OPTIONS=TRUE and OPTIONS_FILE=TRUE, then the Program Options
+are read in from options_file.  This permits more efficient testing
+of various Program Options.
+
+This feature was in the original VFSR code, and was added here at
+the suggestion of Davyd Norris <daffy@physics.monash.edu.au>.
+
+========================================================================
+31 Jan 93
+
+NOTES:
+Comments on how to effect an early exit using ADAPTIVE_OPTIONS=TRUE.
+
+========================================================================
+27 Jan 93
+
+The issue of balancing user-friendly code versus flexibility for
+different machines was re-visited at the suggestion of Davyd Norris
+<daffy@physics.monash.edu.au>.
+
+We have gone back to using SMALL_FLOAT as a measure of "smallness"
+to avoid several underflow and overflow problems.  This is a general
+measure of precision to be expected in log and divide operations in
+vfsr.c, and is _not_ equivalent to defining the number of significant
+figures of precision.  We expect experts who require this detail
+to be able to use the flexibility of the present code to tune it to
+their own requirements.
+
+We have retained MAX_FLOAT and MIN_FLOAT for use in EXPONENT_CHECK, but
+have made these definitions correspond to typical machine definitions.
+We have defined the defaults as MIN_FLOAT=-1.0/SMALL_FLOAT and
+MAX_FLOAT=1.0/SMALL_FLOAT.  Variables max_exponent and min_exponent
+are now calculated once in vfsr.c, speeding up calculations.
+
+========================================================================
+26 Jan 93
+
+vfsr.c:
+Corrected rounding algorithm for integers in generate_new_state().
+Thanks to Wu Kenong <wu@mcrcim.mcgill.edu> for pointing out this bug.
+
+========================================================================
+25 Jan 93
+
+readme.ms, user.c, user.h, vfsr.c, vfsr.h:
+*OPTIONS is an optional parameter that can be passed if
+ADAPTIVE_OPTIONS=TRUE in the Makefile.  When ADAPTIVE_OPTIONS=FALSE
+(the default), all changes in default Program Options DEFINE_OPTIONS
+are defined in the Makefile.  (Compiler Options and Printing Options
+always are to be set in the Makefile.)  When ADAPTIVE_OPTIONS=TRUE,
+all Program Options are defined in the structure OPTIONS, permitting
+adaptive changes during repeated searches, or at different recursive
+levels of VFSR optimization.  As illustrated in the user module,
+if ADAPTIVE_OPTIONS=FALSE, only the typedef int for DEFINES must be
+specified to use this format.
+
+This additional flexibility was possessed by the VFSR code before
+its public release, and has been useful in some systems requiring
+recursive calls to vfsr().
+
+========================================================================
+24 Jan 93
+
+TESTS/..., vfsr.c:
+Changed format for printing out doubles from 10.5 to 12.7.
+
+NOTES:
+Placed some comments on use of DEFINE_OPTIONS for recursive nesting
+of VFSR calls.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Makefile, readme.ms, vfsr.c, vfsr.h:
+Added additional exit criteria, TOO_MANY_INVALID_STATES, based on
+new DEFINE_OPTION, LIMIT_INVALID_GENERATED_STATES (default 1000).
+
+========================================================================
+22 Jan 93
+
+NOTES:
+Added some comments about using VFSR on systems with constraints and
+fine-tuning the DEFINE_OPTIONS.
+
+========================================================================
+21 Jan 93
+
+CHANGES, Makefile, readme.ms, vfsr.c, vfsr.h:
+Added USER_INITIAL_PARAMETERS_TEMPS=FALSE and to Makefile to permit
+user to input initial individual parameter temperatures into *tangents
+array.
+
+Added USER_INITIAL_COST_TEMP=FALSE to Makefile to permit user to
+input initial cost temperature into curvature[0].
+
+These additional features, discussed in the original VFSR paper and
+implemented in the original code, were put back in as suggested by
+correspondence with Zbigniew Michalewicz <zbyszek@mosaic.uncc.edu>
+and Wu Kenong <wu@mcrcim.mcgill.edu>.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+TEST..., vfsr.c:
+Added new DEFINE_OPTIONS to list to be printed out in vfsr_out.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+vfsr.c, vfsr.h:
+Added separate time routines for independent tracking of vfsr
+calculations.
+
+========================================================================
+15 Jan 93
+
+vfsr.c:
+Put in specific test to skip reannealing for integer parameters if
+the default INCLUDE_INTEGER_PARAMETERS=FALSE.  Previously, it had to
+be assumed that tangents[] would be 0 for these cases.
+
+========================================================================
+14 Jan 93
+
+Makefile, NOTES, vfsr.c:
+SMALL_FLOAT was added to the denominator of the calculation of
+delta_cost, to properly handle cases of small current_cost_temperature.
+
+TESTS/..., readme.ms:
+This changes the intermediate calculations, causing longer runs after
+the best minimum is found, in the test cases for SMALL_FLOAT=E-18/E-20,
+but does not affect the final answers or the values of the generating
+and acceptance points at the global minimum.  However, now the test
+problems do not crash on the Convex for SMALL_FLOAT=E-18, but still do
+crash for SMALL_FLOAT=E-20 due to a "Floating exception."
+
+Makefile, user.h, vfsr.h, vfsr.c:
+Hooks were placed in user.h and vfsr.h to set machine-dependent
+SMALL_FLOAT to MACHEPS, MIN_FLOAT to MIN_REAL, and MAX_FLOAT to
+MAX_REAL.  Corresponding DEFINE_OPTIONS were added to Makefile.
+To maintain user-friendly and portable code across platforms, we
+have set the defaults in terms of SMALL_FLOAT; this agrees with our
+previous test results.
+
+Makefile, vfsr.h, vfsr.c:
+A DEFINE_OPTIONS was added because some machines, e.g., PC's,  may
+choke on `long int' as used in vfsr.c to handle some large dimensions.
+Setting INT_LONG=FALSE will use only `int'.
+
+NOTES:
+A entry was placed in NOTES explaining the preference for setting all
+options in the Makefile, rather than introducing a new initialization
+file.
+
+Thanks to Davyd Norris <daffy@physics.monash.edu.au> for finding
+this bug, running many test cases on various machines, and causing
+us to reevaluate the above issues.
+
+========================================================================
+13 Jan 93
+
+user.c, user.h, vfsr.c, vfsr.h:
+As previously mentioned in vfsr.h, the original VFSR code passed the
+parameter bounds in the cost function, permitting additional adaptive
+changes in the search by virtue of decisions made in this calculation.
+E.g., setting a lower bound equal to the upper bound of a parameter
+has the effect of taking it out of consideration of the search.
+This feature has been put back into the code, at the modest expense
+of now requiring parameter bounds to be passed by the cost function.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+user.c:
+Switched order of "if" tests for PRINT_FREQUENCY to avoid division
+by zero.
+
+Thanks to Wu Kenong <wu@mcrcim.mcgill.edu> for pointing out this bug.
+
+========================================================================
+
+12 Jan 93
+
+Makefile, user.c, user.h:
+A TIME_CALC=TRUE option was added to DEFINE_OPTIONS.  Several
+people were having compilation problems on Mac's and PC's because
+of differences in locations of and macro definitions in the time
+include files.  Since the relevant code is in the user module, and
+not in the vfsr module of our primary concern, we feel the best fix
+is just to include this option, where TIME_CALC=FALSE will simply
+ignore all this code.
+
+Thanks to Lee Hon Man <89299465@CPHKVX.CPHK.HK> for stressing these
+problems in the user module.
+
+========================================================================
+20 Dec 92
+
+Makefile, user.c, vfsr.c, vfsr.h:
+Changes were made in casts to make the code more portable to 16-bit
+machines and to machines that might hold only to the strict ANSI
+standards, by changing int -> long int for those variables that might
+get large.
+
+Thanks to Davyd Norris <daffy@physics.monash.edu.au> for bringing
+this necessity to our attention.  Davyd has pointed out that compiler
+"warnings" still are issued, e.g., truncation of some integers on PC's,
+but we feel that we only can spend time addressing actual "errors"
+in the vfsr module that will actually impair implementation of the
+VFSR algorithm.
+
+========================================================================
+19 Dec 92
+
+NOTES:
+Added some email correspondence from Cygnus, who give support to GNU
+products, clarifying some issues in the COPYING-LIB license.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+NOTES:
+Added some comments on VFSR use in the presence of complex constraints.
+
+========================================================================
+18 Dec 92
+
+NOTES, CHANGES:
+Corrected confusing typo that misidentified [m sub i] and [n sub i]
+in published papers with their correct implementation in vfsr.c:
+TEMPERATURE_ANNEAL_SCALE [n sub i]
+TEMPERATURE_RATIO_SCALE  [m sub i]
+Some examples calculating these quantities were placed in NOTES.
+
+Thanks to Wu Kenong <wu@mcrcim.mcgill.edu> for pointing out this bug.
+
+========================================================================
+17 Dec 92
+
+readme.ms
+Inserted  statement:
+Since VFSR has not been applied extensively to many systems, it is
+certain that there is much research to be done on determining optimal
+or even reasonable VFSR parameters, e.g., the set of DEFINE_OPTIONS,
+for different classes of systems, especially in higher dimensional
+spaces of user parameters.  A major purpose of placing this code in
+the public domain is to motivate more of this research, and thus make
+the code more useful to a wider audience.
+
+========================================================================
+16 Dec 92
+
+VFSR.DIR, Makefile, longname.h, readme.ms:
+To accommodate some PC/DOS systems, some changes in name were made.
+Since many such systems do not distinguish case, there is a problem
+using `sh vfsr' to get the VFSR directory.  Therefore, the name of
+the VFSR directory has been changed to VFSR.DIR.
+
+TESTS, Makefile:
+The names of files on DOS systems cannot exceed 8 characters plus
+3 as a suffix.  The names of the files in TESTS were shortened even
+more than previously to permit their unique extraction under `sh vfsr'.
+
+========================================================================
+13 Dec 92
+
+Makefile:
+On some Dec and Convex machines `make' gets confused by backslashes
+("\") at the end of commented lines ("#").  These were taken out of all
+commented option lines.
+
+========================================================================
+12 Dec 92
+
+NOTES:
+Took out names and email addresses of correspondents, as they contact
+us without knowing that we might include their comments in this file.
+
+========================================================================
+10 Dec 92
+
+readme.ms:
+Took %N(S) issue number entries out of file, since references
+as formatted here make unclear the distinction between %N and %V
+(volume) entries using grefer defaults.  Otherwise, a separate macro
+file would have to be included, standard with refer or grefer usage.
+This macro file typically would have some control characters, e.g, ^G,
+and this could cause problems for some people accessing vfsr via email.
+
+========================================================================
+9 Dec 92
+
+vfsr.c:
+In the routine cost_derivatives(), there are three places where a
+division by a parameter can cause problems when it has value zero
+within machine precision.  This did not affect the particular test
+problem.  A value of SMALL_FLOAT has been added to those denominators
+to prevent any future problems.
+
+Thanks to Leslie Picardo <picardo@alpha.ces.cwru.edu> for finding
+this bug.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+readme.ms:
+As suggested in the GNU Library General Public License in the
+COPYING-LIB file, postal addresses for both authors were inserted.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+NOTES:
+Added some correspondence relating to setting parameters for high
+dimensions.
+
+========================================================================
+8 Dec 92
+
+CHANGES, user.c, vfsr.c
+Set up headers to automate updating Modification History whenever a
+new version is created.
+
+========================================================================
+7 Dec 92
+
+vfsr now is in STATLIB as well as NETLIB, permitting interactive or
+email retrieval.
+
+========================================================================
+6 Dec 92
+
+all files:
+Set up a patch macro for all revisions past v6.25.  Changed format of
+this file to use "=" and "+" as separators of changes not to conflict
+with diff separators.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+readme.ms, vfsr.c:
+The RCS Id string containing version number, and values of all
+DEFINE_OPTIONS in the Makefile are now printed out in VFSR_OUT (when
+VFSR_PRINT is at its default of TRUE).
+
+vfsr.h, vfsr.c:
+The exit code is now passed to vfsr_exit to be printed at the bottom
+of VFSR_OUT together with the other summary information.
+
+These changes will help decifer bug reports.
+
+========================================================================
+5 Dec 92
+
+vfsr.c:
+The present code gives incorrect annealing for negative cost functions.
+During the rewrite, an "fabs" was dropped that had insured that the
+initial cost temperature would always be positive.  (For example,
+during reannealing, at a few places the absolute value of the cost
+is taken when used to examine the temperature.)  This bug incorrectly
+reverses the acceptance criteria.  The solution is to change:
+202c202
+<       sampled_cost_sum += current_generated_state.cost;
+---
+>       sampled_cost_sum += fabs(current_generated_state.cost);
+
+Thanks to Cullen Schaffer <schaffer@marna.hunter.cuny.edu> for finding
+this bug.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Makefile, vfsr.c, vfsr.h:
+Added ACTIVATE_REANNEAL (default TRUE) to permit overriding
+reannealing.  This is a simple addition in one place:
+
+#if ACTIVATE_REANNEAL           /* set to FALSE to skip reannealing */
+            /* calculate tangents, not curvatures, to reanneal */
+            curvature_flag = FALSE;
+            cost_derivatives(user_cost_function);
+            reanneal();
+#endif
+
+========================================================================
+3 Dec 92
+
+Makefile, vfsr.c, vfsr.h:
+Changed names of some options to more properly reflect their use as
+described in the original 1989 VFSR paper.  Comments were placed in
+the Makefile.  The code variables are the logs of the variables in
+the paper given in brackets.
+TEMPERATURE_SCALE_WEIGHT_PARAM -> TEMPERATURE_ANNEAL_SCALE [n sub i]
+TEMPERATURE_SCALE_WEIGHT       -> TEMPERATURE_RATIO_SCALE  [m sub i]
+
+
+Added COST_PARAMETER_SCALE if user want to override default (1.0)
+of resulting cost and parameter temperature scales.
+
+Added INCLUDE_INTEGER_PARAMETERS if user wants to override default
+(FALSE) to include integer parameters in derivative and reannealing
+calculations.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+vfsr.c
+Changed "if" to "while" in reanneal to take care of large indices.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+vfsr.c:
+Added some comments on expecting some old instead of current printed
+values at very end of vfsr_out if a "premature" call to vfsr_exit.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Makefile, vfsr.c, vfsr.h, readme.ms:
+Added USER_INITIAL_PARAMETERS.  Default (FALSE) is to let vfsr
+calculate first generated point subject to user's constraints, likely
+the most typical case in complex problems.  A statement to this effect
+was put into readme.ms.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+readme.ms:
+Some people were confused over the GNU COPYING-LIB file, and so the
+following statement was added:
+
+Our intent is to make this code available in the public domain to the
+widest audience while maintaining the integrity of the basic algorithm.
+
+========================================================================
+2 Dec 92
+
+Makefile, vfsr.h, vfsr.c:
+Added COST_PRECISION option in Makefile to let user set precision
+required of cost function if exiting because MAXIMUM_COST_REPEAT has
+been reached.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+user.c, vfsr.c:
+Just list Modification History at the top of each file, instead of
+in each separate function.  This CHANGES file will include details
+of all changes.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+vfsr.c:
+An extraneous block of code, a copy of some code at the beginning
+of vfsr(), was somehow placed at the end.  This returned nonsense to
+the calling routine in cases of *exit_code=NORMAL_EXIT=0.  No changes
+were made in TESTS.
+
+The following lines should be deleted from v6.20 in vfsr.c
+442,463d441
+<     /* copy best parameters and print out results */
+<     VFOR(index_v) {
+< #if VFSR_PRINT
+< 	fprintf(ptr_vfsr_out, "%d\t ", index_v);
+< #endif
+< 	current_parameter_temperature[index_v] =
+< 	    initial_parameter_temperature[index_v] =
+< 	    ((double) INITIAL_PARAMETER_TEMPERATURE);
+<
+< 	/* set the best and last state to the current generated state */
+< 	best_generated_state.parameter[index_v] =
+< 	    last_saved_state.parameter[index_v] =
+< 	    current_generated_state.parameter[index_v];
+<
+< #if VFSR_PRINT
+< 	fprintf(ptr_vfsr_out, "%g\t %g\t %g\t %d\n",
+< 		parameter_minimum[index_v],
+< 		parameter_maximum[index_v],
+< 		current_generated_state.parameter[index_v],
+< 		parameter_type[index_v]);
+< #endif
+<     }
+
+The errors caused by this problem were first discovered by Jacob
+Engelbrecht <engel@virus.fki.dth.dk>.
+
+========================================================================
+28 Nov 92
+gcc-2.3.2 was installed on ingber, so this was used to recalculate
+files in TESTS.  gcc-2.3.2 was just a bit faster than gcc-2.3.1.
+
+The Dec machine used in TESTS turned out to be a 3100, not a 5100,
+so the names of the appropriate files were changed in TESTS.
+
+========================================================================
+27 Nov 92
+
+user.c:
+Passed compiler options into main to print out in user_out.
+
+========================================================================
+vfsr.c:
+sampled_cost_sum was incorrectly declared as int instead of
+double.  This caused a crash on one machine due to the large
+size of the test cost function.  Also, the cast was changed
+to (double) NUMBER_COST_SAMPLES for the initial calculation of
+current_generated_state.cost.  (In fact, some code during reannealing
+is necessary to avoid such large integers.)
+
+Since this alters the initial cost temperature, the sampling changes,
+and the values in vfsr_out are changed.  This just happens to
+make the code more "efficient" for this particular set of starting
+values.  A new set of test runs was placed in TESTS, but including
+SMALL_FLOAT=1.0E-12 instead of SMALL_FLOAT=1.0E-16 to permit some
+comparison with a run on a Convex-C120.
+
+Thanks to Jacob Engelbrecht <engel@virus.fki.dth.dk> for first
+discovering this error.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+TESTS, Makefile:
+shortened names and deleted periods in names of TESTS files to
+accommodate some machines.  Older more descriptive long names are
+in VFSR/TESTS/SHORT2LONG_NAMES.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Added this file, CHANGES, and a NOTES file to include more
+documentation that might be of interest to users.
+
+========================================================================
+25 Nov 92
+
+vfsr.[ch]:
+Changed void to return double final_cost.  Error introduced in r5 by
+passing value instead of pointer. r4 passed pointer but was considered
+confusing for some to pass address.
+
+vfsr.[ch]:
+Reverted to scheme of r4, wherein one g_[...] variable and several
+g_[...] addresses were used in parameter list of vfsr() to make this
+local [...] information global to several other small internal vfsr
+routines.
+
+user.[ch]:
+Changed names of all parameters in user.c passed to vfsr to be
+different than those used in vfsr.  This should help to catch any
+errors such as the one above involving final_cost.
+
+These changes appear to speed up the program; results were the same.
+
+Thanks to Dan Adler <adan@tudor.com> for first discovering this
+blunder.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Added int *exit_status to return reason for exiting vfsr.  A warning
+was put in readme.ms not to rely solely on this info.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Acknowledgment to Mark Johnson <mark@microunity.com> added to user.c.
+
+========================================================================
+5 Nov 92
+
+Over several revisions, the core of VFSR was extracted out of previous
+codes used since 1987, and global name changes were made.  Tests were
+run using cost functions from old problems to check the new code.  The
+old code had some very good checks performed by fitting a Lagrangian
+representation of a set of nonlinear multivariate stochastic
+differential equations (SDE's).  I.e., (a) data was generated from the
+SDE's; (b) the coefficients were arbitrarily changed; (c) the
+Lagrangian representation was processed by VFSR to find the original
+coefficients, within the accuracy permitted by the variances of the
+original SDE's.  Since then, there have been many different tests, such
+as those referenced in the README.
+
+========================================================================
+Jan 1991
+
+Created C-language version of VFSR.
+
+========================================================================
+1987
+
+Created RATFOR/FORTRAN version of VFSR.
+
+========================================================================
+		@@CONTRIBUTORS
+========================================================================
+
+Acknowledgments to people who have contributed to the ASA code:
+
+Ahmed Ouenes		<ouenes@baervan.nmt.edu>
+Alan Cabrera		<adc@sanwabgk.com>
+Amir Atiya		<amir@alumni.caltech.edu>
+Barak Cohen		<goman@netvision.net.il>
+Bill Wong		<bgwong@holonet.net>
+Bruce Rosen		<rosen@ringer.cs.utsa.edu>
+Burkhard Volkemer	<buv@vsnhd1.cern.ch>
+Ceren Kayalar		<ckayalar@sabanciuniv.edu>
+Cullen Schaffer		<schaffer@marna.hunter.cuny.edu>
+Dan Adler		<adan@tudor.com>
+David Hough		<david.hough@eng.sun.com>
+David Zuhn		<zoo@cygnus.com>
+Davyd Norris		<daffy@sci.monash.edu.au>
+Dietmar Auferkorte	<dietmar.auferkorte@fernuni-hagen.de>
+Edward Peschko		<peschko@mermaid.micro.umn.edu>
+Eric Grosse		<ehg@research.att.com>
+Felipe Almeida Lessa	<felipe.lessa@gmail.com>
+Geoff Kuenning		<geoff@itcorp.com>
+Giacomo Indiveri	<giacomo@dibe.unige.it>
+Graham Campbell		<campbell@ams.sunysb.edu>
+Guy Carpenter		<guy@tfrc.csiro.au>
+Heather Sherman		<heather@cco.caltech.edu>
+Helmut Jarausch		<jarausch@igpm.rwth-aachen.de>
+Hime Junior		<hime@engineer.com>
+Hope Pioro		<hpioro@bank-banque-canada.ca>
+Ion Georgiades		<iong@videotron.ca>
+Jacob Engelbrecht	<engel@virus.fki.dth.dk>
+Jacques Mequin		<jmequin@tif.ti.com>
+James Clark		<jjc@ai.mit.edu>
+John Dean		<john_c_dean@bankone.com>
+John Johnson		<john.johnson@epcos.com>
+John Selverian		<selveria@rd.sylvania.com>
+Knut Buettner		<buettner@aix03.fk.bgt.de>
+Kevin Burton		<kburton@noran.com>
+Lee Hon Man		<89299465@cphkvx.cphk.hk>
+Leslie Picardo		<picardo@alpha.ces.cwru.edu>
+Magne Myrtveit		<magne@myrtveit.com>
+Mark Johnson		<mjohnson@netcom.com>
+Matthew O'Hara		<mattman@cml.berkeley.edu>
+Matthias Kirst		<matt@clondiag.com>
+Micah Altman		<micah@cco.caltech.edu>
+Paul Teetor		<e3uprt@fnma.com>
+Radu Mondescu		<rmondescu@drwtrading.com>
+Ravi Bansal		<xbansal@suned.zoo.cs.yale.edu>
+Shinichi Sakata		<shinichi.sakata@gmail.com>
+Sonja Zwissler		<zwissler@askdonald.ask.uni-karlsruhe.de>
+Steve Danauskas		<steved@uchicago.edu>
+Steven Gillispie	<steve_gillispie@oscar.rad.washington.edu>
+Thomas Binder		<binder@iue.tuwien.ac.at>
+Thomas Marston Morse	<morse@chinook.uoregon.edu>
+Timothy Burns		<tim@isis.usi.utah.edu>
+Walter Roberson		<roberson@hamer.ibd.nrc.ca>
+Wolfram Gloger		<wmglo@dent.med.uni-muenchen.de>
+Wu Kenong		<wu@mcrcim.mcgill.edu>
+Yuan Liu		<liu@cs.umd.edu>
+Zening Ge		<zg11@midway.uchicago.edu>
+
+========================================================================
+		@@VERSION DATES
+========================================================================
+* Modification History:
+*	27 Jan 15:	Version	30.18
+*	27 Jan 15:	Version	30.17
+*	27 Jan 15:	Version	30.16
+*	11 Oct 14:	Version	30.15
+*	11 Oct 14:	Version	30.14
+*	11 Oct 14:	Version	30.13
+*	11 Oct 14:	Version	30.12
+*	11 Oct 14:	Version	30.11
+*	28 Jul 14:	Version	30.10
+*	28 Jul 14:	Version	30.9
+*	28 Jul 14:	Version	30.8
+*	09 Apr 14:	Version	30.7
+*	21 Jan 14:	Version	30.6
+*	21 Jan 14:	Version	30.5
+*	19 Jan 14:	Version	30.4
+*	06 Jan 14:	Version	30.3
+*	06 Jan 14:	Version	30.2
+*	04 Jan 14:	Version	30.1
+*	19 Oct 13:	Version	29.6
+*	19 Oct 13:	Version	29.5
+*	19 Oct 13:	Version	29.4
+*	13 Sep 13:	Version	29.3
+*	13 Sep 13:	Version	29.2
+*	12 Sep 13:	Version	29.1
+*	12 Sep 13:	Version	28.16
+*	08 Apr 13:	Version	28.15
+*	26 Mar 13:	Version	28.14
+*	07 Aug 12:	Version	28.13
+*	02 Jul 12:	Version	28.12
+*	13 Apr 12:	Version	28.11
+*	11 Apr 12:	Version	28.10
+*	04 Feb 12:	Version	28.9
+*	29 Dec 11:	Version	28.8
+*	29 Dec 11:	Version	28.7
+*	16 Oct 11:	Version	28.6
+*	27 Jul 11:	Version	28.5
+*	09 Mar 11:	Version	28.4
+*	09 Mar 11:	Version	28.3
+*	09 Mar 11:	Version	28.2
+*	09 Feb 11:	Version	28.1
+*	15 Dec 10:	Version	27.6
+*	14 Dec 10:	Version	27.5
+*	10 Dec 10:	Version	27.4
+*	10 Dec 10:	Version	27.3
+*	10 Dec 10:	Version	27.2
+*	10 Dec 10:	Version	27.1
+*	08 Dec 10:	Version	26.40
+*	16 Jul 10:	Version	26.39
+*	04 Jan 10:	Version	26.38
+*	04 Nov 09:	Version	26.37
+*	03 Nov 09:	Version	26.36
+*	15 Apr 09:	Version	26.35
+*	26 Jan 09:	Version	26.34
+*	30 Dec 08:	Version	26.33
+*	13 Sep 08:	Version	26.32
+*	24 Jul 08:	Version	26.31
+*	24 Apr 08:	Version	26.30
+*	08 Mar 08:	Version	26.29
+*	20 Feb 08:	Version	26.28
+*	19 Feb 08:	Version	26.27
+*	18 Feb 08:	Version	26.26
+*	18 Feb 08:	Version	26.25
+*	26 Dec 07:	Version	26.24
+*	31 Jan 07:	Version	26.23
+*	23 Nov 06:	Version	26.22
+*	21 Nov 06:	Version	26.21
+*	26 Sep 06:	Version	26.20
+*	25 Sep 06:	Version	26.19
+*	27 Jul 06:	Version	26.18
+*	20 Jul 06:	Version	26.17
+*	20 Jul 06:	Version	26.16
+*	19 Jul 06:	Version	26.15
+*	13 Jul 06:	Version	26.14
+*	12 May 06:	Version	26.13
+*	26 Feb 06:	Version	26.12
+*	25 Feb 06:	Version	26.11
+*	23 Feb 06:	Version	26.10
+*	23 Feb 06:	Version	26.9
+*	26 Jan 06:	Version	26.8
+*	02 Jan 06:	Version	26.7
+*	01 Jan 06:	Version	26.6
+*	29 Nov 05:	Version	26.5
+*	28 Nov 05:	Version	26.4
+*	07 Oct 05:	Version	26.3
+*	26 Aug 05:	Version	26.2
+*	23 Aug 05:	Version	26.1
+*	07 Jul 05:	Version	25.28
+*	03 Apr 05:	Version	25.27
+*	02 Mar 05:	Version	25.26
+*	22 Jan 05:	Version	25.25
+*	12 Jan 05:	Version	25.24
+*	11 Jan 05:	Version	25.23
+*	07 Jan 05:	Version	25.22
+*	07 Jan 05:	Version	25.21
+*	03 Jan 05:	Version	25.20
+*	03 Jan 05:	Version	25.19
+*	03 Jan 05:	Version	25.18
+*	12 Dec 04:	Version	25.17
+*	06 Dec 04:	Version	25.16
+*	23 Sep 04:	Version	25.15
+*	26 Jul 04:	Version	25.14
+*	10 Jun 04:	Version	25.13
+*	13 May 04:	Version	25.12
+*	12 May 04:	Version	25.11
+*	23 Feb 04:	Version	25.10
+*	19 Feb 04:	Version	25.9
+*	11 Feb 04:	Version	25.8
+*	10 Feb 04:	Version	25.7
+*	17 Jan 04:	Version	25.6
+*	25 Jul 03:	Version	25.5
+*	24 Jun 03:	Version	25.4
+*	22 Apr 03:	Version	25.3
+*	13 Apr 03:	Version	25.2
+*	22 Feb 03:	Version	25.1
+*	06 Jan 03:	Version	24.3
+*	23 Oct 02:	Version	24.2
+*	03 Jun 02:	Version	24.1
+*	22 Apr 02:	Version	23.13
+*	19 Apr 02:	Version	23.12
+*	05 Mar 02:	Version	23.11
+*	15 Nov 01:	Version	23.10
+*	13 Nov 01:	Version	23.9
+*	29 Oct 01:	Version	23.8
+*	12 Oct 01:	Version	23.7
+*	11 Oct 01:	Version	23.6
+*	14 Sep 01:	Version	23.5
+*	11 Aug 01:	Version	23.4
+*	01 Aug 01:	Version	23.3
+*	20 Jul 01:	Version	23.2
+*	19 Jul 01:	Version	23.1
+*	21 Jun 01:	Version	22.12
+*	15 May 01:	Version	22.11
+*	13 May 01:	Version	22.10
+*	04 May 01:	Version	22.9
+*	17 Apr 01:	Version	22.8
+*	27 Mar 01:	Version	22.7
+*	16 Mar 01:	Version	22.6
+*	05 Mar 01:	Version	22.5
+*	25 Jan 01:	Version	22.4
+*	25 Jan 01:	Version	22.3
+*	17 Jan 01:	Version	22.2
+*	14 Jan 01:	Version	22.1
+*	30 Dec 00:	Version	21.10
+*	19 Dec 00:	Version	21.9
+*	18 Dec 00:	Version	21.8
+*	18 Dec 00:	Version	21.7
+*	12 Dec 00:	Version	21.6
+*	28 Nov 00:	Version	21.5
+*	26 Nov 00:	Version	21.4
+*	24 Oct 00:	Version	21.3
+*	24 Oct 00:	Version	21.2
+*	19 Sep 00:	Version	21.1
+*	07 Sep 00:	Version	20.25
+*	21 Aug 00:	Version	20.24
+*	04 Aug 00:	Version	20.23
+*	02 Aug 00:	Version	20.22
+*	02 Aug 00:	Version	20.21
+*	02 Aug 00:	Version	20.20
+*	29 Jul 00:	Version	20.19
+*	21 Jul 00:	Version	20.18
+*	26 May 00:	Version	20.17
+*	19 May 00:	Version	20.16
+*	12 May 00:	Version	20.15
+*	10 May 00:	Version	20.14
+*	10 May 00:	Version	20.13
+*	09 May 00:	Version	20.12
+*	09 May 00:	Version	20.11
+*	08 May 00:	Version	20.10
+*	06 May 00:	Version	20.9
+*	03 May 00:	Version	20.8
+*	04 Apr 00:	Version	20.7
+*	15 Mar 00:	Version	20.6
+*	01 Mar 00:	Version	20.5
+*	28 Feb 00:	Version	20.4
+*	25 Feb 00:	Version	20.3
+*	21 Jan 00:	Version	20.2
+*	19 Jan 00:	Version	20.1
+*	29 Dec 99:	Version	19.13
+*	28 Dec 99:	Version	19.12
+*	26 Dec 99:	Version	19.11
+*	08 Dec 99:	Version	19.10
+*	08 Dec 99:	Version	19.9
+*	30 Nov 99:	Version	19.8
+*	30 Nov 99:	Version	19.7
+*	27 Nov 99:	Version	19.6
+*	25 Nov 99:	Version	19.5
+*	18 Nov 99:	Version	19.4
+*	17 Nov 99:	Version	19.3
+*	14 Nov 99:	Version	19.2
+*	13 Nov 99:	Version	19.1
+*	13 Nov 99:	Version	18.8
+*	11 Nov 99:	Version	18.7
+*	07 Nov 99:	Version	18.6
+*	06 Nov 99:	Version	18.5
+*	21 Oct 99:	Version	18.4
+*	19 Oct 99:	Version	18.3
+*	30 Sep 99:	Version	18.2
+*	29 Sep 99:	Version	18.1
+*	22 Sep 99:	Version	17.26
+*	09 Sep 99:	Version	17.25
+*	08 Sep 99:	Version	17.24
+*	08 Sep 99:	Version	17.23
+*	25 Aug 99:	Version	17.22
+*	19 Aug 99:	Version	17.21
+*	17 Aug 99:	Version	17.20
+*	15 Feb 99:	Version	17.19
+*	15 Feb 99:	Version	17.18
+*	07 Feb 99:	Version	17.17
+*	04 Feb 99:	Version	17.16
+*	27 Jan 99:	Version	17.15
+*	15 Jan 99:	Version	17.14
+*	26 Sep 98:	Version	17.13
+*	26 Sep 98:	Version	17.12
+*	26 Sep 98:	Version	17.11
+*	25 Sep 98:	Version	17.10
+*	24 Sep 98:	Version	17.9
+*	12 Jul 98:	Version	17.8
+*	09 Jul 98:	Version	17.7
+*	09 Jul 98:	Version	17.6
+*	08 Jul 98:	Version	17.5
+*	08 Jul 98:	Version	17.4
+*	08 Jul 98:	Version	17.3
+*	08 Jul 98:	Version	17.2
+*	07 Jul 98:	Version	17.1
+*	19 Jun 98:	Version	16.21
+*	18 Jun 98:	Version	16.20
+*	29 May 98:	Version	16.19
+*	26 Apr 98:	Version	16.18
+*	09 Apr 98:	Version	16.17
+*	06 Mar 98:	Version	16.16
+*	05 Mar 98:	Version	16.15
+*	12 Feb 98:	Version	16.14
+*	31 Jan 98:	Version	16.13
+*	23 Jan 98:	Version	16.12
+*	22 Jan 98:	Version	16.11
+*	09 Jan 98:	Version	16.10
+*	08 Jan 98:	Version	16.9
+*	29 Dec 97:	Version	16.8
+*	18 Dec 97:	Version	16.7
+*	07 Dec 97:	Version	16.6
+*	05 Dec 97:	Version	16.5
+*	01 Dec 97:	Version	16.4
+*	30 Nov 97:	Version	16.3
+*	30 Nov 97:	Version	16.2
+*	29 Nov 97:	Version	16.1
+*	07 Nov 97:	Version	15.25
+*	03 Nov 97:	Version	15.24
+*	27 Oct 97:	Version	15.23
+*	16 Sep 97:	Version	15.22
+*	28 Aug 97:	Version	15.21
+*	28 Aug 97:	Version	15.20
+*	26 Aug 97:	Version	15.19
+*	26 Aug 97:	Version	15.18
+*	23 Aug 97:	Version	15.17
+*	06 Aug 97:	Version	15.16
+*	06 Aug 97:	Version	15.15
+*	31 Jul 97:	Version	15.14
+*	15 Jul 97:	Version	15.13
+*	03 Jul 97:	Version	15.12
+*	25 Jun 97:	Version	15.11
+*	20 Jun 97:	Version	15.10
+*	17 Jun 97:	Version	15.9
+*	14 Jun 97:	Version	15.8
+*	08 Jun 97:	Version	15.7
+*	06 Jun 97:	Version	15.6
+*	06 Jun 97:	Version	15.5
+*	06 Jun 97:	Version	15.4
+*	05 Jun 97:	Version	15.3
+*	04 Jun 97:	Version	15.2
+*	01 Jun 97:	Version	15.1
+*	29 May 97:	Version	14.16
+*	22 May 97:	Version	14.15
+*	22 May 97:	Version	14.14
+*	22 May 97:	Version	14.13
+*	18 May 97:	Version	14.12
+*	12 May 97:	Version	14.11
+*	11 May 97:	Version	14.10
+*	08 May 97:	Version	14.9
+*	13 Apr 97:	Version	14.8
+*	24 Mar 97:	Version	14.7
+*	11 Mar 97:	Version	14.6
+*	02 Mar 97:	Version	14.5
+*	22 Feb 97:	Version	14.4
+*	03 Feb 97:	Version	14.3
+*	10 Jan 97:	Version	14.2
+*	10 Jan 97:	Version	14.1
+*	30 Dec 96:	Version	13.19
+*	26 Dec 96:	Version	13.18
+*	21 Dec 96:	Version	13.17
+*	09 Dec 96:	Version	13.16
+*	04 Dec 96:	Version	13.15
+*	30 Nov 96:	Version	13.14
+*	22 Nov 96:	Version	13.13
+*	22 Nov 96:	Version	13.12
+*	21 Nov 96:	Version	13.11
+*	14 Nov 96:	Version	13.10
+*	03 Nov 96:	Version	13.9
+*	16 Sep 96:	Version	13.8
+*	15 Sep 96:	Version	13.7
+*	11 Sep 96:	Version	13.6
+*	16 Aug 96:	Version	13.5
+*	24 Jul 96:	Version	13.4
+*	24 Jul 96:	Version	13.3
+*	03 Jul 96:	Version	13.2
+*	14 Jun 96:	Version	13.1
+*	13 Jun 96:	Version	12.30
+*	10 Jun 96:	Version	12.29
+*	09 Jun 96:	Version	12.28
+*	09 Jun 96:	Version	12.27
+*	22 May 96:	Version	12.26
+*	22 May 96:	Version	12.25
+*	09 May 96:	Version	12.24
+*	02 May 96:	Version	12.23
+*	02 May 96:	Version	12.22
+*	29 Apr 96:	Version	12.21
+*	23 Apr 96:	Version	12.20
+*	19 Apr 96:	Version	12.19
+*	16 Apr 96:	Version	12.18
+*	10 Apr 96:	Version	12.17
+*	08 Apr 96:	Version	12.16
+*	07 Apr 96:	Version	12.15
+*	06 Apr 96:	Version	12.14
+*	04 Apr 96:	Version	12.13
+*	17 Mar 96:	Version	12.12
+*	12 Mar 96:	Version	12.11
+*	02 Mar 96:	Version	12.10
+*	29 Feb 96:	Version	12.9
+*	28 Feb 96:	Version	12.8
+*	13 Feb 96:	Version	12.7
+*	09 Feb 96:	Version	12.6
+*	18 Jan 96:	Version	12.5
+*	17 Jan 96:	Version	12.4
+*	15 Jan 96:	Version	12.3
+*	15 Jan 96:	Version	12.2
+*	13 Jan 96:	Version	12.1
+*	10 Jan 96:	Version	11.28
+*	08 Jan 96:	Version	11.27
+*	08 Jan 96:	Version	11.26
+*	06 Jan 96:	Version	11.25
+*	05 Jan 96:	Version	11.24
+*	05 Jan 96:	Version	11.23
+*	05 Jan 96:	Version	11.22
+*	30 Dec 95:	Version	11.21
+*	29 Dec 95:	Version	11.20
+*	29 Dec 95:	Version	11.19
+*	19 Dec 95:	Version	11.18
+*	17 Dec 95:	Version	11.17
+*	08 Dec 95:	Version	11.16
+*	07 Dec 95:	Version	11.15
+*	07 Dec 95:	Version	11.14
+*	07 Dec 95:	Version	11.13
+*	07 Dec 95:	Version	11.12
+*	05 Dec 95:	Version	11.11
+*	05 Dec 95:	Version	11.10
+*	01 Dec 95:	Version	11.9
+*	20 Nov 95:	Version	11.8
+*	17 Nov 95:	Version	11.7
+*	16 Nov 95:	Version	11.6
+*	04 Nov 95:	Version	11.5
+*	04 Nov 95:	Version	11.4
+*	03 Nov 95:	Version	11.3
+*	03 Nov 95:	Version	11.2
+*	03 Nov 95:	Version	11.1
+*	01 Nov 95:	Version	10.23
+*	30 Oct 95:	Version	10.22
+*	30 Oct 95:	Version	10.21
+*	29 Oct 95:	Version	10.20
+*	28 Oct 95:	Version	10.19
+*	22 Oct 95:	Version	10.18
+*	22 Oct 95:	Version	10.17
+*	04 Oct 95:	Version	10.16
+*	01 Oct 95:	Version	10.15
+*	01 Oct 95:	Version	10.14
+*	01 Oct 95:	Version	10.13
+*	30 Sep 95:	Version	10.12
+*	29 Sep 95:	Version	10.11
+*	29 Sep 95:	Version	10.10
+*	29 Sep 95:	Version	10.9
+*	28 Sep 95:	Version	10.8
+*	28 Sep 95:	Version	10.7
+*	28 Sep 95:	Version	10.6
+*	24 Sep 95:	Version	10.5
+*	24 Sep 95:	Version	10.4
+*	16 Sep 95:	Version	10.3
+*	15 Sep 95:	Version	10.2
+*	15 Sep 95:	Version	10.1
+*	14 Sep 95:	Version	9.8
+*	13 Sep 95:	Version	9.7
+*	13 Sep 95:	Version	9.6
+*	08 Sep 95:	Version	9.5
+*	03 Sep 95:	Version	9.4
+*	01 Sep 95:	Version	9.3
+*	29 Aug 95:	Version	9.2
+*	25 Aug 95:	Version	9.1
+*	21 Aug 95:	Version	8.14
+*	19 Aug 95:	Version	8.13
+*	13 Aug 95:	Version	8.12
+*	08 Aug 95:	Version	8.11
+*	06 Aug 95:	Version	8.10
+*	04 Aug 95:	Version	8.9
+*	03 Aug 95:	Version	8.8
+*	03 Aug 95:	Version	8.7
+*	29 Jul 95:	Version	8.6
+*	15 Jul 95:	Version	8.5
+*	06 Jul 95:	Version	8.4
+*	06 Jul 95:	Version	8.3
+*	02 Jul 95:	Version	8.2
+*	15 Jun 95:	Version	8.1
+*	09 Jun 95:	Version	7.17
+*	05 Jun 95:	Version	7.16
+*	30 May 95:	Version	7.15
+*	30 May 95:	Version	7.14
+*	25 May 95:	Version	7.13
+*	25 May 95:	Version	7.12
+*	16 May 95:	Version	7.11
+*	04 May 95:	Version	7.10
+*	30 Apr 95:	Version	7.9
+*	23 Apr 95:	Version	7.8
+*	19 Apr 95:	Version	7.7
+*	19 Apr 95:	Version	7.6
+*	17 Apr 95:	Version	7.5
+*	16 Apr 95:	Version	7.4
+*	14 Apr 95:	Version	7.3
+*	14 Apr 95:	Version	7.2
+*	12 Apr 95:	Version	7.1
+*	02 Apr 95:	Version	6.32
+*	26 Mar 95:	Version	6.31
+*	25 Mar 95:	Version	6.30
+*	24 Mar 95:	Version	6.29
+*	24 Mar 95:	Version	6.28
+*	24 Mar 95:	Version	6.27
+*	17 Mar 95:	Version	6.26
+*	09 Mar 95:	Version	6.25
+*	08 Mar 95:	Version	6.24
+*	28 Feb 95:	Version	6.23
+*	26 Feb 95:	Version	6.22
+*	19 Feb 95:	Version	6.21
+*	18 Feb 95:	Version	6.20
+*	18 Feb 95:	Version	6.19
+*	18 Feb 95:	Version	6.18
+*	18 Feb 95:	Version	6.17
+*	17 Feb 95:	Version	6.16
+*	17 Feb 95:	Version	6.15
+*	17 Feb 95:	Version	6.14
+*	16 Feb 95:	Version	6.13
+*	16 Feb 95:	Version	6.12
+*	16 Feb 95:	Version	6.11
+*	14 Feb 95:	Version	6.10
+*	11 Feb 95:	Version	6.9
+*	11 Feb 95:	Version	6.8
+*	09 Feb 95:	Version	6.7
+*	08 Feb 95:	Version	6.6
+*	08 Feb 95:	Version	6.5
+*	07 Feb 95:	Version	6.4
+*	05 Feb 95:	Version	6.3
+*	01 Feb 95:	Version	6.2
+*	01 Feb 95:	Version	6.1
+*	27 Jan 95:	Version	5.13
+*	26 Jan 95:	Version	5.12
+*	18 Jan 95:	Version	5.11
+*	13 Jan 95:	Version	5.10
+*	13 Jan 95:	Version	5.9
+*	12 Jan 95:	Version	5.8
+*	30 Dec 94:	Version	5.7
+*	20 Dec 94:	Version	5.6
+*	19 Dec 94:	Version	5.5
+*	19 Dec 94:	Version	5.4
+*	18 Dec 94:	Version	5.3
+*	17 Dec 94:	Version	5.2
+*	16 Dec 94:	Version	5.1
+*	15 Dec 94:	Version	4.12
+*	13 Dec 94:	Version	4.11
+*	08 Dec 94:	Version	4.10
+*	23 Nov 94:	Version	4.9
+*	13 Nov 94:	Version	4.8
+*	12 Nov 94:	Version	4.7
+*	08 Nov 94:	Version	4.6
+*	07 Nov 94:	Version	4.5
+*	06 Nov 94:	Version	4.4
+*	05 Nov 94:	Version	4.3
+*	23 Oct 94:	Version	4.2
+*	23 Oct 94:	Version	4.1
+*	23 Oct 94:	Version	3.25
+*	22 Oct 94:	Version	3.24
+*	20 Oct 94:	Version	3.23
+*	19 Oct 94:	Version	3.22
+*	14 Oct 94:	Version	3.21
+*	01 Oct 94:	Version	3.20
+*	31 Aug 94:	Version	3.19
+*	19 Aug 94:	Version	3.18
+*	28 Jun 94:	Version	3.17
+*	09 Jun 94:	Version	3.16
+*	06 Jun 94:	Version	3.15
+*	04 Jun 94:	Version	3.14
+*	31 May 94:	Version	3.13
+*	27 Apr 94:	Version	3.12
+*	27 Apr 94:	Version	3.11
+*	19 Apr 94:	Version	3.10
+*	18 Apr 94:	Version	3.9
+*	17 Apr 94:	Version	3.8
+*	16 Apr 94:	Version	3.7
+*	15 Apr 94:	Version	3.6
+*	10 Apr 94:	Version	3.5
+*	10 Apr 94:	Version	3.4
+*	08 Apr 94:	Version	3.3
+*	07 Apr 94:	Version	3.2
+*	06 Apr 94:	Version	3.1
+*	05 Apr 94:	Version	2.32
+*	05 Apr 94:	Version	2.31
+*	31 Mar 94:	Version	2.30
+*	29 Mar 94:	Version	2.29
+*	17 Mar 94:	Version	2.28
+*	16 Mar 94:	Version	2.27
+*	11 Mar 94:	Version	2.26
+*	10 Mar 94:	Version	2.25
+*	09 Mar 94:	Version	2.24
+*	08 Mar 94:	Version	2.23
+*	04 Mar 94:	Version	2.22
+*	03 Mar 94:	Version	2.21
+*	17 Feb 94:	Version	2.20
+*	16 Feb 94:	Version	2.19
+*	16 Feb 94:	Version	2.18
+*	15 Feb 94:	Version	2.17
+*	13 Feb 94:	Version	2.16
+*	10 Feb 94:	Version	2.15
+*	03 Feb 94:	Version	2.14
+*	01 Feb 94:	Version	2.13
+*	31 Jan 94:	Version	2.12
+*	28 Jan 94:	Version	2.11
+*	21 Jan 94:	Version	2.10
+*	17 Jan 94:	Version	2.9
+*	16 Jan 94:	Version	2.8
+*	13 Jan 94:	Version	2.7
+*	12 Jan 94:	Version	2.6
+*	12 Jan 94:	Version	2.5
+*	09 Jan 94:	Version	2.4
+*	21 Dec 93:	Version	2.3
+*	04 Dec 93:	Version	2.2
+*	26 Nov 93:	Version	2.1
+*	22 Nov 93:	Version	1.59
+*	17 Nov 93:	Version	1.58
+*	16 Nov 93:	Version	1.57
+*	15 Nov 93:	Version	1.56
+*	14 Nov 93:	Version	1.55
+*	14 Nov 93:	Version	1.54
+*	12 Nov 93:	Version	1.53
+*	11 Nov 93:	Version	1.52
+*	06 Nov 93:	Version	1.51
+*	26 Oct 93:	Version	1.50
+*	23 Oct 93:	Version	1.49
+*	15 Oct 93:	Version	1.48
+*	15 Oct 93:	Version	1.47
+*	14 Oct 93:	Version	1.46
+*	29 Sep 93:	Version	1.45
+*	24 Sep 93:	Version	1.44
+*	17 Sep 93:	Version	1.43
+*	14 Sep 93:	Version	1.42
+*	01 Sep 93:	Version	1.41
+*	18 Aug 93:	Version	1.40
+*	16 Aug 93:	Version	1.39
+*	28 Jul 93:	Version	1.38
+*	24 Jul 93:	Version	1.37
+*	10 Jul 93:	Version	1.36
+*	05 Jul 93:	Version	1.35
+*	04 Jul 93:	Version	1.34
+*	30 Jun 93:	Version	1.33
+*	29 Jun 93:	Version	1.32
+*	16 Jun 93:	Version	1.31
+*	12 Jun 93:	Version	1.30
+*	10 Jun 93:	Version	1.29
+*	09 Jun 93:	Version	1.28
+*	08 Jun 93:	Version	1.27
+*	06 Jun 93:	Version	1.26
+*	06 Jun 93:	Version	1.25
+*	05 Jun 93:	Version	1.24
+*	04 Jun 93:	Version	1.23
+*	02 Jun 93:	Version	1.22
+*	02 Jun 93:	Version	1.21
+*	31 May 93:	Version	1.20
+*	31 May 93:	Version	1.19
+*	29 May 93:	Version	1.18
+*	25 May 93:	Version	1.17
+*	25 May 93:	Version	1.16
+*	24 May 93:	Version	1.15
+*	22 May 93:	Version	1.14
+*	17 May 93:	Version	1.13
+*	16 May 93:	Version	1.12
+*	16 May 93:	Version	1.11
+*	15 May 93:	Version	1.10
+*	14 May 93:	Version	1.9
+*	14 May 93:	Version	1.8
+*	13 May 93:	Version	1.7
+*	11 May 93:	Version	1.6
+*	09 May 93:	Version	1.5
+*	08 May 93:	Version	1.4
+*	07 May 93:	Version	1.3
+*	05 May 93:	Version	1.2
+*	20 Apr 93:	Version	1.1	first ASA release
+*	05 Apr 93:	VFSR	9.4
+*	04 Apr 93:	VFSR	9.3
+*	22 Mar 93:	VFSR	9.1
+*	05 Mar 93:	VFSR	8.2
+*	27 Feb 93:	VFSR	8.1
+*	18 Feb 93:	VFSR	7.7
+*	15 Feb 93:	VFSR	7.6
+*	07 Feb 93:	VFSR	7.4
+*	04 Feb 93:	VFSR	7.3
+*	01 Feb 93:	VFSR	7.1
+*	28 Jan 93:	VFSR	6.46
+*	18 Jan 93:	VFSR	6.40
+*	01 Jan 93:	Version	1.0	development stage of ASA
+*	30 Dec 92:	VFSR	6.38
+*	17 Dec 92:	VFSR	6.35
+*	13 Dec 92:	VFSR	6.34
+*	09 Dec 92:	VFSR	6.33
+*	07 Dec 92:	VFSR	6.30
+*	03 Dec 92:	VFSR	6.25
+*	30 Nov 92:	VFSR	6.20
+*	19 Nov 92:	Beta VFSR
+*	05 Nov 92:	Initial C-language GNU version of VFSR
+*	Jan 1991:	Created C-language version of VFSR
+*	1987:		Created RATFOR/FORTRAN version of VFSR
+========================================================================

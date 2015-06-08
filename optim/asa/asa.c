@@ -1,11 +1,11 @@
 /***********************************************************************
 * Adaptive Simulated Annealing (ASA)
 * Lester Ingber <ingber@ingber.com>
-* Copyright (c) 1987-2014 Lester Ingber.  All Rights Reserved.
+* Copyright (c) 1987-2015 Lester Ingber.  All Rights Reserved.
 * ASA-LICENSE file has the license that must be included with ASA code.
 ***********************************************************************/
 
-#define ASA_ID "/* $Id: asa.c,v 30.10 2014/07/28 21:14:10 ingber Exp ingber $ */"
+#define ASA_ID "/* $Id: asa.c,v 30.18 2015/01/27 22:43:13 ingber Exp ingber $ */"
 
 #include "asa.h"
 
@@ -182,7 +182,6 @@ asa (user_cost_function,
   double *tmp_var_db_par;
   int *valid_state_generated_flag_par;
   int valid_state_generated_flag_par_test;
-  int parallel_id;
 #if ASA_QUEUE
   int *queue_new_par;
   LONG_INT *queue_v_par;
@@ -4761,7 +4760,8 @@ reanneal (parameter_minimum,
         log_new_temperature_ratio =
           -temperature_scale_parameters[index_v] * F_POW (tmp_dbl,
 #if QUENCH_PARAMETERS
-                                                          OPTIONS->User_Quench_Param_Scale
+                                                          OPTIONS->
+                                                          User_Quench_Param_Scale
                                                           [index_v]
 #else
                                                           ONE
@@ -4776,7 +4776,8 @@ reanneal (parameter_minimum,
         tmp_dbl /= (double) REANNEAL_SCALE;
         temperature_rescale_power = ONE / F_POW ((double) REANNEAL_SCALE,
 #if QUENCH_PARAMETERS
-                                                 OPTIONS->User_Quench_Param_Scale
+                                                 OPTIONS->
+                                                 User_Quench_Param_Scale
                                                  [index_v]
 #else
                                                  ONE
@@ -4857,7 +4858,8 @@ reanneal (parameter_minimum,
     while (tmp_dbl > ((double) MAXIMUM_REANNEAL_INDEX)) {
       log_new_temperature_ratio = -*temperature_scale_cost * F_POW (tmp_dbl,
 #if QUENCH_COST
-                                                                    OPTIONS->User_Quench_Cost_Scale
+                                                                    OPTIONS->
+                                                                    User_Quench_Cost_Scale
                                                                     [0]
 #else
                                                                     ONE
@@ -6079,6 +6081,12 @@ asa_test_asa_options (seed,
     print_string (ptr_asa_out, exit_msg);
     ++invalid;
   }
+  if (ASA_FUZZY_PRINT != FALSE && ASA_FUZZY_PRINT != TRUE) {
+    strcpy (exit_msg,
+            "*** ASA_FUZZY_PRINT != FALSE && ASA_FUZZY_PRINT != TRUE ***");
+    print_string (ptr_asa_out, exit_msg);
+    ++invalid;
+  }
   if (FITLOC != FALSE && FITLOC != TRUE) {
     strcpy (exit_msg, "*** FITLOC != FALSE && FITLOC != TRUE ***");
     print_string (ptr_asa_out, exit_msg);
@@ -6941,6 +6949,7 @@ print_asa_options (ptr_asa_out, OPTIONS)
   fprintf (ptr_asa_out, "ASA_QUEUE = %d\n", (int) ASA_QUEUE);
   fprintf (ptr_asa_out, "ASA_RESOLUTION = %d\n", (int) ASA_RESOLUTION);
   fprintf (ptr_asa_out, "ASA_FUZZY = %d\n", (int) ASA_FUZZY);
+  fprintf (ptr_asa_out, "ASA_FUZZY_PRINT = %d\n", (int) ASA_FUZZY_PRINT);
   fprintf (ptr_asa_out, "FITLOC = %d\n", (int) FITLOC);
   fprintf (ptr_asa_out, "FITLOC_ROUND = %d\n", (int) FITLOC_ROUND);
   fprintf (ptr_asa_out, "FITLOC_PRINT = %d\n", (int) FITLOC_PRINT);
