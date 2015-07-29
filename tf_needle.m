@@ -1,7 +1,7 @@
 function [stackwn, qmin, qidx] = tf_needle(stack, lambda, theta, pol, mfun, mfpar, ri, nic)
 %function [stackwn, qmin, qidx] = tf_needle(stack, lambda, theta, pol, mfun, mfpar, ri, nic)
 % 
-% tf_needle :  determines optimal positions of a needle layer
+% tf_needle :  determines the optimal position of a needle layer
 %              in a multi-layer film stack and returns a new
 %              film stack containing the needle layer. 
 %

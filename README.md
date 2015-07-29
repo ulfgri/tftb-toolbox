@@ -46,7 +46,7 @@ Unfortunately, very limited database of refractive indices.
 FreeSnell : http://people.csail.mit.edu/jaffer/FreeSnell/
 ---------------------------------------------------------
 FreeSnell is a software package for analyzing thin film multi-layers
-multi-layers written in Scheme. No design functionality.
+multi-layers written in Scheme. Analysis only - no design functionality.
 
 
 tmm: https://pypi.python.org/pypi/tmm
@@ -54,7 +54,7 @@ tmm: https://pypi.python.org/pypi/tmm
 TMM is a group of programs written in Python / NumPy for simulating light
 propagation in planar multilayer thin films, including the effects of
 multiple internal reflections and interference, using the "Transfer
-Matrix Method".
+Matrix Method". Very good manual.
 
 
 Units

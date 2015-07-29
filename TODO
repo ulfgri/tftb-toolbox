@@ -1,4 +1,6 @@
 
+- ellipsometry for transparent substrates (Yang-Abelson method).
+
 - improve spetral plots with spectrum bar (optional)
 
 - explore implementation of layer groups. S(k).d and S(k).n could become

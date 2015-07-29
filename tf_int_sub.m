@@ -17,6 +17,11 @@ function [R,T] = tf_int_sub(df, nkf, db, nkb, theta, pol)
 % Output:
 % R : reflectance
 % T : transmittance
+%
+% Reference:
+% + S. Larouche and L. Martinu, "OpenFilters: open-source software 
+%   for the design, optimization, and synthesis of optical
+%   filters", Appl. Opt. 47(13), C219-C230 (2008)
 
 % Initial version, Ulf Griesmann, January 2014
 
@@ -59,4 +64,3 @@ function [R,T] = tf_int_sub(df, nkf, db, nkb, theta, pol)
     T = Tf*Tb*exp(2*beta) / D;
 
 end
-
