@@ -41,7 +41,7 @@ elseif pol == 'p'
    eta_in = nk(1)^2 / sqrt(nk(1)^2 - alpha2);
    eta_ex = nk(end)^2 / sqrt(nk(end)^2 - alpha2);
 else
-   error('tf_amplinc :  unknown polarization state.');
+   error(sprintf('tf_amplinc :  unknown polarization state: %s.',pol));
 end
 
 % get characteristic matrices for layers

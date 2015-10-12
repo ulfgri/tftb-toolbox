@@ -33,24 +33,24 @@ function [M] = tf_charmat(d, nk, theta, pol);
     if isrow(d), d = d'; end
     if isempty(theta), theta = 0; end
 
-    % check if only one interface
+    % Snell invariant
+    alpha2 = (nk(1) * sin(pi*theta/180))^2;
+    
+    % check if there is only one interface (no layers)
     if length(d) == 2
-       M = eye(2);  % because delta = 0
+       M = eye(2);
        return
     end
 
     % pseudo-index eta and phase phi shift for each layer
-    alpha2 = (nk(1) * sin(pi*theta/180))^2;  % is constant
     N = nk(2:end-1);                         % actual layers
-    eta0 = sqrt(N.^2 - alpha2);
+    eta_s = sqrt(N.^2 - alpha2);
     if pol == 's'
-       eta = eta0;
-    elseif pol == 'p'
-       eta = N.^2 ./ eta0;
+       eta = eta_s;
     else
-       error('tf_charmat :  unknown polarization state.');
+       eta = N.^2 ./ eta_s;
     end
-    phi = 2*pi * d(2:end-1) .* eta0;
+    phi = 2*pi * d(2:end-1) .* eta_s;
 
     % stack of characteristic matrices for each layer
     M = complex(zeros(2,2,length(phi)));
@@ -60,5 +60,5 @@ function [M] = tf_charmat(d, nk, theta, pol);
     M(2,2,:) = cosphi;
     M(1,2,:) = i*sinphi./eta;
     M(2,1,:) = i*sinphi.*eta;
-
+    
 end

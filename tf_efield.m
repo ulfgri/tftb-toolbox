@@ -38,7 +38,7 @@ if pol == 's'
 elseif pol == 'p'
    eta_in = nk(1)^2 / sqrt(nk(1)^2 - alpha2);
 else
-   error('tf_efield :  unknown polarization state.');
+   error(sprintf('tf_efield :  unknown polarization state: %s.',pol));
 end
 
 % get characteristic matrices for layers

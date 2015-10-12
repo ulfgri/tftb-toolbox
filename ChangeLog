@@ -1,3 +1,7 @@
+2015-October-12
+- fixed a serious bug that resulted in wrong results for
+  p-polarized transmittances. Thank you to Matt Witzman
+  who noticed it.
 - fixed a bug in tf_*_sub.m functions that affected the
   calculation of transmittances when substrate effects are 
   included (thanks to Petar Atanackovic for pointing it out).

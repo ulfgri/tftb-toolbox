@@ -40,10 +40,10 @@ function [r, t] = tf_ampl(d, nk, theta, pol)
         eta_in = nk(1)^2 / sqrt(nk(1)^2 - alpha2);
         eta_ex = nk(end)^2 / sqrt(nk(end)^2 - alpha2);
     else
-        error('tf_ampl :  unknown polarization state.');
+        error(sprintf('tf_ampl :  unknown polarization state: %s.',pol));
     end
 
-    % get characteristic matrices for layers
+    % characteristic matrices for layers
     M = tf_charmat(d, nk, theta, pol);
 
     % characteristic matrix Mq for the whole stack
@@ -51,6 +51,8 @@ function [r, t] = tf_ampl(d, nk, theta, pol)
     for k = 2:size(M,3)
         Mq = Mq * M(:,:,k);
     end
+
+    % calculate amplitudes
     D =  eta_in*Mq(1,1) + eta_ex*Mq(2,2) + eta_in*eta_ex*Mq(1,2) + Mq(2,1);
     r = (eta_in*Mq(1,1) - eta_ex*Mq(2,2) + eta_in*eta_ex*Mq(1,2) - Mq(2,1)) / D;
     t =  2*eta_in / D;

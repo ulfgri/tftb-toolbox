@@ -1,10 +1,10 @@
-function ri = tf_ellip_sub(lambda, tanpsi, cosdel, theta, rien, name)
-%function ri = tf_ellip_sub(lambda, tanpsi, cosdel, theta, rien, name)
+function ri = tf_ellip_rind(lambda, tanpsi, cosdel, theta, rien, name)
+%function ri = tf_ellip_rind(lambda, tanpsi, cosdel, theta, rien, name)
 %
-% tf_ellip_sub: calculates the complex refractive index
-%               of a material from spectroscopic ellipsometry
-%               measurements at a single interface between 
-%               a substrate and an entry medium.
+% tf_ellip_rind: calculates the complex refractive index
+%                of a material from spectroscopic ellipsometry
+%                measurements at a single interface between 
+%                a substrate and an entry medium.
 %
 % Input:
 % lambda :  vector with wavelengths in micrometer

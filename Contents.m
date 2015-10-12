@@ -95,10 +95,16 @@
 % Ellipsometry:
 % -------------
 %    tf_psi.m        - calculate ellipsometric Psi and Delta
+%    tf_psi_sub.m    - ellipsometric Psi, Delta for transparent
+%                      substrates (Yang - Abelson)
 %    tf_ellip.m      - Ellipsometric spectra Psi(lambda) &
 %                      Delta(lambda) for a thin film stack
+%    tf_ellip_sub.m  - Ellipsometric spectra Psi(lambda) and 
+%                      Delta(lambda) for transparent substrates.
 %
-%    In directory 'ellipsometry':
+%
+% Ellipsometry functions for data analysis:
+% -----------------------------------------
 %    tf_ellip_match  - Visually compare measured ellipsometry data
 %                      with calculated data as function of 
 %                      layer thickness (rms of difference) e.g. to
@@ -106,7 +112,7 @@
 %    tf_ellip_d      - calculate layer thicknesses from spectroscopic
 %                      ellipsometry data for materials with known
 %                      optical constants.
-%    tf_ellip_sub    - calculate the complex refractive index of a
+%    tf_ellip_rind   - calculate the complex refractive index of a
 %                      material from spectroscopic ellipsometry
 %                      data of a substrate, i.e. a single material 
 %                      interface.

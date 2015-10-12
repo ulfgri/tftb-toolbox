@@ -18,43 +18,51 @@ function [R,T] = tf_int(d, nk, theta, pol)
 
 % Initial version, Ulf Griesmann, October 2013
 
-% check arguments
-if nargin ~= 4
-   error('tf_int :  4 input arguments required.');
-end
+    % check arguments
+    if nargin ~= 4
+        error('tf_int :  4 input arguments required.');
+    end
 
-% factor for transmitted waves
-tfac = real(nk(end)) / real(nk(1));
+    % factors for transmitted waves
+    alpha2 = (nk(1) * sin(pi*theta/180))^2; % Snell invariant
+    if pol == 's' || pol == 'u'
+       eta_in_s = sqrt(nk(1)^2 - alpha2);
+       eta_ex_s = sqrt(nk(end)^2 - alpha2);
+       tf_s = real(eta_ex_s)/real(eta_in_s);
+    end
+    if pol == 'p' || pol == 'u'
+       eta_in_p = nk(1)^2 / sqrt(nk(1)^2 - alpha2);
+       eta_ex_p = nk(end)^2 / sqrt(nk(end)^2 - alpha2);
+       tf_p = real(eta_ex_p)/real(eta_in_p);
+    end
     
-% calculate intensities
-switch pol
+    % calculate intensities
+    switch pol
       
-   case 'u'
-      [r, t] = tf_ampl(d, nk, theta, 's');
-      Rs = r*conj(r);
-      Ts = tfac * (t*conj(t));
+     case 'u'
+         [r, t] = tf_ampl(d, nk, theta, 's');
+         Rs = r*conj(r);
+         Ts = tf_s * (t*conj(t));
       
-      [r, t] = tf_ampl(d, nk, theta, 'p');
-      Rp = r*conj(r);
-      Tp = tfac * (t*conj(t));
+         [r, t] = tf_ampl(d, nk, theta, 'p');
+         Rp = r*conj(r);
+         Tp = tf_p * (t*conj(t));
+         
+         R = 0.5 * (Rs + Rp);
+         T = 0.5 * (Ts + Tp);
+         
+     case 's'
+         [r, t] = tf_ampl(d, nk, theta, 's');
+         R = r*conj(r);
+         T = tf_s * (t*conj(t));
       
-      R = 0.5 * (Rs + Rp);
-      T = 0.5 * (Ts + Tp);
+     case 'p'
+         [r, t] = tf_ampl(d, nk, theta, 'p');
+         R = r*conj(r);
+         T = tf_p * (t*conj(t));
       
-   case 's'
-      [r, t] = tf_ampl(d, nk, theta, 's');
-      R = r*conj(r);
-      T = tfac * (t*conj(t));
-      
-   case 'p'
-      [r, t] = tf_ampl(d, nk, theta, 'p');
-      R = r*conj(r);
-      T = tfac * (t*conj(t));
-      
-   otherwise
-      error('tf_int :  unknown polarization state.');
-        
+     otherwise
+         error(sprintf('tf_int :  unknown polarization state: %s.',pol));
+    end
+
 end
-
-return
-
