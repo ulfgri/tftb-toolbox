@@ -43,7 +43,7 @@ function [M] = tf_charmat(d, nk, theta, pol);
     end
 
     % pseudo-index eta and phase phi shift for each layer
-    N = nk(2:end-1);                         % actual layers
+    N = nk(2:end-1);                  % actual layers
     eta_s = sqrt(N.^2 - alpha2);
     if pol == 's'
        eta = eta_s;

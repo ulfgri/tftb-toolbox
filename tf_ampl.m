@@ -32,16 +32,7 @@ function [r, t] = tf_ampl(d, nk, theta, pol)
     if isempty(theta), theta = 0; end
 
     % pseudo-indices for entrance and exit materials
-    alpha2 = (nk(1) * sin(pi*theta/180))^2;  % Snell constant ^2
-    if pol == 's'
-        eta_in = sqrt(nk(1)^2 - alpha2);
-        eta_ex = sqrt(nk(end)^2 - alpha2);
-    elseif pol == 'p'
-        eta_in = nk(1)^2 / sqrt(nk(1)^2 - alpha2);
-        eta_ex = nk(end)^2 / sqrt(nk(end)^2 - alpha2);
-    else
-        error(sprintf('tf_ampl :  unknown polarization state: %s.',pol));
-    end
+    [eta_in, eta_ex] = eta_sp(nk, theta, pol);
 
     % characteristic matrices for layers
     M = tf_charmat(d, nk, theta, pol);

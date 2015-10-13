@@ -23,44 +23,35 @@ function [r, t] = tf_amplinc(d, nk, theta, pol)
 
 % Initial version, Ulf Griesmann, October 2013
 
-% check arguments
-if nargin < 4
-   error('tf_amplinc :  must have 4 arguments.');
-end
-if length(d) ~= length(nk)
-   error('tf_amplinc :  number of thicknesses ~= number of indices.');
-end
-if isempty(theta), theta = 0; end
+    % check arguments
+    if nargin < 4
+        error('tf_amplinc :  must have 4 arguments.');
+    end
+    if length(d) ~= length(nk)
+        error('tf_amplinc :  number of thicknesses ~= number of indices.');
+    end
+    if isempty(theta), theta = 0; end
 
-% pseudo-indices for entrance and exit materials
-alpha2 = (nk(1) * sin(pi*theta/180))^2;  % Snell constant ^2
-if pol == 's'
-   eta_in = sqrt(nk(1)^2 - alpha2);
-   eta_ex = sqrt(nk(end)^2 - alpha2);
-elseif pol == 'p'
-   eta_in = nk(1)^2 / sqrt(nk(1)^2 - alpha2);
-   eta_ex = nk(end)^2 / sqrt(nk(end)^2 - alpha2);
-else
-   error(sprintf('tf_amplinc :  unknown polarization state: %s.',pol));
+    % pseudo-indices for entrance and exit materials
+    [eta_in, eta_ex] = eta_sp(nk, theta, pol);
+
+    % get characteristic matrices for layers
+    M = tf_charmat(d, nk, theta, pol);
+
+    % calculate reflectance for each added layer
+    nm = size(M,3);
+    nm = nm+1;        % add matrix for no layer
+    M(:,:,nm) = eye(2);
+    r = complex(zeros(1,nm));
+    t = complex(zeros(1,nm));
+    Mq = eye(2);      % initialize M up to layer q      
+    for k = nm:-1:1   % assemble stack from substrate up
+        Mq = M(:,:,k) * Mq;
+        D =  eta_in*Mq(1,1) + eta_ex*Mq(2,2) + ...
+             eta_in*eta_ex*Mq(1,2) + Mq(2,1);
+        r(nm-k+1) = (eta_in*Mq(1,1) - eta_ex*Mq(2,2) + ...
+                     eta_in*eta_ex*Mq(1,2) - Mq(2,1)) / D;
+        t(nm-k+1) = 2*eta_in / D;
+    end
+
 end
-
-% get characteristic matrices for layers
-M = tf_charmat(d, nk, theta, pol);
-
-% calculate reflectance for each added layer
-nm = size(M,3);
-nm = nm+1;        % add matrix for no layer
-M(:,:,nm) = eye(2);
-r = complex(zeros(1,nm));
-t = complex(zeros(1,nm));
-Mq = eye(2);      % initialize M up to layer q      
-for k = nm:-1:1   % assemble stack from substrate up
-   Mq = M(:,:,k) * Mq;
-   D =  eta_in*Mq(1,1) + eta_ex*Mq(2,2) + ...
-        eta_in*eta_ex*Mq(1,2) + Mq(2,1);
-   r(nm-k+1) = (eta_in*Mq(1,1) - eta_ex*Mq(2,2) + ...
-                eta_in*eta_ex*Mq(1,2) - Mq(2,1)) / D;
-   t(nm-k+1) = 2*eta_in / D;
-end
-
-return

@@ -23,30 +23,19 @@ function [R,T] = tf_int(d, nk, theta, pol)
         error('tf_int :  4 input arguments required.');
     end
 
-    % factors for transmitted waves
-    alpha2 = (nk(1) * sin(pi*theta/180))^2; % Snell invariant
-    if pol == 's' || pol == 'u'
-       eta_in_s = sqrt(nk(1)^2 - alpha2);
-       eta_ex_s = sqrt(nk(end)^2 - alpha2);
-       tf_s = real(eta_ex_s)/real(eta_in_s);
-    end
-    if pol == 'p' || pol == 'u'
-       eta_in_p = nk(1)^2 / sqrt(nk(1)^2 - alpha2);
-       eta_ex_p = nk(end)^2 / sqrt(nk(end)^2 - alpha2);
-       tf_p = real(eta_ex_p)/real(eta_in_p);
-    end
-    
     % calculate intensities
     switch pol
       
      case 'u'
          [r, t] = tf_ampl(d, nk, theta, 's');
          Rs = r*conj(r);
-         Ts = tf_s * (t*conj(t));
+         [eta_in,eta_ex] = eta_sp(nk, theta, 's');
+         Ts = real(eta_ex) * (t*conj(t)) / real(eta_in);
       
          [r, t] = tf_ampl(d, nk, theta, 'p');
          Rp = r*conj(r);
-         Tp = tf_p * (t*conj(t));
+         [eta_in,eta_ex] = eta_sp(nk, theta, 'p');
+         Tp = real(eta_ex) * (t*conj(t)) / real(eta_in);
          
          R = 0.5 * (Rs + Rp);
          T = 0.5 * (Ts + Tp);
@@ -54,12 +43,14 @@ function [R,T] = tf_int(d, nk, theta, pol)
      case 's'
          [r, t] = tf_ampl(d, nk, theta, 's');
          R = r*conj(r);
-         T = tf_s * (t*conj(t));
+         [eta_in,eta_ex] = eta_sp(nk, theta, 's');
+         T = real(eta_ex) * (t*conj(t)) / real(eta_in);
       
      case 'p'
          [r, t] = tf_ampl(d, nk, theta, 'p');
          R = r*conj(r);
-         T = tf_p * (t*conj(t));
+         [eta_in,eta_ex] = eta_sp(nk, theta, 'p');
+         T = real(eta_ex) * (t*conj(t)) / real(eta_in);
       
      otherwise
          error(sprintf('tf_int :  unknown polarization state: %s.',pol));

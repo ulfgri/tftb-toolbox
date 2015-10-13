@@ -20,40 +20,33 @@ function [B,C] = tf_bcinc(d, nk, theta, pol)
 
 % Initial version, Ulf Griesmann, November 2013
 
-% check arguments
-if nargin < 4
-   error('tf_bcinc :  must have 4 arguments.');
-end
-if length(d) ~= length(nk)
-   error('tf_bcinc :  number of thicknesses ~= number of indices.');
-end
-if isempty(theta), theta = 0; end
+    % check arguments
+    if nargin < 4
+        error('tf_bcinc :  must have 4 arguments.');
+    end
+    if length(d) ~= length(nk)
+        error('tf_bcinc :  number of thicknesses ~= number of indices.');
+    end
+    if isempty(theta), theta = 0; end
 
-% pseudo-index for substrate material
-alpha2 = (nk(1) * sin(pi*theta/180))^2;  % Snell constant ^2
-if pol == 's'
-   eta_ex = sqrt(nk(end)^2 - alpha2);
-elseif pol == 'p'
-   eta_ex = nk(end)^2 / sqrt(nk(end)^2 - alpha2);
-else
-   error('tf_bcinc :  unknown polarization state.');
+    % pseudo-index for substrate material
+    [~, eta_ex] = eta_sp(nk, theta, pol);
+
+    % get characteristic matrices for layers
+    M = tf_charmat(d, nk, theta, pol);
+
+    % calculate B,C for each added layer
+    nm = size(M,3);
+    nm = nm+1;        % add matrix for no layer
+    M(:,:,nm) = eye(2);
+    B = complex(zeros(1,nm));
+    C = complex(zeros(1,nm));
+    Mq = eye(2);      % initialize M up to layer q      
+    for k = nm:-1:1   % assemble stack from substrate up
+        Mq = M(:,:,k) * Mq;
+        BC = Mq * [1;eta_ex];
+        B(nm-k+1) = BC(1);
+        C(nm-k+1) = BC(2);
+    end
+
 end
-
-% get characteristic matrices for layers
-M = tf_charmat(d, nk, theta, pol);
-
-% calculate B,C for each added layer
-nm = size(M,3);
-nm = nm+1;        % add matrix for no layer
-M(:,:,nm) = eye(2);
-B = complex(zeros(1,nm));
-C = complex(zeros(1,nm));
-Mq = eye(2);      % initialize M up to layer q      
-for k = nm:-1:1   % assemble stack from substrate up
-   Mq = M(:,:,k) * Mq;
-   BC = Mq * [1;eta_ex];
-   B(nm-k+1) = BC(1);
-   C(nm-k+1) = BC(2);
-end
-
-return

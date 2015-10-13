@@ -21,37 +21,30 @@ function [B,C,eta_ex] = tf_bc(d, nk, theta, pol)
 
 % Initial version, Ulf Griesmann, November 2013
 
-% check arguments
-if nargin < 4
-   error('tf_bc :  must have 4 arguments.');
+    % check arguments
+    if nargin < 4
+        error('tf_bc :  must have 4 arguments.');
+    end
+    if length(d) ~= length(nk)
+        error('tf_bc :  number of thicknesses ~= number of indices.');
+    end
+    if isempty(theta), theta = 0; end
+
+    % pseudo-index for substrate material
+    [~, eta_ex] = eta_sp(nk, theta, pol);
+
+    % get characteristic matrices for layers
+    M = tf_charmat(d, nk, theta, pol);
+
+    % characteristic matrix Mq for the whole stack
+    Mq = M(:,:,1);
+    for k = 2:size(M,3)
+        Mq = Mq * M(:,:,k);
+    end
+
+    % calculate B,C
+    bc = Mq * [1;eta_ex];
+    B = bc(1);
+    C = bc(2);
+
 end
-if length(d) ~= length(nk)
-   error('tf_bc :  number of thicknesses ~= number of indices.');
-end
-if isempty(theta), theta = 0; end
-
-% pseudo-index for substrate material
-alpha2 = (nk(1) * sin(pi*theta/180))^2;  % Snell constant ^2
-if pol == 's'
-   eta_ex = sqrt(nk(end)^2 - alpha2);
-elseif pol == 'p'
-   eta_ex = nk(end)^2 / sqrt(nk(end)^2 - alpha2);
-else
-   error('tf_bc :  unknown polarization state.');
-end
-
-% get characteristic matrices for layers
-M = tf_charmat(d, nk, theta, pol);
-
-% characteristic matrix Mq for the whole stack
-Mq = M(:,:,1);
-for k = 2:size(M,3)
-   Mq = Mq * M(:,:,k);
-end
-
-% calculate B,C
-bc = Mq * [1;eta_ex];
-B = bc(1);
-C = bc(2);
-
-return

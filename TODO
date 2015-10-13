@@ -16,7 +16,7 @@
   toolbox instead of levmar - at least as an alternative
   
 - analyze ellipsometric data by fitting of spectroscopic models
-  using B-Splines
+  using B-Splines (Johs-Hale algorithm)
 
 - check derivatives in group delay functions
 
